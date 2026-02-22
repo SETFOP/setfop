@@ -1,1 +1,1019 @@
-<h1> hello, this will be the future SETFOP home page </h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SETFOP — Prevent. Protect. Preserve.</title>
+  <link rel="icon" type="image/png" href="SETFOP_favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #09080f;
+      --bg2: #0f0d1a;
+      --bg3: #141126;
+      --border: #2a1f45;
+      --accent: #a78bfa;
+      --accent2: #7c3aed;
+      --text: #ede9fe;
+      --muted: #6b6b8a;
+      --card: #100e1c;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(9, 8, 15, 0.88);
+      border-color: var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      /* Better touch targets */
+      padding: 0.5rem 0;
+      display: inline-block;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      /* safe area for mobile browsers */
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+      overflow: hidden;
+    }
+
+    /* grid lines bg */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle at center, rgba(167, 139, 250, 0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle at center, rgba(124, 58, 237, 0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      padding-top: 6rem;
+      /* space for fixed nav */
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+      }
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      margin-top: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-tagline em {
+      color: var(--text);
+      font-style: normal;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--accent);
+      color: #09080f;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      /* Better touch target */
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary:hover {
+      background: #c4b5fd;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      min-height: 44px;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost:active {
+      transform: translateY(0);
+    }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .scroll-hint .line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--accent));
+      animation: grow 1.5s 1.4s infinite;
+    }
+
+    @keyframes grow {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scaleY(0.4);
+        opacity: 0.4;
+      }
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 4rem;
+      margin: 1rem 0;
+    }
+
+    .section-divider span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 8rem 4rem;
+      position: relative;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    .about-body {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    .about-body+.about-body {
+      margin-top: 1.25rem;
+    }
+
+    .pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pillar {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.75rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s;
+    }
+
+    .pillar:hover {
+      border-color: rgba(167, 139, 250, 0.35);
+      transform: translateX(4px);
+    }
+
+    .pillar:hover::before {
+      transform: scaleY(1);
+    }
+
+    .pillar-icon {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.4rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      width: 2rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .pillar-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 8rem 4rem;
+      position: relative;
+    }
+
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2.5rem 3rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      min-width: 190px;
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.07), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(167, 139, 250, 0.4);
+      transform: translateY(-6px);
+    }
+
+    .contact-card:hover::after {
+      opacity: 1;
+    }
+
+    .contact-card:active {
+      transform: translateY(-2px);
+    }
+
+    .contact-card svg {
+      width: 28px;
+      height: 28px;
+      color: var(--accent);
+      transition: transform 0.3s;
+    }
+
+    .contact-card:hover svg {
+      transform: scale(1.15);
+    }
+
+    .contact-card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-card-value {
+      font-size: 0.88rem;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-tagline {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE — iPad (≤1024px)
+    ══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 1.25rem 2.5rem;
+      }
+
+      #hero {
+        padding: 0 2.5rem;
+      }
+
+      #about,
+      #contact {
+        padding: 6rem 2.5rem;
+      }
+
+      .section-divider {
+        padding: 0 2.5rem;
+      }
+
+      footer {
+        padding: 2rem 2.5rem;
+      }
+
+      .about-grid {
+        gap: 3.5rem;
+      }
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE — Mobile (≤768px)
+    ══════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* Nav */
+      nav {
+        padding: 1rem 1.25rem;
+      }
+
+      .nav-logo {
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.78rem;
+      }
+
+      /* Hero */
+      #hero {
+        padding: 0 1.25rem;
+        align-items: flex-start;
+        padding-top: 0;
+      }
+
+      .hero-content {
+        padding-top: 7rem;
+        padding-bottom: 5rem;
+      }
+
+      .hero-glow {
+        width: 350px;
+        height: 350px;
+        top: -5%;
+        right: -20%;
+      }
+
+      .hero-glow2 {
+        width: 280px;
+        height: 280px;
+        bottom: -10%;
+        left: -15%;
+      }
+
+      .hero-badge {
+        font-size: 0.68rem;
+        margin-bottom: 1.75rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 11vw, 3.5rem);
+      }
+
+      .hero-tagline {
+        font-size: 0.88rem;
+        margin-top: 1.5rem;
+      }
+
+      .hero-cta {
+        margin-top: 2rem;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 1.5rem;
+        font-size: 0.8rem;
+      }
+
+      .scroll-hint {
+        display: none;
+      }
+
+      /* Dividers */
+      .section-divider {
+        padding: 0 1.25rem;
+        gap: 1rem;
+      }
+
+      /* About */
+      #about {
+        padding: 5rem 1.25rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-heading {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Pillars */
+      .pillar {
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+
+      .pillar:hover {
+        transform: none;
+      }
+
+      /* disable slide on touch */
+
+      /* Contact */
+      #contact {
+        padding: 5rem 1.25rem;
+      }
+
+      .contact-sub {
+        margin-bottom: 2.5rem;
+      }
+
+      .contact-links {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .contact-card {
+        flex-direction: row;
+        padding: 1.25rem 1.5rem;
+        min-width: unset;
+        gap: 1.25rem;
+        align-items: center;
+      }
+
+      .contact-card:hover {
+        transform: none;
+      }
+
+      .contact-card::after {
+        display: none;
+      }
+
+      .contact-card svg {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+      }
+
+      .contact-card-label {
+        font-size: 0.65rem;
+        margin-bottom: 0.1rem;
+      }
+
+      .contact-card-value {
+        font-size: 0.82rem;
+      }
+
+      .contact-card>div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      /* Footer */
+      footer {
+        padding: 1.75rem 1.25rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE — Small phones (≤380px)
+    ══════════════════════════════════════════ */
+    @media (max-width: 380px) {
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.2rem, 12vw, 3rem);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">SETFOP</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="return false;">Downloads</a></li>
+      <li><a href="#" onclick="return false;">How to Use</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Linux Utility</div>
+      <h1 class="hero-title">
+        Meet<br /><span>SETFOP</span>
+      </h1>
+      <p class="hero-tagline">
+        <em>Prevent. Protect. Preserve.</em> &nbsp;—&nbsp; That's the SETFOP way.
+      </p>
+      <div class="hero-cta">
+        <a href="#about" class="btn-primary">Learn More</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="section-divider"><span>Our Philosophy</span></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-label">// About</p>
+        <h2 class="about-heading">Built for those who take system integrity seriously.</h2>
+        <p class="about-body">
+          SETFOP is a Linux utility crafted with a singular purpose — to give you command over your system's safety
+          without compromise. Designed for administrators, power users, and anyone who believes a secure system is not a
+          luxury, but a standard.
+        </p>
+        <p class="about-body" style="margin-top:1.25rem;">
+          At its core, SETFOP operates on three unwavering principles: preventing threats before they take root,
+          protecting what matters most, and preserving the integrity of your environment through every change.
+        </p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar reveal" style="transition-delay: 0.1s;">
+          <div class="pillar-icon">▸</div>
+          <div>
+            <p class="pillar-title">Prevent</p>
+            <p class="pillar-desc">Stop issues before they escalate. SETFOP keeps your system ahead of threats, not
+              playing catch-up with them.</p>
+          </div>
+        </div>
+        <div class="pillar reveal" style="transition-delay: 0.2s;">
+          <div class="pillar-icon">▸</div>
+          <div>
+            <p class="pillar-title">Protect</p>
+            <p class="pillar-desc">Guard your environment with precision. Every critical layer of your system gets the
+              attention it deserves.</p>
+          </div>
+        </div>
+        <div class="pillar reveal" style="transition-delay: 0.3s;">
+          <div class="pillar-icon">▸</div>
+          <div>
+            <p class="pillar-title">Preserve</p>
+            <p class="pillar-desc">Maintain stability and integrity over time. Because a system worth protecting is a
+              system worth keeping.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="section-divider"><span>Reach Out</span></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="about-label" style="text-align:center;">// Contact</p>
+      <h2 class="contact-heading reveal">Let's connect.</h2>
+      <p class="contact-sub reveal">Find us where the conversation is happening.</p>
+
+      <div class="contact-links">
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/company/setfop/" target="_blank" rel="noopener" class="contact-card reveal"
+          style="transition-delay:0.1s;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="4" cy="4" r="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div>
+            <span class="contact-card-label">LinkedIn</span>
+            <span class="contact-card-value">SETFOP</span>
+          </div>
+        </a>
+
+        <!-- Substack -->
+        <a href="https://substack.com/@setfop" target="_blank" rel="noopener" class="contact-card reveal"
+          style="transition-delay:0.2s;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M19 4H5a2 2 0 0 0-2 2v14l4-2 3 2 3-2 4 2V6a2 2 0 0 0-2-2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8M8 14h5" />
+          </svg>
+          <div>
+            <span class="contact-card-label">Substack</span>
+            <span class="contact-card-value">@setfop</span>
+          </div>
+        </a>
+
+        <!-- Email -->
+        <a href="/cdn-cgi/l/email-protection#94e7f1e0f2fbe4b9f5ffe2ffd4eefbfcfbf9f5fdf8bafdfa"
+          class="contact-card reveal" style="transition-delay:0.3s;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9.75 6.75L2.25 6.75" />
+          </svg>
+          <div>
+            <span class="contact-card-label">Email</span>
+            <span class="contact-card-value"><span class="__cf_email__"
+                data-cfemail="c2b1a7b6a4adb2efa3a9b4a982b8adaaadafa3abaeecabac">setfop-akvk@zohomail.in</span></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">SETFOP</span>
+    <span class="footer-tagline">Prevent. Protect. Preserve.</span>
+    <span class="footer-copy">&copy; <span id="year"></span> SETFOP. All rights reserved.</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sticky nav
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
