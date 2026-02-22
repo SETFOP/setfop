@@ -1,1 +1,89 @@
-<H1><center>ushoo creating it as a formality not as mandatory</center></H1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SETFOP — Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=DM+Sans:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09080f;
+            --accent: #a78bfa;
+            --text: #ede9fe;
+            --muted: #6b6b8a;
+            --card: #100e1c;
+            --border: #2a1f45;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'DM Mono', monospace;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        .kb-list {
+            list-style: none;
+            margin-top: 3rem;
+            padding: 0;
+        }
+
+        .kb-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .kb-item:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .kb-link {
+            display: block;
+            padding: 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .kb-link span {
+            color: var(--muted);
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="../index.html" style="color: var(--muted); text-decoration: none; font-size: 0.8rem;">← Back to Home</a>
+
+    <h1 style="margin-top: 1rem;">Help Center</h1>
+    <p style="color: var(--muted);">Explore the documentation for the SETFOP Linux Utility.</p>
+
+    <ul class="kb-list">
+        <li class="kb-item">
+            <a href="my-first-article.html" class="kb-link">
+                01. My First Article
+                <span>An introduction to SETFOP as the First Line of Defense.</span>
+            </a>
+        </li>
+
+    </ul>
+
+</body>
+
+</html>
