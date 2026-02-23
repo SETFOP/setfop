@@ -589,7 +589,13 @@
       pointer-events: none;
     }
 
-    .email-card:hover .email-copy-hint {
+    @media (hover: hover) {
+      .email-card:hover .email-copy-hint {
+        opacity: 1;
+      }
+    }
+
+    .email-card.active .email-copy-hint {
       opacity: 1;
     }
 
@@ -1041,16 +1047,25 @@
     reveals.forEach(el => observer.observe(el));
 
     // Keyboard support for email card
-    document.querySelector(".email-card").addEventListener("keydown", (e) => {
+    const emailCard = document.querySelector(".email-card");
+    emailCard.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); copyEmail(); }
     });
 
+    // iOS: auto-dismiss active state after a short delay
+    emailCard.addEventListener("touchend", () => {
+      setTimeout(() => emailCard.classList.remove("active"), 1500);
+    }, { passive: true });
+
     function copyEmail() {
+      const card = document.querySelector(".email-card");
       const email = "setfop-akvk@zohomail.in";
+
+      card.classList.add("active");
+
       navigator.clipboard.writeText(email).then(() => {
         showToast();
       }).catch(() => {
-        // Fallback for older browsers
         const ta = document.createElement("textarea");
         ta.value = email;
         ta.style.position = "fixed";
@@ -1061,6 +1076,10 @@
         document.body.removeChild(ta);
         showToast();
       });
+
+      setTimeout(() => {
+        card.classList.remove("active");
+      }, 550);
     }
 
     let toastTimer;
