@@ -39,15 +39,14 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-weight: 300;
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
     body::before {
-      content: '';
+      content: "";
       position: fixed;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
@@ -56,7 +55,6 @@
       opacity: 0.35;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0;
@@ -79,7 +77,7 @@
     }
 
     .nav-logo {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 1.15rem;
       font-weight: 500;
       letter-spacing: 0.2em;
@@ -100,7 +98,6 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.2s;
-      /* Better touch targets */
       padding: 0.5rem 0;
       display: inline-block;
     }
@@ -109,21 +106,18 @@
       color: var(--accent);
     }
 
-    /* ── HERO ── */
     #hero {
       position: relative;
       min-height: 100vh;
       min-height: 100svh;
-      /* safe area for mobile browsers */
       display: flex;
       align-items: center;
       padding: 0 4rem;
       overflow: hidden;
     }
 
-    /* grid lines bg */
     #hero::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       background-image:
@@ -158,14 +152,13 @@
       z-index: 1;
       max-width: 780px;
       padding-top: 6rem;
-      /* space for fixed nav */
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       color: var(--accent);
@@ -178,7 +171,7 @@
     }
 
     .hero-badge::before {
-      content: '';
+      content: "";
       width: 6px;
       height: 6px;
       border-radius: 50%;
@@ -202,7 +195,7 @@
     }
 
     .hero-title {
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
       font-size: clamp(3rem, 7vw, 5.5rem);
       font-weight: 900;
       line-height: 1.05;
@@ -218,7 +211,7 @@
 
     .hero-tagline {
       margin-top: 2rem;
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: clamp(0.9rem, 2vw, 1.1rem);
       color: var(--muted);
       letter-spacing: 0.04em;
@@ -241,11 +234,10 @@
     }
 
     .btn-primary {
-      display: inline-block;
       padding: 0.85rem 2rem;
       background: var(--accent);
       color: #09080f;
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.82rem;
       font-weight: 500;
       letter-spacing: 0.1em;
@@ -253,7 +245,6 @@
       text-decoration: none;
       border-radius: 2px;
       transition: background 0.2s, transform 0.2s;
-      /* Better touch target */
       min-height: 44px;
       display: inline-flex;
       align-items: center;
@@ -276,7 +267,7 @@
       padding: 0.85rem 2rem;
       border: 1px solid var(--border);
       color: var(--muted);
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.82rem;
       font-weight: 400;
       letter-spacing: 0.1em;
@@ -297,7 +288,6 @@
       transform: translateY(0);
     }
 
-    /* scroll indicator */
     .scroll-hint {
       position: absolute;
       bottom: 2.5rem;
@@ -307,7 +297,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.65rem;
       letter-spacing: 0.15em;
       color: var(--muted);
@@ -337,7 +327,6 @@
       }
     }
 
-    /* ── DIVIDER ── */
     .section-divider {
       display: flex;
       align-items: center;
@@ -347,7 +336,7 @@
     }
 
     .section-divider span {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       color: var(--muted);
@@ -357,13 +346,12 @@
 
     .section-divider::before,
     .section-divider::after {
-      content: '';
+      content: "";
       flex: 1;
       height: 1px;
       background: var(--border);
     }
 
-    /* ── ABOUT ── */
     #about {
       padding: 8rem 4rem;
       position: relative;
@@ -379,7 +367,7 @@
     }
 
     .about-label {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.72rem;
       letter-spacing: 0.2em;
       color: var(--accent);
@@ -388,7 +376,7 @@
     }
 
     .about-heading {
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       line-height: 1.15;
@@ -425,7 +413,7 @@
     }
 
     .pillar::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 0;
@@ -447,7 +435,7 @@
     }
 
     .pillar-icon {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 1.4rem;
       color: var(--accent);
       flex-shrink: 0;
@@ -457,7 +445,7 @@
     }
 
     .pillar-title {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -471,7 +459,6 @@
       line-height: 1.65;
     }
 
-    /* ── CONTACT ── */
     #contact {
       padding: 8rem 4rem;
       position: relative;
@@ -484,7 +471,7 @@
     }
 
     .contact-heading {
-      font-family: 'Playfair Display', serif;
+      font-family: "Playfair Display", serif;
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       color: #fff;
@@ -521,7 +508,7 @@
     }
 
     .contact-card::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, rgba(167, 139, 250, 0.07), transparent);
@@ -554,7 +541,7 @@
     }
 
     .contact-card-label {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.72rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -567,7 +554,72 @@
       word-break: break-all;
     }
 
-    /* ── FOOTER ── */
+    /* ── EMAIL CARD SPECIFIC ── */
+    .email-card {
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      /* ADD THIS */
+    }
+
+    .email-copy-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background: rgba(9, 8, 15, 0.82);
+      backdrop-filter: blur(2px);
+      /* softer blur */
+      -webkit-backdrop-filter: blur(2px);
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .email-card:hover .email-copy-hint {
+      opacity: 1;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: #09080f;
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.75rem;
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 9999;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 2.5rem 4rem;
@@ -579,14 +631,14 @@
     }
 
     .footer-logo {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.95rem;
       letter-spacing: 0.2em;
       color: var(--accent);
     }
 
     .footer-copy {
-      font-family: 'DM Mono', monospace;
+      font-family: "DM Mono", monospace;
       font-size: 0.7rem;
       color: var(--muted);
       letter-spacing: 0.08em;
@@ -598,7 +650,6 @@
       font-style: italic;
     }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -622,9 +673,6 @@
       transform: translateY(0);
     }
 
-    /* ══════════════════════════════════════════
-       RESPONSIVE — iPad (≤1024px)
-    ══════════════════════════════════════════ */
     @media (max-width: 1024px) {
       nav {
         padding: 1.25rem 2.5rem;
@@ -652,12 +700,7 @@
       }
     }
 
-    /* ══════════════════════════════════════════
-       RESPONSIVE — Mobile (≤768px)
-    ══════════════════════════════════════════ */
     @media (max-width: 768px) {
-
-      /* Nav */
       nav {
         padding: 1rem 1.25rem;
       }
@@ -674,7 +717,6 @@
         font-size: 0.78rem;
       }
 
-      /* Hero */
       #hero {
         padding: 0 1.25rem;
         align-items: flex-start;
@@ -732,13 +774,11 @@
         display: none;
       }
 
-      /* Dividers */
       .section-divider {
         padding: 0 1.25rem;
         gap: 1rem;
       }
 
-      /* About */
       #about {
         padding: 5rem 1.25rem;
       }
@@ -753,7 +793,6 @@
         margin-bottom: 1.5rem;
       }
 
-      /* Pillars */
       .pillar {
         padding: 1.25rem;
         gap: 1rem;
@@ -763,9 +802,6 @@
         transform: none;
       }
 
-      /* disable slide on touch */
-
-      /* Contact */
       #contact {
         padding: 5rem 1.25rem;
       }
@@ -811,14 +847,13 @@
         font-size: 0.82rem;
       }
 
-      .contact-card>div {
+      .contact-card>div:not(.email-copy-hint) {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         text-align: left;
       }
 
-      /* Footer */
       footer {
         padding: 1.75rem 1.25rem;
         flex-direction: column;
@@ -827,9 +862,6 @@
       }
     }
 
-    /* ══════════════════════════════════════════
-       RESPONSIVE — Small phones (≤380px)
-    ══════════════════════════════════════════ */
     @media (max-width: 380px) {
       .nav-links {
         gap: 1rem;
@@ -843,6 +875,9 @@
 </head>
 
 <body>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Email copied successfully!</div>
 
   <!-- NAV -->
   <nav id="navbar">
@@ -859,9 +894,7 @@
     <div class="hero-glow2"></div>
     <div class="hero-content">
       <div class="hero-badge">Linux Utility</div>
-      <h1 class="hero-title">
-        Meet<br /><span>SETFOP</span>
-      </h1>
+      <h1 class="hero-title">Meet<br /><span>SETFOP</span></h1>
       <p class="hero-tagline">
         <em>Prevent. Protect. Preserve.</em> &nbsp;—&nbsp; That's the SETFOP way.
       </p>
@@ -897,24 +930,24 @@
       </div>
 
       <div class="pillars">
-        <div class="pillar reveal" style="transition-delay: 0.1s;">
-          <div class="pillar-icon">▸</div>
+        <div class="pillar reveal" style="transition-delay:0.1s;">
+          <div class="pillar-icon">&#9658;</div>
           <div>
             <p class="pillar-title">Prevent</p>
             <p class="pillar-desc">Stop issues before they escalate. SETFOP keeps your system ahead of threats, not
               playing catch-up with them.</p>
           </div>
         </div>
-        <div class="pillar reveal" style="transition-delay: 0.2s;">
-          <div class="pillar-icon">▸</div>
+        <div class="pillar reveal" style="transition-delay:0.2s;">
+          <div class="pillar-icon">&#9658;</div>
           <div>
             <p class="pillar-title">Protect</p>
             <p class="pillar-desc">Guard your environment with precision. Every critical layer of your system gets the
               attention it deserves.</p>
           </div>
         </div>
-        <div class="pillar reveal" style="transition-delay: 0.3s;">
-          <div class="pillar-icon">▸</div>
+        <div class="pillar reveal" style="transition-delay:0.3s;">
+          <div class="pillar-icon">&#9658;</div>
           <div>
             <p class="pillar-title">Preserve</p>
             <p class="pillar-desc">Maintain stability and integrity over time. Because a system worth protecting is a
@@ -966,19 +999,19 @@
           </div>
         </a>
 
-        <!-- Email -->
-        <a href="/cdn-cgi/l/email-protection#94e7f1e0f2fbe4b9f5ffe2ffd4eefbfcfbf9f5fdf8bafdfa"
-          class="contact-card reveal" style="transition-delay:0.3s;">
+        <!-- Email — copy to clipboard -->
+        <div class="contact-card email-card reveal" style="transition-delay:0.3s;" onclick="copyEmail()" role="button"
+          tabindex="0" aria-label="Copy email address">
+          <div class="email-copy-hint">Copy</div>
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9.75 6.75L2.25 6.75" />
           </svg>
           <div>
             <span class="contact-card-label">Email</span>
-            <span class="contact-card-value"><span class="__cf_email__"
-                data-cfemail="c2b1a7b6a4adb2efa3a9b4a982b8adaaadafa3abaeecabac">setfop-akvk@zohomail.in</span></span>
+            <span class="contact-card-value">setfop-akvk@zohomail.in</span>
           </div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -991,28 +1024,52 @@
     <span class="footer-copy">&copy; <span id="year"></span> SETFOP. All rights reserved.</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Sticky nav
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 40);
     }, { passive: true });
 
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
+    const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
+
+    // Keyboard support for email card
+    document.querySelector(".email-card").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); copyEmail(); }
+    });
+
+    function copyEmail() {
+      const email = "setfop-akvk@zohomail.in";
+      navigator.clipboard.writeText(email).then(() => {
+        showToast();
+      }).catch(() => {
+        // Fallback for older browsers
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast();
+      });
+    }
+
+    let toastTimer;
+    function showToast() {
+      const toast = document.getElementById("toast");
+      clearTimeout(toastTimer);
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
+    }
   </script>
 </body>
 
