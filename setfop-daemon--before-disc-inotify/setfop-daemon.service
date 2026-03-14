@@ -1,0 +1,28 @@
+[Unit]
+Description=setfop-daemon - Filesystem Drift Monitoring Service
+After=network.target auditd.service
+ConditionPathExists=/opt/setfop-daemon
+
+[Service]
+
+Type=simple
+TimeoutStopSec=10
+User=root
+Group=root
+
+ExecStart=/usr/bin/python3 /opt/setfop-daemon/bin/setfop-daemon.py
+
+Restart=always
+RestartSec=5
+
+# Security and stability
+
+NoNewPrivileges=true
+
+# Logging
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
