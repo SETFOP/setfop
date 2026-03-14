@@ -4,7 +4,6 @@ After=network.target auditd.service
 ConditionPathExists=/opt/setfop-daemon
 
 [Service]
-
 Type=simple
 TimeoutStopSec=10
 User=root
