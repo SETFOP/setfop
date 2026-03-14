@@ -1,0 +1,98 @@
+Read this fully before we write a single line.
+
+---
+
+## Where we started — the original architecture
+
+The daemon had **three separate concerns** trying to work together:
+
+**1. inotify (the watcher)**
+Python's `inotify` library watched directories for filesystem events — file created, deleted, permission changed. It worked by registering kernel watch descriptors on specific directory paths. When something happened inside a watched directory, the kernel fired an event.
+
+**2. The drift detector**
+When inotify fired, the detector fetched current file attributes (`stat`, `lsattr`) and compared them against a stored baseline. If anything changed — mode, owner, size, chattr — it logged the difference.
+
+**3. AuditWorker (attribution)**
+inotify tells you *what* changed but not *who* did it. So a separate thread submitted the path to `ausearch` after the fact, hoping auditd had recorded who made the change. This was always a race — by the time the lookup ran, the process had often already exited.
+
+---
+
+## The hard walls we kept hitting
+
+**Wall 1 — inotify is directory-scoped, not recursive by default**
+inotify watches are registered on specific directory paths. If you create a new subdirectory mid-run, no watch exists on it yet. We patched this by adding a watch when `IN_CREATE` fires on a directory — but the Python inotify library doesn't handle adding watches from inside the event loop iteration cleanly. That's why files inside `testing-2` never appeared in the log even after the fix.
+
+**Wall 2 — inotify is blind to chattr**
+`chattr` uses a kernel ioctl (`FS_IOC_SETFLAGS`) that inotify simply doesn't monitor. We worked around this with a polling thread (`ChattrPoller`) that runs `lsattr` on every file every 15 seconds and diffs against baseline. This works but has a 15-second detection window, and — critically — every single `lsattr` call generates its own auditd event, flooding the audit log with noise from our own daemon.
+
+**Wall 3 — attribution was always a race**
+inotify fires an event. We look up who did it in auditd. But the syscall and the inotify event are two separate kernel mechanisms with no coordination. For fast operations like `touch` or `chmod`, the process exits in milliseconds. By the time our `lookup_actor` polling loop ran, auditd often hadn't flushed the record yet — so we waited up to 2 seconds, then gave up and wrote `unknown`. This is why `unknown -> unknown` persisted throughout.
+
+**Wall 4 — stale baseline format**
+The old `get_file_attributes` stored `uid` and `gid` as raw integers in separate keys. The new version stores `owner` as `"username:groupname"` in a single key. The baseline file on disk was built with the old format, so comparisons found no `owner` key and silently skipped ownership changes entirely — which is why `chown /etc/fstab` never appeared in the log.
+
+**Wall 5 — two systems doing half a job each**
+inotify handled detection. auditd handled attribution. Neither was complete alone. The result was complexity, timing gaps, and noise — while auditd already had everything we needed in a single event record.
+
+---
+
+## The new path — auditd only, bash tailer
+
+auditd is a kernel subsystem. Every syscall that touches a file — `openat`, `unlinkat`, `chmod`, `chown`, `rename`, `ioctl` — is recorded atomically with the actor baked in. One record. One moment. Complete.
+
+The `ausearch --checkpoint` mechanism lets us read only new events since the last poll, efficiently, without scanning the full audit log. We poll every second in a bash loop.
+
+**What bash does:**
+- Calls `ausearch --checkpoint ... -k setfop_watches -i` every second
+- Parses each event block: extracts path (from `type=PATH nametype=CREATE/DELETE/NORMAL`), actor (from `auid=` or `uid=`), process (from `exe=`), and syscall type
+- Filters out our own daemon's noise (`lsattr`, `ausearch`, the daemon itself)
+- Passes structured data to the Python drift detector via stdin pipe
+
+**What Python still does:**
+- Baseline management — comparing old vs new attributes
+- Deciding what *kind* of drift occurred (mode, owner, size, chattr)
+- Writing the log in the exact format you specified
+
+**What we drop entirely:**
+- The `inotify` library and all watch management
+- `ChattrPoller` and its `lsattr` flood — auditd catches chattr via ioctl rule instead, in real-time
+- The `lookup_actor` polling loop — actor comes with the event, no lookup needed
+- The log rewrite mechanism — never needed again
+
+---
+
+## The log format — confirmed and locked
+
+```
+TIMESTAMP | actor -> process | path | change
+```
+
+Every field, every case:
+
+```
+# Known actor, any change except ownership
+2026-03-13 16:05:22 | vamsiva -> nano   | /opt/scripts/backup.sh | new file
+2026-03-13 16:05:45 | vamsiva -> chmod  | /opt/scripts/backup.sh | mode: 0644 → 0755
+2026-03-13 16:09:03 | vamsiva -> vim    | /opt/scripts/backup.sh | size: 842 → 1031
+2026-03-13 16:18:44 | vamsiva -> rm     | /opt/scripts/temp.sh   | deleted
+
+# Ownership change — actor slot shows old_owner -> new_owner
+# The change_desc also records it explicitly
+2026-03-13 16:07:10 | root -> chown     | /opt/scripts/backup.sh | owner: 1001:1001 → 0:0
+
+# chattr — shows only what changed, not full flag string
+2026-03-13 16:12:20 | root -> chattr    | /opt/scripts/backup.sh | chattr: +i
+2026-03-13 17:02:11 | unknown           | /opt/secure/critical.bin | chattr: +i ---> -i
+
+# Unknown actor — single field, no arrow
+2026-03-13 17:02:11 | unknown           | /opt/secure/critical.bin | chattr: +i ---> -i
+```
+
+One thing I want to lock down before writing — the chattr format. Your spec shows two styles:
+
+```
+chattr: +i              ← flag was added (simple case)
+chattr: +i ---> -i      ← flag was set then unset (poller caught net change)
+```
+
+With auditd replacing the poller, we catch chattr in real-time via ioctl. So we'll always know the direction — we won't need the `+i ---> -i` style anymore. Every chattr event will be either `+i` or `-i` individually. Is that acceptable, or do you want to keep the `---> ` style for when both happen close together?
