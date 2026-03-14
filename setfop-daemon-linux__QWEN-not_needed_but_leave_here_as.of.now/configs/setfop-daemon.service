@@ -1,0 +1,52 @@
+# =============================================================================
+#  setfop-daemon.service — systemd unit file
+#  Part of the SETFOP project: https://github.com/SETFOP/setfop
+#
+#  Install location : /etc/systemd/system/setfop-daemon.service
+#  After install run: systemctl daemon-reload
+#                     systemctl enable setfop-daemon
+#                     systemctl start  setfop-daemon
+# =============================================================================
+
+[Unit]
+Description=SETFOP Daemon — File Permission & Ownership Drift Monitor
+Documentation=https://github.com/SETFOP/setfop
+After=network.target local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/setfop.pid
+
+ExecStart=/usr/bin/python3 /usr/local/bin/setfop-daemon
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Give the daemon up to 30s to write its PID file after forking
+TimeoutStartSec=30
+
+# On failure wait 5s then restart — but only try 3 times in 1 minute
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Must run as root — needed for /proc reads and watching system paths
+User=root
+Group=root
+
+# Make sure log and lib dirs exist before starting
+# (install.sh creates these, but this is a safety net)
+ExecStartPre=/bin/mkdir -p /var/log/setfop
+ExecStartPre=/bin/mkdir -p /var/lib/setfop
+ExecStartPre=/bin/mkdir -p /etc/setfop
+
+# Clean up PID file if it is left behind after a crash
+ExecStopPost=/bin/rm -f /var/run/setfop.pid
+
+# Logging — journal captures anything written to stdout/stderr
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=setfop-daemon
+
+[Install]
+WantedBy=multi-user.target
