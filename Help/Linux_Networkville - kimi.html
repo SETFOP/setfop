@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Great Neighborhood IP Address Adventure! 🏘️</title>
+    <link rel="icon" type="image/png" href="/SETFOP_favicon.png" />
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&display=swap');
         
@@ -313,12 +315,11 @@
     <div class="storybook">
         <div class="progress-bar" id="progressBar"></div>
         
-        <!-- Page 1: Introduction -->
         <div class="page active" data-page="1">
             <div class="illustration">🏘️ 🏠 🏡 🏘️</div>
             <h1>The Great Neighborhood IP Address Adventure!</h1>
             <div class="story-text">
-                <p>Once upon a time in the magical land of <span class="highlight">Linux Networkville</span>, there lived houses that needed addresses so the mailman (we call him " packets") could deliver messages!</p>
+                <p>Once upon a time in the magical land of <span class="highlight">Linux Networkville</span>, there lived houses that needed addresses so the mailman (we call him "packets") could deliver messages!</p>
                 
                 <p>But here's the tricky part: <strong>How do we know which houses are on the same street?</strong> And how do we know which neighborhood they belong to?</p>
                 
@@ -334,7 +335,6 @@
             </div>
         </div>
 
-        <!-- Page 2: IP Addresses -->
         <div class="page" data-page="2">
             <div class="illustration">📬 🏠 192.168.1.5</div>
             <h2>Chapter 1: What is an IP Address?</h2>
@@ -360,7 +360,6 @@
             </div>
         </div>
 
-        <!-- Page 3: Network Mask -->
         <div class="page" data-page="3">
             <div class="illustration">🎭 🔍</div>
             <h2>Chapter 2: Meet the Network Mask!</h2>
@@ -371,7 +370,7 @@
                 <div class="code-block">
     IP Address:    192.168.1.5
     Network Mask:  255.255.255.0
-                   ↓↓↓ ↓↓↓ ↓ ↓
+                    ↓↓↓ ↓↓↓ ↓ ↓
     Result:        [NETWORK] [HOST]
                    192.168.1  .5
                 </div>
@@ -388,7 +387,6 @@
             <p style="text-align: center; color: #666;">Green = Same street (network) | Pink = Different street</p>
         </div>
 
-        <!-- Page 4: Subnet Mask -->
         <div class="page" data-page="4">
             <div class="illustration">🏗️ 🧱 🔨</div>
             <h2>Chapter 3: The Subnet Mask - Building Smaller Neighborhoods!</h2>
@@ -427,7 +425,6 @@
             </div>
         </div>
 
-        <!-- Page 5: Binary Magic -->
         <div class="page" data-page="5">
             <div class="illustration">0️⃣ 1️⃣ ✨</div>
             <h2>Chapter 4: The Secret Binary Language!</h2>
@@ -470,7 +467,6 @@
             </div>
         </div>
 
-        <!-- Page 6: CIDR -->
         <div class="page" data-page="6">
             <div class="illustration">📝 ➡️ /24</div>
             <h2>Chapter 5: CIDR - The Lazy Writer's Shortcut!</h2>
@@ -499,7 +495,6 @@
             </div>
         </div>
 
-        <!-- Page 7: Comparison -->
         <div class="page" data-page="7">
             <div class="illustration">⚖️ 🤔</div>
             <h2>Chapter 6: The Big Comparison!</h2>
@@ -542,7 +537,6 @@
             </div>
         </div>
 
-        <!-- Page 8: Linux in Action -->
         <div class="page" data-page="8">
             <div class="illustration">🐧 💻 🖥️</div>
             <h2>Chapter 7: Linux in Action!</h2>
@@ -577,7 +571,6 @@
             </div>
         </div>
 
-        <!-- Page 9: Summary -->
         <div class="page" data-page="9">
             <div class="illustration">🎓 🎉 🏆</div>
             <h2>The End! You Are Now a Network Wizard! 🧙‍♂️</h2>
@@ -639,7 +632,13 @@
         }
         
         function goToPage(pageNum) {
-            if (pageNum < 1 || pageNum > totalPages) return;
+            // Redirect logic for the Finish button
+            if (pageNum > totalPages) {
+                window.location.href = "https://setfop.in/Help/";
+                return;
+            }
+
+            if (pageNum < 1) return;
             
             // Hide current page
             document.querySelector(`.page[data-page="${currentPage}"]`).classList.remove('active');
@@ -650,8 +649,15 @@
             
             // Update buttons
             document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage === totalPages;
-            document.getElementById('nextBtn').textContent = currentPage === totalPages ? 'Finish! 🎉' : 'Next →';
+            
+            const nextBtn = document.getElementById('nextBtn');
+            if (currentPage === totalPages) {
+                nextBtn.textContent = 'Finish! 🎉';
+                nextBtn.disabled = false;
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.disabled = false;
+            }
             
             updateProgressBar();
             
