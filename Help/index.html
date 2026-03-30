@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="/SETFOP_favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="SETFOP_favicon.png" />
     <title>SETFOP — Documentation</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=DM+Sans:wght@300;400&display=swap"
-        rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg: #09080f;
@@ -24,12 +27,14 @@
             padding: 4rem 2rem;
             max-width: 800px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
         h1 {
             font-family: 'DM Mono', monospace;
             color: var(--accent);
             letter-spacing: 2px;
+            margin-top: 1rem;
         }
 
         .kb-list {
@@ -43,7 +48,7 @@
             border: 1px solid var(--border);
             margin-bottom: 1rem;
             border-radius: 4px;
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
         .kb-item:hover {
@@ -64,15 +69,26 @@
             font-size: 0.8rem;
             display: block;
             margin-top: 0.5rem;
+            font-family: 'DM Sans', sans-serif; /* Cleaner for descriptions */
+        }
+
+        .back-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
         }
     </style>
 </head>
-
 <body>
 
-    <a href="../index.html" style="color: var(--muted); text-decoration: none; font-size: 0.8rem;">← Back to Home</a>
+    <a href="../index.html" class="back-link">← Back to Home</a>
 
-    <h1 style="margin-top: 1rem;">Help Center</h1>
+    <h1>Help Center</h1>
     <p style="color: var(--muted);">Explore the documentation for the SETFOP Linux Utility.</p>
 
     <ul class="kb-list">
@@ -83,10 +99,13 @@
             </a>
         </li>
 
+        <li class="kb-item">
+            <a href="Linux_Networkville - kimi.html" class="kb-link">
+                02. Story of Linux Networkville
+                <span>An introduction to Network concepts from the Linux point-of-view.</span>
+            </a>
+        </li>
     </ul>
 
 </body>
-
-
 </html>
-
