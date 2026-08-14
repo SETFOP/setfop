@@ -30,6 +30,8 @@
       --text: #ede9fe;
       --muted: #6b6b8a;
       --card: #100e1c;
+
+      --nav-h: clamp(4rem, 8vh, 6.5rem);
     }
 
     html, body {
@@ -67,18 +69,20 @@
       background-image:
         linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-size: clamp(30px, 5vw, 60px) clamp(30px, 5vw, 60px);
       pointer-events: none;
       z-index: 0;
     }
 
     section,
     footer,
-    .section-divider {
+    .section-divider,
+    .sloka-viewport {
       position: relative;
       z-index: 1;
     }
 
+    /* ── SEAMLESS / CLEAN NAV BAR ── */
     nav {
       position: fixed;
       top: 0;
@@ -88,33 +92,34 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 4rem;
-      border-bottom: 1px solid transparent;
-      background: rgba(9, 8, 15, 0.88);
-      border-color: var(--border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      padding: clamp(1rem, 3vh, 2rem) clamp(1rem, 5vw, 4rem);
+      background: transparent;
+      border: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     .nav-logo {
       font-family: "DM Mono", monospace;
-      font-size: 1.15rem;
+      font-size: clamp(0.85rem, 1.8vw, 1.15rem);
       font-weight: 500;
       letter-spacing: 0.2em;
       color: var(--accent);
       text-decoration: none;
-      padding: 0.4rem 0.7rem;
-      margin-left: -0.7rem;
-      border-radius: 3px;
-      border: 1px solid transparent;
+      padding: 0;
+      margin-left: 0;
+      border-radius: 0;
+      border: none;
+      background: transparent;
       cursor: pointer;
       white-space: nowrap;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
     }
 
     .nav-logo:hover {
-      background: rgba(167, 139, 250, 0.08);
-      border-color: rgba(167, 139, 250, 0.3);
+      background: transparent;
+      border-color: transparent;
+      opacity: 0.8;
       transform: translateY(-1px);
     }
 
@@ -125,7 +130,7 @@
     /* ── FLUID NAV LINKS ── */
     .nav-links {
       display: flex;
-      gap: clamp(0.6rem, 3vw, 2.5rem);
+      gap: clamp(0.75rem, 3vw, 2.5rem);
       list-style: none;
       align-items: center;
     }
@@ -133,7 +138,7 @@
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: clamp(0.62rem, 2vw, 0.85rem);
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.2s;
@@ -147,63 +152,13 @@
       color: var(--accent);
     }
 
-    /* ── PAGE HEADER ── */
-    #motto-hero {
-      position: relative;
-      padding: 10rem 4rem 5rem;
-      overflow: hidden;
-    }
-
-    #motto-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-
-    .motto-hero-glow {
-      position: absolute;
-      top: -15%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 500px;
-      background: radial-gradient(circle at center, rgba(167, 139, 250, 0.10) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .motto-hero-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .about-label {
-      font-family: "DM Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .motto-hero-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: #fff;
-    }
-
-    .motto-hero-title span {
-      color: var(--accent);
+    /* ── FIRST-VIEWPORT SLOKA COMPOSITION ── */
+    .sloka-viewport {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--nav-h);
+      box-sizing: border-box;
     }
 
     /* ── DIVIDER ── */
@@ -212,11 +167,13 @@
       flex-direction: column;
       align-items: center;
       gap: 0.85rem;
-      margin: 1rem 0;
+      margin-top: clamp(2rem, 5vh, 4rem);
+      margin-bottom: clamp(1.5rem, 4vh, 3rem);
+      flex-shrink: 0;
     }
 
     .section-divider .divider-rule {
-      width: 36px;
+      width: clamp(24px, 4vw, 36px);
       height: 2px;
       background: var(--accent);
       opacity: 0.6;
@@ -227,7 +184,7 @@
       align-items: center;
       gap: 0.75rem;
       font-family: "DM Mono", monospace;
-      font-size: 0.7rem;
+      font-size: clamp(0.6rem, 1.2vw, 0.7rem);
       letter-spacing: 0.25em;
       color: var(--muted);
       text-transform: uppercase;
@@ -244,21 +201,26 @@
       opacity: 0.7;
     }
 
+    .next-section-divider {
+      margin: clamp(2rem, 5vh, 3rem) 0 1rem;
+    }
+
     /* ── SLOKA ── */
     #sloka {
-      padding: 1.5rem 4rem 4rem;
+      padding: 0 clamp(1rem, 4vw, 4rem) clamp(1rem, 2vh, 1.5rem);
       position: relative;
-      min-height: calc(100vh - 12rem);
+      flex: 1 1 auto;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 0;
     }
-    
+
     .sloka-frame {
       max-width: 820px;
       margin: 0 auto;
       text-align: center;
-      padding: 3rem 3rem;
+      padding: clamp(1.5rem, 4vw, 3rem);
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 4px;
@@ -278,18 +240,9 @@
       background: var(--accent);
     }
 
-    .sloka-mark {
-      font-family: "Playfair Display", serif;
-      font-size: 3rem;
-      color: var(--accent);
-      opacity: 0.4;
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
     .sloka-text {
       font-family: "Playfair Display", serif;
-      font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+      font-size: clamp(1.1rem, 2.5vw, 1.75rem);
       font-style: italic;
       font-weight: 400;
       color: #fff;
@@ -299,38 +252,29 @@
     .sloka-devanagari {
       font-style: normal;
       font-weight: 700;
-      font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+      font-size: clamp(1.25rem, 2.8vw, 1.9rem);
     }
 
     .sloka-transliteration {
-      margin-top: 1.25rem;
+      margin-top: clamp(0.75rem, 2vh, 1.25rem);
       font-family: "DM Mono", monospace;
-      font-size: 0.9rem;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
       font-style: italic;
       color: var(--accent);
       letter-spacing: 0.02em;
       line-height: 1.85;
     }
 
-    .sloka-source {
-      margin-top: 1.75rem;
-      font-family: "DM Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
     .sloka-divider {
       width: 40px;
       height: 1px;
       background: var(--border);
-      margin: 2rem auto;
+      margin: clamp(1rem, 3vh, 2rem) auto;
     }
 
     .sloka-translation {
       font-family: "DM Mono", monospace;
-      font-size: 0.95rem;
+      font-size: clamp(0.78rem, 1.6vw, 0.95rem);
       color: var(--muted);
       letter-spacing: 0.01em;
       line-height: 1.9;
@@ -340,7 +284,7 @@
 
     /* ── PHILOSOPHY PARAGRAPHS ── */
     #motto-body {
-      padding: 2rem 4rem 8rem;
+      padding: clamp(1rem, 3vh, 2rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 10vh, 8rem);
     }
 
     .motto-body-inner {
@@ -350,7 +294,7 @@
 
     .motto-body-inner p {
       color: var(--muted);
-      font-size: 1rem;
+      font-size: clamp(0.88rem, 1.8vw, 1rem);
       line-height: 1.9;
     }
 
@@ -360,7 +304,7 @@
 
     .motto-body-inner p:first-of-type::first-letter {
       font-family: "Playfair Display", serif;
-      font-size: 3.2rem;
+      font-size: clamp(2.5rem, 5vw, 3.2rem);
       font-weight: 700;
       color: var(--accent);
       float: left;
@@ -370,7 +314,7 @@
 
     footer {
       border-top: 1px solid var(--border);
-      padding: 2.5rem 4rem;
+      padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1rem, 5vw, 4rem);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -380,20 +324,20 @@
 
     .footer-logo {
       font-family: "DM Mono", monospace;
-      font-size: 0.95rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
       letter-spacing: 0.2em;
       color: var(--accent);
     }
 
     .footer-copy {
       font-family: "DM Mono", monospace;
-      font-size: 0.7rem;
+      font-size: clamp(0.65rem, 1.2vw, 0.7rem);
       color: var(--muted);
       letter-spacing: 0.08em;
     }
 
     .footer-tagline {
-      font-size: 0.78rem;
+      font-size: clamp(0.7rem, 1.3vw, 0.78rem);
       color: var(--muted);
       font-style: italic;
     }
@@ -408,78 +352,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* ── MEDIA QUERIES ── */
-    @media (max-width: 1024px) {
-      nav {
-        padding: 1.25rem 2.5rem;
-      }
-
-      #motto-hero {
-        padding: 8.5rem 2.5rem 4rem;
-      }
-
-      .section-divider {
-        padding: 0 2.5rem;
-      }
-      
-      #sloka {
-        padding: 1.25rem 2.5rem 3rem;
-        min-height: auto;
-      }
-
-      #motto-body {
-        padding: 1.5rem 2.5rem 6rem;
-      }
-
-      footer {
-        padding: 2rem 2.5rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        padding: 0.85rem 0.75rem;
-      }
-
-      .nav-logo {
-        font-size: 0.95rem;
-        letter-spacing: 0.15em;
-      }
-
-      /* Cleaned up: nav-links and nav-links a step overrides removed */
-
-      #motto-hero {
-        padding: 7rem 1.25rem 3rem;
-      }
-
-      .section-divider {
-        padding: 0 1.25rem;
-        gap: 1rem;
-      }
-
-      #sloka {
-        padding: 1rem 1.25rem 2.5rem;
-        min-height: auto;
-      }
-
-      .sloka-frame {
-        padding: 2rem 1.25rem;
-      }
-
-      #motto-body {
-        padding: 1rem 1.25rem 5rem;
-      }
-
-      footer {
-        padding: 1.75rem 1.25rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-    }
-
-    /* Cleaned up: @media (max-width: 360px) block removed since clamp() handles small viewports */
   </style>
 </head>
 
@@ -495,31 +367,36 @@
     </ul>
   </nav>
 
-  <div class="section-divider reveal" style="margin-top: 6.5rem;">
-    <div class="divider-rule"></div>
-    <span>Sloka</span>
+  <!-- FIRST-VIEWPORT SLOKA COMPOSITION -->
+  <div class="sloka-viewport">
+
+    <div class="section-divider reveal">
+      <div class="divider-rule"></div>
+      <span>Sloka</span>
+    </div>
+
+    <!-- SLOKA -->
+    <section id="sloka">
+      <div class="sloka-frame reveal">
+        <p class="sloka-text sloka-devanagari">
+          यद्यत्कष्टं मां पश्चादाकर्षत्,<br />
+          तत्तन्मेऽग्रगतेः पदे गुरुर्बभूव॥
+        </p>
+        <p class="sloka-transliteration">
+          yad-yat kaṣṭaṃ māṃ paścād-ākarṣat<br />
+          tat-tan-me'gra-gateḥ pade gurur-babhūva.
+        </p>
+        <div class="sloka-divider"></div>
+        <p class="sloka-translation">
+          Every hardship that pulled me backward -
+          becomes my guru at every step I take forward.
+        </p>
+      </div>
+    </section>
+
   </div>
 
-  <!-- SLOKA -->
-  <section id="sloka">
-    <div class="sloka-frame reveal">
-      <p class="sloka-text sloka-devanagari">
-        यद्यत्कष्टं मां पश्चादाकर्षत्,<br />
-        तत्तन्मेऽग्रगतेः पदे गुरुर्बभूव॥
-      </p>
-      <p class="sloka-transliteration">
-        yad-yat kaṣṭaṃ māṃ paścād-ākarṣat<br />
-        tat-tan-me'gra-gateḥ pade gurur-babhūva.
-      </p>
-      <div class="sloka-divider"></div>
-      <p class="sloka-translation">
-        Every hardship that pulled me backward - 
-        becomes my guru at every step I take forward.
-      </p>
-    </div>
-  </section>
-
-  <div class="section-divider reveal">
+  <div class="section-divider next-section-divider reveal">
     <div class="divider-rule"></div>
     <span>The Philosophy</span>
   </div>
