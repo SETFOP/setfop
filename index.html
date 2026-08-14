@@ -85,21 +85,24 @@
       text-decoration: none;
     }
 
+    /* ── FLUID NAV LINKS ── */
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: clamp(0.6rem, 3vw, 2.5rem);
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: clamp(0.62rem, 2vw, 0.85rem);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.2s;
       padding: 0.5rem 0;
       display: inline-block;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -559,7 +562,6 @@
       cursor: pointer;
       user-select: none;
       position: relative;
-      /* ADD THIS */
     }
 
     .email-copy-hint {
@@ -575,7 +577,6 @@
       text-align: center;
       background: rgba(9, 8, 15, 0.82);
       backdrop-filter: blur(2px);
-      /* softer blur */
       -webkit-backdrop-filter: blur(2px);
       font-family: "DM Mono", monospace;
       font-size: 0.78rem;
@@ -715,13 +716,7 @@
         font-size: 1rem;
       }
 
-      .nav-links {
-        gap: 1.5rem;
-      }
-
-      .nav-links a {
-        font-size: 0.78rem;
-      }
+      /* Cleaned up: nav-links stepped overrides removed (handled by clamp) */
 
       #hero {
         padding: 0 1.25rem;
@@ -869,9 +864,7 @@
     }
 
     @media (max-width: 380px) {
-      .nav-links {
-        gap: 1rem;
-      }
+      /* Cleaned up: nav-links stepped override removed (handled by clamp) */
 
       .hero-title {
         font-size: clamp(2.2rem, 12vw, 3rem);
@@ -888,7 +881,7 @@
   <!-- NAV -->
   <nav id="navbar">
     <a href="#hero" class="nav-logo">SETFOP</a>
-     <ul class="nav-links">
+    <ul class="nav-links">
       <li><a href="#" onclick="return false;">Downloads</a></li>
       <li><a href="./Help/">Help</a></li>
       <li><a href="./out_motto.html">our motto</a></li>
