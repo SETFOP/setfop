@@ -55,6 +55,25 @@
       opacity: 0.35;
     }
 
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    section,
+    footer,
+    .section-divider {
+      position: relative;
+      z-index: 1;
+    }
+
     nav {
       position: fixed;
       top: 0;
@@ -181,27 +200,39 @@
     /* ── DIVIDER ── */
     .section-divider {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
-      padding: 0 4rem;
+      gap: 0.85rem;
       margin: 1rem 0;
     }
 
+    .section-divider .divider-rule {
+      width: 36px;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
     .section-divider span {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       font-family: "DM Mono", monospace;
       font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       color: var(--muted);
       text-transform: uppercase;
       white-space: nowrap;
     }
 
-    .section-divider::before,
-    .section-divider::after {
+    .section-divider span::before,
+    .section-divider span::after {
       content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.7;
     }
 
     /* ── SLOKA ── */
@@ -450,7 +481,10 @@
     </ul>
   </nav>
 
-  <div class="section-divider reveal" style="margin-top: 9rem;"><span>Sloka</span></div>
+  <div class="section-divider reveal" style="margin-top: 9rem;">
+    <div class="divider-rule"></div>
+    <span>Sloka</span>
+  </div>
 
   <!-- SLOKA -->
   <section id="sloka">
@@ -471,7 +505,10 @@
     </div>
   </section>
 
-  <div class="section-divider reveal"><span>The Philosophy</span></div>
+  <div class="section-divider reveal">
+    <div class="divider-rule"></div>
+    <span>The Philosophy</span>
+  </div>
 
   <!-- DUMMY BODY CONTENT -->
   <section id="motto-body">
