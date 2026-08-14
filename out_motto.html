@@ -1,1 +1,521 @@
-<html> <h1> testing "out motto" page </h1> </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SETFOP — Our Motto</title>
+  <link rel="icon" type="image/png" href="SETFOP_favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #09080f;
+      --bg2: #0f0d1a;
+      --bg3: #141126;
+      --border: #2a1f45;
+      --accent: #a78bfa;
+      --accent2: #7c3aed;
+      --text: #ede9fe;
+      --muted: #6b6b8a;
+      --card: #100e1c;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      border-bottom: 1px solid transparent;
+      background: rgba(9, 8, 15, 0.88);
+      border-color: var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      font-family: "DM Mono", monospace;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.4rem 0.7rem;
+      margin-left: -0.7rem;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .nav-logo:hover {
+      background: rgba(167, 139, 250, 0.08);
+      border-color: rgba(167, 139, 250, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .nav-logo:active {
+      transform: translateY(0);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      padding: 0.5rem 0;
+      display: inline-block;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.current {
+      color: var(--accent);
+    }
+
+    /* ── PAGE HEADER ── */
+    #motto-hero {
+      position: relative;
+      padding: 10rem 4rem 5rem;
+      overflow: hidden;
+    }
+
+    #motto-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .motto-hero-glow {
+      position: absolute;
+      top: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(circle at center, rgba(167, 139, 250, 0.10) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .motto-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-label {
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .motto-hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .motto-hero-title span {
+      color: var(--accent);
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 4rem;
+      margin: 1rem 0;
+    }
+
+    .section-divider span {
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SLOKA ── */
+    #sloka {
+      padding: 6rem 4rem;
+      position: relative;
+    }
+
+    .sloka-frame {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 4rem 3rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sloka-frame::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .sloka-mark {
+      font-family: "Playfair Display", serif;
+      font-size: 3rem;
+      color: var(--accent);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .sloka-text {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.85;
+    }
+
+    .sloka-devanagari {
+      font-style: normal;
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    }
+
+    .sloka-transliteration {
+      margin-top: 1.25rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      line-height: 1.85;
+    }
+
+    .sloka-source {
+      margin-top: 1.75rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .sloka-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem auto;
+    }
+
+    .sloka-translation {
+      font-family: "DM Mono", monospace;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── PHILOSOPHY PARAGRAPHS ── */
+    #motto-body {
+      padding: 2rem 4rem 8rem;
+    }
+
+    .motto-body-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .motto-body-inner p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .motto-body-inner p+p {
+      margin-top: 1.5rem;
+    }
+
+    .motto-body-inner p:first-of-type::first-letter {
+      font-family: "Playfair Display", serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      float: left;
+      line-height: 0.8;
+      margin: 0.1rem 0.6rem 0 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: "DM Mono", monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-tagline {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      nav {
+        padding: 1.25rem 2.5rem;
+      }
+
+      #motto-hero {
+        padding: 8.5rem 2.5rem 4rem;
+      }
+
+      .section-divider {
+        padding: 0 2.5rem;
+      }
+
+      #sloka {
+        padding: 4rem 2.5rem;
+      }
+
+      #motto-body {
+        padding: 1.5rem 2.5rem 6rem;
+      }
+
+      footer {
+        padding: 2rem 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.25rem;
+      }
+
+      .nav-logo {
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.78rem;
+      }
+
+      #motto-hero {
+        padding: 7rem 1.25rem 3rem;
+      }
+
+      .section-divider {
+        padding: 0 1.25rem;
+        gap: 1rem;
+      }
+
+      #sloka {
+        padding: 3rem 1.25rem;
+      }
+
+      .sloka-frame {
+        padding: 2.5rem 1.5rem;
+      }
+
+      #motto-body {
+        padding: 1rem 1.25rem 5rem;
+      }
+
+      footer {
+        padding: 1.75rem 1.25rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="./index.html" class="nav-logo">SETFOP</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="return false;">Downloads</a></li>
+      <li><a href="./Help/">Help</a></li>
+      <li><a href="./out_motto.html" class="current">our motto</a></li>
+    </ul>
+  </nav>
+
+  <div class="section-divider reveal" style="margin-top: 9rem;"><span>Sloka</span></div>
+
+  <!-- SLOKA -->
+  <section id="sloka">
+    <div class="sloka-frame reveal">
+      <p class="sloka-text sloka-devanagari">
+        यद्यत्कष्टं मां पश्चादाकर्षति,<br />
+        तत्तन्मेऽग्रगतेः पदे गुरुर्भवति॥
+      </p>
+      <p class="sloka-transliteration">
+        yad-yat kaṣṭaṃ māṃ paścād-ākarṣati,<br />
+        tat-tan-me'gra-gateḥ pade gurur-bhavati.
+      </p>
+      <div class="sloka-divider"></div>
+      <p class="sloka-translation">
+        Whatever hardship pulls me backward —
+        that very thing becomes my guru at every step of my forward journey.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider reveal"><span>The Philosophy</span></div>
+
+  <!-- DUMMY BODY CONTENT -->
+  <section id="motto-body">
+    <div class="motto-body-inner reveal">
+      <p>
+        Placeholder paragraph one. This is dummy text standing in for the real
+        introduction you will write about why SETFOP holds this verse close —
+        the idea of carrying what is missing and preserving what already
+        stands, mirrored in how the utility treats ownership and permissions
+        on a system.
+      </p>
+      <p>
+        Placeholder paragraph two. Replace this with a short reflection on
+        prevention — how discipline applied early removes the need for
+        correction later, and how that same principle shapes the way SETFOP
+        approaches configuration drift before it ever becomes a problem.
+      </p>
+      <p>
+        Placeholder paragraph three. Use this space to connect protection and
+        preservation back to the reader — why a system that is watched over
+        deliberately, rather than left to entropy, is one that lasts. Swap in
+        your own words whenever you are ready.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">SETFOP</span>
+    <span class="footer-tagline">Prevent. Protect. Preserve.</span>
+    <span class="footer-copy">&copy; <span id="year"></span> SETFOP. All rights reserved.</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
