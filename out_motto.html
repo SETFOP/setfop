@@ -32,6 +32,13 @@
       --card: #100e1c;
     }
 
+    html, body {
+     overflow-x: hidden;
+    max-width: 100%;
+    }
+
+
+
     html {
       scroll-behavior: smooth;
     }
@@ -251,6 +258,7 @@
       border-radius: 4px;
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .sloka-frame::before {
@@ -433,11 +441,12 @@
       }
 
       .nav-links {
-        gap: 1.5rem;
+        gap: 1rem;
       }
 
       .nav-links a {
-        font-size: 0.78rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
       }
 
       #motto-hero {
