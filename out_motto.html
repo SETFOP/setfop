@@ -242,11 +242,15 @@
       background: var(--accent);
       opacity: 0.7;
     }
-
+    
     /* ── SLOKA ── */
     #sloka {
-      padding: 1.5rem 4rem 3rem; /* Reduced bottom padding so card doesn't touch bottom boundary */
+      padding: 1.5rem 4rem 4rem;
       position: relative;
+      min-height: calc(100vh - 12rem); /* Ensures "The Philosophy" stays off-screen */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .sloka-frame {
