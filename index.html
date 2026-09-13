@@ -30,6 +30,14 @@
       --text: #ede9fe;
       --muted: #6b6b8a;
       --card: #100e1c;
+
+      --nav-h: clamp(4rem, 8vh, 6.5rem);
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     html {
@@ -55,6 +63,36 @@
       opacity: 0.35;
     }
 
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: clamp(30px, 5vw, 60px) clamp(30px, 5vw, 60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav,
+    section,
+    footer,
+    .section-divider {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      scroll-margin-top: var(--nav-h);
+    }
+
+    /* ── PAGE SWITCHING ── */
+    .page[hidden] {
+      display: none !important;
+    }
+
+    /* ── NAV (shared) ── */
     nav {
       position: fixed;
       top: 0;
@@ -64,7 +102,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 4rem;
+      padding: clamp(1rem, 3vh, 2rem) clamp(1rem, 5vw, 4rem);
+      background: transparent;
       border-bottom: 1px solid transparent;
       transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
     }
@@ -78,17 +117,30 @@
 
     .nav-logo {
       font-family: "DM Mono", monospace;
-      font-size: 1.15rem;
+      font-size: clamp(0.85rem, 1.8vw, 1.15rem);
       font-weight: 500;
       letter-spacing: 0.2em;
       color: var(--accent);
       text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.2s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
     }
 
-    /* ── FLUID NAV LINKS ── */
+    .nav-logo:hover {
+      opacity: 0.8;
+      transform: translateY(-1px);
+    }
+
+    .nav-logo:active {
+      transform: translateY(0);
+    }
+
     .nav-links {
       display: flex;
-      gap: clamp(0.6rem, 3vw, 2.5rem);
+      gap: clamp(0.75rem, 3vw, 2.5rem);
       list-style: none;
       align-items: center;
     }
@@ -96,7 +148,7 @@
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: clamp(0.62rem, 2vw, 0.85rem);
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: color 0.2s;
@@ -105,10 +157,12 @@
       white-space: nowrap;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.current {
       color: var(--accent);
     }
 
+    /* ── HERO ── */
     #hero {
       position: relative;
       min-height: 100vh;
@@ -117,17 +171,6 @@
       align-items: center;
       padding: 0 4rem;
       overflow: hidden;
-    }
-
-    #hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
     }
 
     .hero-glow {
@@ -330,21 +373,50 @@
       }
     }
 
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── SECTION DIVIDER (shared) ── */
     .section-divider {
       display: flex;
       align-items: center;
       gap: 1.5rem;
       padding: 0 4rem;
-      margin: 1rem 0;
+      margin: 3rem 0 1rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .section-divider span {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       font-family: "DM Mono", monospace;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       color: var(--muted);
       text-transform: uppercase;
       white-space: nowrap;
+    }
+
+    .section-divider span::before,
+    .section-divider span::after {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.7;
     }
 
     .section-divider::before,
@@ -355,9 +427,9 @@
       background: var(--border);
     }
 
+    /* ── ABOUT ── */
     #about {
       padding: 8rem 4rem;
-      position: relative;
     }
 
     .about-grid {
@@ -462,9 +534,499 @@
       line-height: 1.65;
     }
 
+    /* ── HELP: INTRO ── */
+    #help-hero {
+      padding: calc(var(--nav-h) + clamp(2rem, 6vh, 4rem)) 4rem 2rem;
+    }
+
+    .help-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .help-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.4rem, 5vw, 3.75rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .help-title span {
+      color: var(--accent);
+    }
+
+    .help-sub {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+
+    /* ── QUICK START ── */
+    #quick-start {
+      padding: 1rem 4rem 2rem;
+    }
+
+    .quick-start-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.06), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem 2.25rem;
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .panel-heading-icon {
+      font-family: "DM Mono", monospace;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .panel-heading h3 {
+      font-family: "DM Mono", monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .quick-command {
+      display: block;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid rgba(167, 139, 250, 0.22);
+      border-radius: 4px;
+      background: #07060d;
+      color: var(--text);
+      font-family: "DM Mono", monospace;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .quick-command .prompt {
+      color: var(--accent);
+      user-select: none;
+    }
+
+    /* ── COMMANDS GRID ── */
+    #commands {
+      padding: 1rem 4rem 2rem;
+    }
+
+    .commands-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .commands-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .command-card {
+      padding: 1.6rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .command-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.3s;
+    }
+
+    .command-card:hover {
+      border-color: rgba(167, 139, 250, 0.35);
+      transform: translateX(4px);
+    }
+
+    .command-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .command-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .command-icon {
+      width: 2.1rem;
+      height: 2.1rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      background: rgba(167, 139, 250, 0.1);
+      color: var(--accent);
+      font-family: "DM Mono", monospace;
+      font-size: 1rem;
+    }
+
+    .command-name {
+      font-family: "DM Mono", monospace;
+      font-size: 0.95rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .command-description {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .command-description strong {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .code-block {
+      margin: 0;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(167, 139, 250, 0.16);
+      border-radius: 3px;
+      background: #07060d;
+      color: #d8d2e9;
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    .code-command {
+      color: var(--accent);
+    }
+
+    .code-example {
+      color: var(--muted);
+    }
+
+    /* ── WORKFLOW ── */
+    #workflow {
+      padding: 1rem 4rem 2rem;
+    }
+
+    .workflow-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .workflow-step {
+      padding: 1.6rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      background: rgba(167, 139, 250, 0.1);
+      color: var(--accent);
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+    }
+
+    .workflow-step h4 {
+      font-family: "DM Mono", monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    .workflow-step p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    .workflow-step p strong {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* ── NOTES ── */
+    #notes {
+      padding: 1rem 4rem 2rem;
+    }
+
+    .notes-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .notes-card {
+      padding: 1.75rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card);
+    }
+
+    .notes-card h3 {
+      font-family: "DM Mono", monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+      font-weight: 500;
+    }
+
+    .notes-list {
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.9;
+    }
+
+    .notes-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .notes-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .notes-list strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .notes-list code {
+      font-family: "DM Mono", monospace;
+      color: var(--accent);
+      font-size: 0.82rem;
+    }
+
+    /* ── MOTTO: FIRST-VIEWPORT SLOKA ── */
+    .sloka-viewport {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--nav-h);
+      box-sizing: border-box;
+    }
+
+    .motto-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: clamp(2rem, 5vh, 4rem);
+      margin-bottom: clamp(1.5rem, 4vh, 3rem);
+      flex-shrink: 0;
+    }
+
+    .motto-divider .divider-rule {
+      width: clamp(24px, 4vw, 36px);
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .motto-divider span {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: "DM Mono", monospace;
+      font-size: clamp(0.6rem, 1.2vw, 0.7rem);
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .motto-divider span::before,
+    .motto-divider span::after {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .next-motto-divider {
+      margin: clamp(2rem, 5vh, 3rem) 0 1rem;
+    }
+
+    #sloka {
+      padding: 0 clamp(1rem, 4vw, 4rem) clamp(1rem, 2vh, 1.5rem);
+      position: relative;
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+    }
+
+    .sloka-frame {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .sloka-frame::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .sloka-text {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.85;
+    }
+
+    .sloka-devanagari {
+      font-style: normal;
+      font-weight: 700;
+      font-size: clamp(1.25rem, 2.8vw, 1.9rem);
+    }
+
+    .sloka-transliteration {
+      margin-top: clamp(0.75rem, 2vh, 1.25rem);
+      font-family: "DM Mono", monospace;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      line-height: 1.85;
+    }
+
+    .sloka-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: clamp(1rem, 3vh, 2rem) auto;
+    }
+
+    .sloka-translation {
+      font-family: "DM Mono", monospace;
+      font-size: clamp(0.78rem, 1.6vw, 0.95rem);
+      color: var(--muted);
+      letter-spacing: 0.01em;
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── MOTTO: PHILOSOPHY PARAGRAPHS ── */
+    #motto-body {
+      padding: clamp(1rem, 3vh, 2rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 10vh, 8rem);
+    }
+
+    .motto-body-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .motto-body-inner p {
+      color: var(--muted);
+      font-size: clamp(0.88rem, 1.8vw, 1rem);
+      line-height: 1.9;
+    }
+
+    .motto-body-inner p+p {
+      margin-top: 1.5rem;
+    }
+
+    .motto-body-inner p:first-of-type::first-letter {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.5rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--accent);
+      float: left;
+      line-height: 0.8;
+      margin: 0.1rem 0.6rem 0 0;
+    }
+
+    /* ── CONTACT ── */
     #contact {
       padding: 8rem 4rem;
-      position: relative;
     }
 
     .contact-inner {
@@ -627,6 +1189,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* ── FOOTER (shared) ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 2.5rem 4rem;
@@ -657,18 +1220,6 @@
       font-style: italic;
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -680,7 +1231,9 @@
       transform: translateY(0);
     }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
+
       nav {
         padding: 1.25rem 2.5rem;
       }
@@ -694,7 +1247,17 @@
         padding: 6rem 2.5rem;
       }
 
-      .section-divider {
+      #help-hero,
+      #quick-start,
+      #commands,
+      #workflow,
+      #notes {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+
+      .section-divider,
+      .motto-divider {
         padding: 0 2.5rem;
       }
 
@@ -707,7 +1270,16 @@
       }
     }
 
+    @media (max-width: 900px) {
+
+      .commands-grid,
+      .workflow-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
+
       nav {
         padding: 1rem 1.25rem;
       }
@@ -715,8 +1287,6 @@
       .nav-logo {
         font-size: 1rem;
       }
-
-      /* Cleaned up: nav-links stepped overrides removed (handled by clamp) */
 
       #hero {
         padding: 0 1.25rem;
@@ -775,7 +1345,8 @@
         display: none;
       }
 
-      .section-divider {
+      .section-divider,
+      .motto-divider {
         padding: 0 1.25rem;
         gap: 1rem;
       }
@@ -800,6 +1371,30 @@
       }
 
       .pillar:hover {
+        transform: none;
+      }
+
+      #help-hero,
+      #quick-start,
+      #commands,
+      #workflow,
+      #notes {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .help-title {
+        font-size: clamp(2rem, 9vw, 2.75rem);
+      }
+
+      .quick-start-inner,
+      .command-card,
+      .workflow-step,
+      .notes-card {
+        padding: 1.25rem;
+      }
+
+      .command-card:hover {
         transform: none;
       }
 
@@ -864,8 +1459,6 @@
     }
 
     @media (max-width: 380px) {
-      /* Cleaned up: nav-links stepped override removed (handled by clamp) */
-
       .hero-title {
         font-size: clamp(2.2rem, 12vw, 3rem);
       }
@@ -878,149 +1471,447 @@
   <!-- TOAST -->
   <div class="toast" id="toast">Email copied successfully!</div>
 
-  <!-- NAV -->
+  <!-- NAV (shared across all pages) -->
   <nav id="navbar">
-    <a href="#hero" class="nav-logo">SETFOP</a>
+    <a href="#home" class="nav-logo" data-page-link="home">SETFOP</a>
     <ul class="nav-links">
       <li><a href="#" onclick="return false;">Downloads</a></li>
-      <li><a href="./setfop-web-help-btn_GitHub.html">Help</a></li>
-      <li><a href="./out_motto.html">our motto</a></li>
+      <li><a href="#help" class="nav-help" data-page-link="help">Help</a></li>
+      <li><a href="#motto" class="nav-motto" data-page-link="motto">our motto</a></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-glow2"></div>
-    <div class="hero-content">
-      <div class="hero-badge">Linux Utility</div>
-      <h1 class="hero-title">Meet<br /><span>SETFOP</span></h1>
-      <p class="hero-tagline">
-        <em>Prevent. Protect. Preserve.</em> &nbsp;—&nbsp; That's the SETFOP way.
-      </p>
-      <div class="hero-cta">
-        <a href="#about" class="btn-primary">Learn More</a>
-        <a href="#contact" class="btn-ghost">Get in Touch</a>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="line"></div>
-    </div>
-  </section>
+  <!-- ══════════════════ PAGE: HOME ══════════════════ -->
+  <div id="page-home" class="page">
 
-  <!-- DIVIDER -->
-  <div class="section-divider"><span>Our Philosophy</span></div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="reveal">
-        <p class="about-label">// About</p>
-        <h2 class="about-heading">Built for those who take system integrity seriously.</h2>
-        <p class="about-body">
-          SETFOP is a Linux utility crafted with a singular purpose — to give you precise control over ownership and
-          permissions without compromise.
-          Designed for administrators, DevOps engineers, and power users who believe a stable system is not a luxury,
-          but a baseline requirement.
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-glow2"></div>
+      <div class="hero-content">
+        <div class="hero-badge">Linux Utility</div>
+        <h1 class="hero-title">Meet<br /><span>SETFOP</span></h1>
+        <p class="hero-tagline">
+          <em>Prevent. Protect. Preserve.</em> &nbsp;—&nbsp; That's the SETFOP way.
         </p>
-        <p class="about-body" style="margin-top:1.25rem;">
-          At its core, SETFOP is built on three uncompromising principles: preventing configuration drift before it
-          begins
-          protecting critical paths from unsafe or unintended changes, and preserving the integrity of your environment
-          through every operation.
+        <div class="hero-cta">
+          <a href="#about" class="btn-primary">Learn More</a>
+          <a href="#contact" class="btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="line"></div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="section-divider"><span>Our Philosophy</span></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="about-label">// About</p>
+          <h2 class="about-heading">Built for those who take system integrity seriously.</h2>
+          <p class="about-body">
+            SETFOP is a Linux utility crafted with a singular purpose — to give you precise control over ownership and
+            permissions without compromise.
+            Designed for administrators, DevOps engineers, and power users who believe a stable system is not a luxury,
+            but a baseline requirement.
+          </p>
+          <p class="about-body" style="margin-top:1.25rem;">
+            At its core, SETFOP is built on three uncompromising principles: preventing configuration drift before it
+            begins
+            protecting critical paths from unsafe or unintended changes, and preserving the integrity of your environment
+            through every operation.
+          </p>
+        </div>
+
+        <div class="pillars">
+          <div class="pillar reveal" style="transition-delay:0.1s;">
+            <div class="pillar-icon">&#9658;</div>
+            <div>
+              <p class="pillar-title">Prevent</p>
+              <p class="pillar-desc">Stop permission drift before it spreads. SETFOP captures and controls ownership and
+                access states at the source — before inconsistencies take hold.</p>
+            </div>
+          </div>
+          <div class="pillar reveal" style="transition-delay:0.2s;">
+            <div class="pillar-icon">&#9658;</div>
+            <div>
+              <p class="pillar-title">Protect</p>
+              <p class="pillar-desc">Shield critical paths with deliberate enforcement. Every change is validated, applied
+                with intent and guarded against unsafe modification.</p>
+            </div>
+          </div>
+          <div class="pillar reveal" style="transition-delay:0.3s;">
+            <div class="pillar-icon">&#9658;</div>
+            <div>
+              <p class="pillar-title">Preserve</p>
+              <p class="pillar-desc">Sustain stability through consistency. Because a controlled system is not just secure — it is reliable,
+                 reproducible, and built to last.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="section-divider"><span>Reach Out</span></div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-inner">
+        <p class="about-label" style="text-align:center;">// Contact</p>
+        <h2 class="contact-heading reveal">Let's connect.</h2>
+        <p class="contact-sub reveal">Find us where the conversation is happening.</p>
+
+        <div class="contact-links">
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/setfop/" target="_blank" rel="noopener" class="contact-card reveal"
+            style="transition-delay:0.1s;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="4" cy="4" r="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div>
+              <span class="contact-card-label">LinkedIn</span>
+              <span class="contact-card-value">SETFOP</span>
+            </div>
+          </a>
+
+          <!-- Substack -->
+          <a href="https://substack.com/@setfop" target="_blank" rel="noopener" class="contact-card reveal"
+            style="transition-delay:0.2s;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19 4H5a2 2 0 0 0-2 2v14l4-2 3 2 3-2 4 2V6a2 2 0 0 0-2-2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8M8 14h5" />
+            </svg>
+            <div>
+              <span class="contact-card-label">Substack</span>
+              <span class="contact-card-value">@setfop</span>
+            </div>
+          </a>
+
+          <!-- Email — copy to clipboard -->
+          <div class="contact-card email-card reveal" style="transition-delay:0.3s;" onclick="copyEmail()" role="button"
+            tabindex="0" aria-label="Copy email address">
+            <div class="email-copy-hint">Copy</div>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9.75 6.75L2.25 6.75" />
+            </svg>
+            <div>
+              <span class="contact-card-label">Email</span>
+              <span class="contact-card-value">setfop-akvk@zohomail.in</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- ══════════════════ /PAGE: HOME ══════════════════ -->
+
+  <!-- ══════════════════ PAGE: HELP ══════════════════ -->
+  <div id="page-help" class="page" hidden>
+
+    <!-- HERO / INTRO -->
+    <section id="help-hero">
+      <div class="help-hero-inner">
+        <p class="eyebrow reveal">SETFOP CLI</p>
+        <h1 class="help-title reveal">Command <span>Help</span></h1>
+        <p class="help-sub reveal">
+          Use the SETFOP command-line interface to create templates, apply
+          filesystem metadata, validate destinations, inspect templates and
+          logs, and view SETFOP information.
         </p>
       </div>
+    </section>
 
-      <div class="pillars">
-        <div class="pillar reveal" style="transition-delay:0.1s;">
-          <div class="pillar-icon">&#9658;</div>
-          <div>
-            <p class="pillar-title">Prevent</p>
-            <p class="pillar-desc">Stop permission drift before it spreads. SETFOP captures and controls ownership and
-              access states at the source — before inconsistencies take hold.</p>
-          </div>
+    <!-- QUICK START -->
+    <section id="quick-start">
+      <div class="quick-start-inner reveal">
+        <div class="panel-heading">
+          <span class="panel-heading-icon">&#9679;</span>
+          <h3>Quick Start</h3>
         </div>
-        <div class="pillar reveal" style="transition-delay:0.2s;">
-          <div class="pillar-icon">&#9658;</div>
-          <div>
-            <p class="pillar-title">Protect</p>
-            <p class="pillar-desc">Shield critical paths with deliberate enforcement. Every change is validated, applied
-              with intent and guarded against unsafe modification.</p>
-          </div>
-        </div>
-        <div class="pillar reveal" style="transition-delay:0.3s;">
-          <div class="pillar-icon">&#9658;</div>
-          <div>
-            <p class="pillar-title">Preserve</p>
-            <p class="pillar-desc">Sustain stability through consistency. Because a controlled system is not just secure — it is reliable,
-               reproducible, and built to last.</p>
-          </div>
+        <code class="quick-command"><span class="prompt">$</span> setfop help</code>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="section-divider"><span>Available Commands</span></div>
+
+    <!-- COMMANDS -->
+    <section id="commands">
+      <div class="commands-inner">
+        <div class="commands-grid">
+
+          <!-- CREATE -->
+          <article class="command-card reveal" style="transition-delay:0.05s;">
+            <div class="command-header">
+              <div class="command-icon">+</div>
+              <div class="command-name">setfop create</div>
+            </div>
+            <p class="command-description">
+              Create a SETFOP template from a source directory. The template
+              captures filesystem metadata.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop create &lt;template_name&gt; &lt;source_path&gt;</span>
+
+<span class="code-example">Example:
+setfop create my-template /etc/myapp</span></pre>
+          </article>
+
+          <!-- APPLY -->
+          <article class="command-card reveal" style="transition-delay:0.1s;">
+            <div class="command-header">
+              <div class="command-icon">&#9658;</div>
+              <div class="command-name">setfop apply</div>
+            </div>
+            <p class="command-description">
+              Apply a template to a destination target. Use
+              <strong>--dry-run</strong> when you want to preview the
+              operation.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop apply &lt;template_name&gt; &lt;destination_path&gt; [--dry-run]</span>
+
+<span class="code-example">Example:
+setfop apply my-template /tmp/testroot
+
+Dry-run:
+setfop apply my-template /tmp/testroot --dry-run</span></pre>
+          </article>
+
+          <!-- VALIDATE -->
+          <article class="command-card reveal" style="transition-delay:0.15s;">
+            <div class="command-header">
+              <div class="command-icon">&#10003;</div>
+              <div class="command-name">setfop validate</div>
+            </div>
+            <p class="command-description">
+              Verify a destination filesystem against an existing SETFOP
+              template specification.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop validate &lt;template_name&gt; &lt;destination_path&gt;</span>
+
+<span class="code-example">Example:
+setfop validate my-template /tmp/testroot</span></pre>
+          </article>
+
+          <!-- LIST TEMPLATES -->
+          <article class="command-card reveal" style="transition-delay:0.2s;">
+            <div class="command-header">
+              <div class="command-icon">&#9632;</div>
+              <div class="command-name">setfop list-templates</div>
+            </div>
+            <p class="command-description">
+              List the SETFOP templates currently available.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop list-templates</span>
+
+<span class="code-example">Example:
+setfop list-templates</span></pre>
+          </article>
+
+          <!-- LIST LOGS -->
+          <article class="command-card reveal" style="transition-delay:0.25s;">
+            <div class="command-header">
+              <div class="command-icon">&#8801;</div>
+              <div class="command-name">setfop list-logs</div>
+            </div>
+            <p class="command-description">
+              List the operation logs generated by SETFOP.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop list-logs</span>
+
+<span class="code-example">Example:
+setfop list-logs</span></pre>
+          </article>
+
+          <!-- INFO -->
+          <article class="command-card reveal" style="transition-delay:0.3s;">
+            <div class="command-header">
+              <div class="command-icon">i</div>
+              <div class="command-name">setfop info</div>
+            </div>
+            <p class="command-description">
+              Display the SETFOP banner and CLI information.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop info</span>
+
+<span class="code-example">Example:
+setfop info</span></pre>
+          </article>
+
+          <!-- HELP -->
+          <article class="command-card reveal" style="transition-delay:0.35s;">
+            <div class="command-header">
+              <div class="command-icon">?</div>
+              <div class="command-name">setfop help</div>
+            </div>
+            <p class="command-description">
+              Display the SETFOP command usage and help information.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop help</span>
+
+<span class="code-example">Example:
+setfop help</span></pre>
+          </article>
+
+          <!-- VERSION -->
+          <article class="command-card reveal" style="transition-delay:0.4s;">
+            <div class="command-header">
+              <div class="command-icon">#</div>
+              <div class="command-name">setfop version</div>
+            </div>
+            <p class="command-description">
+              Display the installed SETFOP version.
+            </p>
+            <pre class="code-block"><span class="code-command">setfop version</span>
+
+<span class="code-example">Example:
+setfop version</span></pre>
+          </article>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- DIVIDER -->
-  <div class="section-divider"><span>Reach Out</span></div>
+    <!-- DIVIDER -->
+    <div class="section-divider"><span>Typical Workflow</span></div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <p class="about-label" style="text-align:center;">// Contact</p>
-      <h2 class="contact-heading reveal">Let's connect.</h2>
-      <p class="contact-sub reveal">Find us where the conversation is happening.</p>
+    <!-- WORKFLOW -->
+    <section id="workflow">
+      <div class="workflow-inner">
+        <div class="workflow-steps">
 
-      <div class="contact-links">
-
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/company/setfop/" target="_blank" rel="noopener" class="contact-card reveal"
-          style="transition-delay:0.1s;">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect x="2" y="9" width="4" height="12" stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="4" cy="4" r="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <div>
-            <span class="contact-card-label">LinkedIn</span>
-            <span class="contact-card-value">SETFOP</span>
+          <div class="workflow-step reveal" style="transition-delay:0.05s;">
+            <div class="step-number">01</div>
+            <h4>Create a template</h4>
+            <p>
+              Capture filesystem metadata from your source directory into a
+              SETFOP template.
+            </p>
           </div>
-        </a>
 
-        <!-- Substack -->
-        <a href="https://substack.com/@setfop" target="_blank" rel="noopener" class="contact-card reveal"
-          style="transition-delay:0.2s;">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M19 4H5a2 2 0 0 0-2 2v14l4-2 3 2 3-2 4 2V6a2 2 0 0 0-2-2z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8M8 14h5" />
-          </svg>
-          <div>
-            <span class="contact-card-label">Substack</span>
-            <span class="contact-card-value">@setfop</span>
+          <div class="workflow-step reveal" style="transition-delay:0.15s;">
+            <div class="step-number">02</div>
+            <h4>Preview or apply</h4>
+            <p>
+              Use <strong>apply</strong> to deploy the template, or use
+              <strong>--dry-run</strong> first to preview what SETFOP will do.
+            </p>
           </div>
-        </a>
 
-        <!-- Email — copy to clipboard -->
-        <div class="contact-card email-card reveal" style="transition-delay:0.3s;" onclick="copyEmail()" role="button"
-          tabindex="0" aria-label="Copy email address">
-          <div class="email-copy-hint">Copy</div>
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9.75 6.75L2.25 6.75" />
-          </svg>
-          <div>
-            <span class="contact-card-label">Email</span>
-            <span class="contact-card-value">setfop-akvk@zohomail.in</span>
+          <div class="workflow-step reveal" style="transition-delay:0.25s;">
+            <div class="step-number">03</div>
+            <h4>Validate</h4>
+            <p>
+              Run <strong>validate</strong> against the destination to verify
+              the filesystem against the specification.
+            </p>
           </div>
+
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
+    <!-- DIVIDER -->
+    <div class="section-divider"><span>SETFOP Notes</span></div>
+
+    <!-- NOTES -->
+    <section id="notes">
+      <div class="notes-inner">
+        <div class="notes-card reveal">
+          <h3>Good to Know</h3>
+          <ul class="notes-list">
+            <li><strong>Templates:</strong> <code>/var/lib/setfop/templates/&lt;name&gt;.setfop</code></li>
+            <li><strong>Logs:</strong> <code>/var/log/setfop/</code></li>
+            <li>Log types include: create, apply, dry-run, validate and copy.</li>
+            <li>SETFOP captures metadata only: mode, owner, group and symlink target.</li>
+            <li><strong>SETFOP does NOT copy file contents.</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- ══════════════════ /PAGE: HELP ══════════════════ -->
+
+  <!-- ══════════════════ PAGE: OUR MOTTO ══════════════════ -->
+  <div id="page-motto" class="page" hidden>
+
+    <!-- FIRST-VIEWPORT SLOKA COMPOSITION -->
+    <div class="sloka-viewport">
+
+      <div class="motto-divider reveal">
+        <div class="divider-rule"></div>
+        <span>Sloka</span>
+      </div>
+
+      <!-- SLOKA -->
+      <section id="sloka">
+        <div class="sloka-frame reveal">
+          <p class="sloka-text sloka-devanagari">
+            यद्यत्कष्टं मां पश्चादाकर्षत्,<br />
+            तत्तन्मेऽग्रगतेः पदे गुरुर्बभूव॥
+          </p>
+          <p class="sloka-transliteration">
+            yad-yat kaṣṭaṃ māṃ paścād-ākarṣat<br />
+            tat-tan-me'gra-gateḥ pade gurur-babhūva.
+          </p>
+          <div class="sloka-divider"></div>
+          <p class="sloka-translation">
+            Every hardship that pulled me backward -
+            becomes my guru at every step I take forward.
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="motto-divider next-motto-divider reveal">
+      <div class="divider-rule"></div>
+      <span>The Philosophy</span>
+    </div>
+
+    <!-- DUMMY BODY CONTENT -->
+    <section id="motto-body">
+      <div class="motto-body-inner reveal">
+        <p>
+          Placeholder paragraph one. This is dummy text standing in for the real
+          introduction you will write about why SETFOP holds this verse close —
+          the idea of carrying what is missing and preserving what already
+          stands, mirrored in how the utility treats ownership and permissions
+          on a system.
+        </p>
+        <p>
+          Placeholder paragraph two. Replace this with a short reflection on
+          prevention — how discipline applied early removes the need for
+          correction later, and how that same principle shapes the way SETFOP
+          approaches configuration drift before it ever becomes a problem.
+        </p>
+        <p>
+          Placeholder paragraph three. Use this space to connect protection and
+          preservation back to the reader — why a system that is watched over
+          deliberately, rather than left to entropy, is one that lasts. Swap in
+          your own words whenever you are ready.
+        </p>
+      </div>
+    </section>
+
+  </div>
+  <!-- ══════════════════ /PAGE: OUR MOTTO ══════════════════ -->
+
+  <!-- FOOTER (shared, persists across pages) -->
   <footer>
     <span class="footer-logo">SETFOP</span>
     <span class="footer-tagline">Prevent. Protect. Preserve.</span>
@@ -1030,18 +1921,74 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    /* ── PAGE ROUTER ──
+       Fakes separate pages ("index.html", "help", "our motto") from one file
+       using the URL hash. Clicking a nav link swaps the visible page, resets
+       scroll to the top, and updates the tab title — just like a real
+       page navigation, but everything lives in this single HTML file. */
+    (function () {
+      const pages = {
+        home: document.getElementById("page-home"),
+        help: document.getElementById("page-help"),
+        motto: document.getElementById("page-motto")
+      };
+      const titles = {
+        home: "SETFOP — Prevent. Protect. Preserve.",
+        help: "SETFOP — Command Help",
+        motto: "SETFOP — Our Motto"
+      };
+      const navHelp = document.querySelector(".nav-help");
+      const navMotto = document.querySelector(".nav-motto");
+
+      function keyFromHash(hash) {
+        if (hash === "help") return "help";
+        if (hash === "motto") return "motto";
+        return "home";
+      }
+
+      let currentKey = null;
+
+      function showPage(key) {
+        Object.keys(pages).forEach(function (k) {
+          if (k === key) {
+            pages[k].removeAttribute("hidden");
+          } else {
+            pages[k].setAttribute("hidden", "");
+          }
+        });
+        document.title = titles[key];
+        if (navHelp) navHelp.classList.toggle("current", key === "help");
+        if (navMotto) navMotto.classList.toggle("current", key === "motto");
+        window.scrollTo(0, 0);
+        currentKey = key;
+      }
+
+      function route() {
+        const hash = location.hash.replace("#", "");
+        const key = keyFromHash(hash);
+        if (key !== currentKey) showPage(key);
+      }
+
+      window.addEventListener("hashchange", route);
+      route();
+    })();
+
+    // Nav background on scroll
     const navbar = document.getElementById("navbar");
     window.addEventListener("scroll", () => {
       navbar.classList.toggle("scrolled", window.scrollY > 40);
     }, { passive: true });
 
+    // Reveal-on-scroll animations (works across all pages; elements in a
+    // hidden page simply have no size, so they won't fire until their page
+    // is shown and scrolled into view)
     const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.add("visible"); revealObserver.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
-    reveals.forEach(el => observer.observe(el));
+    reveals.forEach(el => revealObserver.observe(el));
 
     // Keyboard support for email card
     const emailCard = document.querySelector(".email-card");
