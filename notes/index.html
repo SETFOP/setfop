@@ -3,300 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SETFOP Notes</title>
+<link rel="icon" type="image/png" href="../SETFOP_favicon.png" />
+<title>SETFOP / Notes</title>
 <style>
-  :root{
-    --bg:#09080f;--panel:#100e1c;--panel2:#141126;
-    --border:#2a1f45;--accent:#a78bfa;--accent2:#7c3aed;
-    --text:#ede9fe;--muted:#77718f;--danger:#f87171;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);
-    font-family:system-ui,-apple-system,Segoe UI,sans-serif;height:100vh}
-  button,input,textarea{font:inherit}
-  button{cursor:pointer}
-  .hidden{display:none!important}
-  .screen{min-height:100vh;display:grid;place-items:center;padding:24px}
-  .card{width:min(460px,100%);background:var(--panel);border:1px solid var(--border);
-    padding:32px;border-radius:8px;box-shadow:0 20px 80px #0008}
-  .brand{font-family:monospace;color:var(--accent);letter-spacing:.18em;font-size:13px}
-  h1{font-size:30px;margin:12px 0 8px}
-  p{color:var(--muted);line-height:1.6}
-  input,textarea{width:100%;background:#07060d;color:var(--text);
-    border:1px solid var(--border);border-radius:5px;padding:11px 13px;outline:none}
-  input:focus,textarea:focus{border-color:var(--accent)}
-  label{display:block;font-size:12px;color:var(--muted);margin:18px 0 7px}
-  .btn{border:1px solid var(--border);background:var(--panel2);color:var(--text);
-    padding:10px 15px;border-radius:4px}
-  .btn.primary{background:var(--accent);color:#09080f;border-color:var(--accent);font-weight:600}
-  .btn.danger{color:var(--danger)}
-  .status{font-family:monospace;font-size:12px;margin-top:14px;color:var(--muted)}
-  #app{height:100vh;display:grid;grid-template-columns:280px 1fr}
-  aside{border-right:1px solid var(--border);background:var(--panel);display:flex;flex-direction:column}
-  .sidehead{padding:20px;border-bottom:1px solid var(--border)}
-  .sidehead .row{display:flex;justify-content:space-between;align-items:center}
-  .files{overflow:auto;padding:10px}
-  .file{display:flex;align-items:center;gap:9px;padding:10px;border-radius:4px;
-    color:var(--muted);cursor:pointer;font-family:monospace;font-size:13px}
-  .file:hover,.file.active{background:var(--panel2);color:var(--text)}
-  .sidefoot{margin-top:auto;padding:14px;border-top:1px solid var(--border)}
-  main{display:flex;flex-direction:column;min-width:0}
-  .toolbar{height:62px;border-bottom:1px solid var(--border);display:flex;
-    align-items:center;gap:10px;padding:10px 18px}
-  .filename{font-family:monospace;flex:1;color:var(--text)}
-  textarea{border:0;border-radius:0;resize:none;height:calc(100vh - 62px);
-    padding:28px;line-height:1.7;font-family:"DM Mono",monospace;font-size:14px}
-  .empty{height:100%;display:grid;place-items:center;color:var(--muted)}
-  .small{font-size:11px;color:var(--muted);font-family:monospace}
-  @media(max-width:700px){
-    #app{grid-template-columns:1fr}
-    aside{height:42vh;border-right:0;border-bottom:1px solid var(--border)}
-    textarea{height:calc(58vh - 62px)}
-  }
+:root{
+  --bg:#09080f;--panel:#100e1c;--panel2:#141126;--border:#2a1f45;
+  --accent:#a78bfa;--accent2:#7c3aed;--text:#ede9fe;--muted:#77718f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:var(--bg);color:var(--text)}
+body{font-family:"DM Sans",system-ui,sans-serif}
+button{font:inherit;cursor:pointer}
+.hidden{display:none!important}
+
+/* AUTH */
+#auth{
+  min-height:100vh;display:grid;place-items:center;padding:24px;
+}
+.auth-card{
+  width:min(460px,100%);padding:42px;background:var(--panel);
+  border:1px solid var(--border);border-radius:6px;
+  box-shadow:0 25px 90px #0008;
+}
+.brand{
+  font-family:"DM Mono",monospace;color:var(--accent);
+  font-size:13px;letter-spacing:.22em;
+}
+.auth-card h1{
+  font-family:"DM Sans",system-ui,sans-serif;font-size:32px;
+  margin:22px 0 10px;letter-spacing:-.03em;
+}
+.auth-card p{color:var(--muted);line-height:1.7;margin:0 0 28px}
+.github-btn{
+  width:100%;height:50px;border:1px solid var(--accent);
+  background:var(--accent);color:#09080f;border-radius:3px;
+  font-family:"DM Mono",monospace;font-size:13px;font-weight:600;
+  letter-spacing:.08em;transition:.2s;
+}
+.github-btn:hover{background:#c4b5fd;transform:translateY(-1px)}
+.auth-note{
+  margin-top:18px!important;margin-bottom:0!important;
+  font-family:"DM Mono",monospace;font-size:11px;
+}
+
+/* APP */
+#app{height:100vh;display:grid;grid-template-columns:280px 1fr}
+.sidebar{
+  min-width:0;background:var(--panel);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+}
+.sidebar-head{padding:20px;border-bottom:1px solid var(--border)}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.repo-label{font:11px "DM Mono",monospace;color:var(--muted);margin-top:7px}
+.new-btn{
+  width:34px;height:34px;border:1px solid var(--border);background:var(--panel2);
+  color:var(--accent);border-radius:3px;font-size:21px;line-height:1;
+}
+.new-btn:hover{border-color:var(--accent)}
+.file-list{padding:10px;overflow:auto;flex:1}
+.file{
+  display:flex;align-items:center;gap:10px;padding:10px 11px;margin-bottom:2px;
+  border-radius:3px;color:var(--muted);font:13px "DM Mono",monospace;cursor:pointer;
+}
+.file:hover,.file.active{background:var(--panel2);color:var(--text)}
+.file-icon{color:var(--accent);font-size:11px}
+.sidebar-foot{padding:14px;border-top:1px solid var(--border)}
+.signout{
+  width:100%;height:38px;background:transparent;color:var(--muted);
+  border:1px solid var(--border);border-radius:3px;font:11px "DM Mono",monospace;
+  letter-spacing:.1em;
+}
+.signout:hover{color:var(--text);border-color:var(--accent)}
+
+.editor-area{min-width:0;display:flex;flex-direction:column}
+.toolbar{
+  height:62px;display:flex;align-items:center;gap:10px;
+  padding:0 18px;border-bottom:1px solid var(--border);
+}
+.file-name{flex:1;font:13px "DM Mono",monospace;color:var(--text)}
+.tool-btn{
+  height:34px;padding:0 14px;background:var(--panel2);color:var(--muted);
+  border:1px solid var(--border);border-radius:3px;font:11px "DM Mono",monospace;
+}
+.tool-btn:hover{color:var(--text);border-color:var(--accent)}
+.save-btn{background:var(--accent);border-color:var(--accent);color:#09080f;font-weight:600}
+.save-btn:hover{background:#c4b5fd}
+.editor{
+  width:100%;height:calc(100vh - 62px);resize:none;border:0;outline:0;
+  background:#07060d;color:var(--text);padding:30px;
+  font:14px/1.8 "DM Mono",monospace;
+}
+.empty{height:100%;display:grid;place-items:center;color:var(--muted)}
+.empty-inner{text-align:center;font:12px "DM Mono",monospace}
+.empty-inner .plus{font-size:30px;color:var(--accent);margin-bottom:10px}
+
+/* mobile */
+@media(max-width:700px){
+  #app{grid-template-columns:1fr;grid-template-rows:38vh 62vh}
+  .sidebar{border-right:0;border-bottom:1px solid var(--border)}
+  .editor{height:calc(62vh - 62px)}
+  .auth-card{padding:30px}
+}
 </style>
 </head>
+
 <body>
 
 <!--
   SETFOP NOTES
-  Prototype architecture:
-    notes/index.html
-    notes/*.md
-    notes/*.txt
+  -----------------------------
+  Frontend only.
 
-  IMPORTANT:
-  This prototype uses a GitHub Personal Access Token entered by the user.
-  Do NOT hard-code a token into this file.
+  AUTHENTICATION CONTRACT:
+    GET /notes-auth/login
+      -> starts GitHub OAuth and returns/redirects to /notes/
+
+    GET /notes-auth/session
+      -> { "authenticated": true, "login": "github-user" }
+
+    GET /notes-api/files
+      -> [ { "name":"linux.md", "path":"notes/linux.md" } ]
+
+    GET /notes-api/file?path=notes/linux.md
+      -> { "content":"...", "sha":"..." }
+
+    PUT /notes-api/file
+      body: { "path":"notes/linux.md", "content":"...", "sha":"..." }
+
+    DELETE /notes-api/file
+      body: { "path":"notes/linux.md", "sha":"..." }
+
+  The GitHub OAuth secret MUST NOT be placed in this HTML file.
 -->
 
-<section id="loginScreen" class="screen">
-  <div class="card">
+<section id="auth">
+  <div class="auth-card">
     <div class="brand">SETFOP / NOTES</div>
     <h1>Private Notes</h1>
-    <p>Sign in with a GitHub token to access your notes.</p>
+    <p>
+      This area is not listed on the SETFOP website.
+      GitHub authorization is required to continue.
+    </p>
 
-    <label>GitHub repository owner</label>
-    <input id="owner" placeholder="your-github-username">
-
-    <label>Repository</label>
-    <input id="repo" placeholder="your-repository">
-
-    <label>Branch</label>
-    <input id="branch" value="main">
-
-    <label>GitHub token</label>
-    <input id="token" type="password" placeholder="github_pat_...">
-
-    <button class="btn primary" style="width:100%;margin-top:20px" onclick="login()">
-      SIGN IN
+    <button class="github-btn" onclick="signIn()">
+      CONTINUE WITH GITHUB
     </button>
 
-    <div id="loginStatus" class="status"></div>
-    <p class="small" style="margin-top:22px">
-      Your token is used directly by this browser and is not sent to SETFOP servers.
+    <p class="auth-note">
+      Access is handled by GitHub. No GitHub password is entered here.
     </p>
   </div>
 </section>
 
 <section id="app" class="hidden">
-  <aside>
-    <div class="sidehead">
-      <div class="row">
+
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="head-row">
         <div>
           <div class="brand">SETFOP / NOTES</div>
-          <div class="small" id="repoLabel"></div>
+          <div class="repo-label" id="userLabel">AUTHORIZED</div>
         </div>
-        <button class="btn" onclick="newFile()">+</button>
+        <button class="new-btn" onclick="newFile()" title="New note">+</button>
       </div>
     </div>
 
-    <div id="fileList" class="files"></div>
+    <div class="file-list" id="fileList"></div>
 
-    <div class="sidefoot">
-      <button class="btn danger" style="width:100%" onclick="logout()">SIGN OUT</button>
+    <div class="sidebar-foot">
+      <button class="signout" onclick="signOut()">SIGN OUT</button>
     </div>
   </aside>
 
-  <main>
+  <main class="editor-area">
     <div class="toolbar">
-      <div id="filename" class="filename">No file selected</div>
-      <button id="saveBtn" class="btn primary hidden" onclick="saveFile()">SAVE</button>
-      <button id="deleteBtn" class="btn danger hidden" onclick="deleteFile()">DELETE</button>
+      <div class="file-name" id="fileName">No file selected</div>
+      <button class="tool-btn hidden" id="deleteBtn" onclick="deleteFile()">DELETE</button>
+      <button class="tool-btn save-btn hidden" id="saveBtn" onclick="saveFile()">SAVE</button>
     </div>
 
-    <div id="emptyState" class="empty">
-      <div>
-        <div style="font-family:monospace">Select a note or create a new one.</div>
+    <div class="empty" id="empty">
+      <div class="empty-inner">
+        <div class="plus">+</div>
+        SELECT A NOTE OR CREATE A NEW ONE
       </div>
     </div>
 
-    <textarea id="editor" class="hidden" spellcheck="false"></textarea>
+    <textarea class="editor hidden" id="editor" spellcheck="false"></textarea>
   </main>
 </section>
 
 <script>
-const API = "https://api.github.com";
-let cfg = {};
-let files = [];
+/*
+  This file deliberately contains NO GitHub client secret.
+
+  A tiny server/edge function must perform the OAuth code exchange.
+  That is required because GitHub's web OAuth flow returns an authorization
+  code and the access-token exchange uses a client secret.
+
+  Replace the endpoint paths below with your backend/edge-function paths.
+*/
+const ENDPOINTS = {
+  login:  "/notes-auth/login",
+  session:"/notes-auth/session",
+  logout: "/notes-auth/logout",
+  files:  "/notes-api/files",
+  file:   "/notes-api/file"
+};
+
 let current = null;
 
 function $(id){ return document.getElementById(id); }
 
-function setStatus(msg, error=false){
-  $("loginStatus").textContent = msg;
-  $("loginStatus").style.color = error ? "var(--danger)" : "var(--muted)";
+async function signIn(){
+  // Redirect to the authentication endpoint.
+  window.location.href = ENDPOINTS.login;
 }
 
-function saveConfig(){
-  /*
-    Stored locally only in this browser.
-    For a real multi-device/private deployment, replace PAT auth
-    with a proper OAuth/backend flow.
-  */
-  localStorage.setItem("setfop_notes_cfg", JSON.stringify(cfg));
-}
-
-function loadConfig(){
+async function checkSession(){
   try{
-    const x = JSON.parse(localStorage.getItem("setfop_notes_cfg") || "null");
-    if(x) return x;
-  }catch(e){}
-  return null;
-}
+    const res = await fetch(ENDPOINTS.session,{credentials:"include"});
+    if(!res.ok) return false;
 
-async function github(path, options={}){
-  const res = await fetch(API + path, {
-    ...options,
-    headers:{
-      "Accept":"application/vnd.github+json",
-      "Authorization":"Bearer " + cfg.token,
-      "X-GitHub-Api-Version":"2022-11-28",
-      ...(options.headers || {})
+    const data = await res.json();
+
+    if(data.authenticated){
+      $("auth").classList.add("hidden");
+      $("app").classList.remove("hidden");
+      $("userLabel").textContent =
+        data.login ? "@" + data.login : "AUTHORIZED";
+      await loadFiles();
+      return true;
     }
-  });
-
-  if(!res.ok){
-    let msg = res.status + " " + res.statusText;
-    try{
-      const j = await res.json();
-      if(j.message) msg += ": " + j.message;
-    }catch(e){}
-    throw new Error(msg);
-  }
-  if(res.status === 204) return null;
-  return res.json();
-}
-
-async function login(){
-  cfg = {
-    owner: $("owner").value.trim(),
-    repo: $("repo").value.trim(),
-    branch: $("branch").value.trim() || "main",
-    token: $("token").value.trim()
-  };
-
-  if(!cfg.owner || !cfg.repo || !cfg.token){
-    setStatus("Owner, repository and token are required.", true);
-    return;
-  }
-
-  setStatus("Checking GitHub access...");
-
-  try{
-    await github("/repos/" + encodeURIComponent(cfg.owner) + "/" +
-                 encodeURIComponent(cfg.repo));
-    saveConfig();
-    await openApp();
   }catch(e){
-    setStatus("Login failed: " + e.message, true);
+    // Backend is not installed yet; remain on login screen.
   }
-}
-
-async function openApp(){
-  $("loginScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  $("repoLabel").textContent = cfg.owner + "/" + cfg.repo;
-  await loadFiles();
+  return false;
 }
 
 async function loadFiles(){
-  $("fileList").innerHTML = '<div class="small" style="padding:10px">Loading...</div>';
+  $("fileList").innerHTML =
+    '<div style="padding:10px;font:11px DM Mono,monospace;color:var(--muted)">LOADING...</div>';
 
   try{
-    let data;
-    try{
-      data = await github("/repos/" + encodeURIComponent(cfg.owner) + "/" +
-        encodeURIComponent(cfg.repo) + "/contents/notes?ref=" +
-        encodeURIComponent(cfg.branch));
-    }catch(e){
-      if(e.message.includes("404")){
-        files = [];
-        renderFiles();
-        return;
-      }
-      throw e;
+    const res = await fetch(ENDPOINTS.files,{credentials:"include"});
+    if(!res.ok) throw new Error("Could not load notes.");
+
+    const data = await res.json();
+
+    const files = data.filter(f =>
+      /\.(md|txt)$/i.test(f.name || f.path || "")
+    );
+
+    $("fileList").innerHTML = "";
+
+    if(!files.length){
+      $("fileList").innerHTML =
+        '<div style="padding:10px;font:11px DM Mono,monospace;color:var(--muted)">NO NOTES YET</div>';
+      return;
     }
 
-    files = Array.isArray(data)
-      ? data.filter(x =>
-          x.type === "file" &&
-          /\.(md|txt)$/i.test(x.name)
-        )
-      : [];
-
-    renderFiles();
+    for(const f of files){
+      const el = document.createElement("div");
+      el.className = "file";
+      el.innerHTML =
+        '<span class="file-icon">▸</span>' +
+        escapeHtml(f.name || f.path.split("/").pop());
+      el.onclick = () => openFile(f);
+      $("fileList").appendChild(el);
+    }
   }catch(e){
     $("fileList").innerHTML =
-      '<div class="small" style="padding:10px;color:var(--danger)">' +
+      '<div style="padding:10px;font:11px DM Mono,monospace;color:#f87171">' +
       escapeHtml(e.message) + '</div>';
-  }
-}
-
-function renderFiles(){
-  const list = $("fileList");
-  list.innerHTML = "";
-
-  if(!files.length){
-    list.innerHTML = '<div class="small" style="padding:10px">No notes yet.</div>';
-    return;
-  }
-
-  files.sort((a,b)=>a.name.localeCompare(b.name));
-
-  for(const f of files){
-    const div = document.createElement("div");
-    div.className = "file" + (current && current.path === f.path ? " active" : "");
-    div.innerHTML = "▸ " + escapeHtml(f.name);
-    div.onclick = () => openFile(f);
-    list.appendChild(div);
   }
 }
 
 async function openFile(file){
   try{
-    const data = await github("/repos/" + encodeURIComponent(cfg.owner) + "/" +
-      encodeURIComponent(cfg.repo) + "/contents/" +
-      file.path.split("/").map(encodeURIComponent).join("/") +
-      "?ref=" + encodeURIComponent(cfg.branch));
+    const path = file.path || ("notes/" + file.name);
+    const res = await fetch(
+      ENDPOINTS.file + "?path=" + encodeURIComponent(path),
+      {credentials:"include"}
+    );
 
-    const content = decodeBase64(data.content.replace(/\n/g,""));
+    if(!res.ok) throw new Error("Could not open note.");
+
+    const data = await res.json();
 
     current = {
-      path:data.path,
-      name:file.name,
-      sha:data.sha,
-      content:content
+      path:path,
+      name:file.name || path.split("/").pop(),
+      sha:data.sha || null
     };
 
-    $("filename").textContent = current.name;
-    $("editor").value = content;
+    $("fileName").textContent = current.name;
+    $("editor").value = data.content || "";
     $("editor").classList.remove("hidden");
-    $("emptyState").classList.add("hidden");
+    $("empty").classList.add("hidden");
     $("saveBtn").classList.remove("hidden");
     $("deleteBtn").classList.remove("hidden");
-    renderFiles();
   }catch(e){
-    alert("Could not open file:\\n\\n" + e.message);
+    alert(e.message);
   }
 }
 
@@ -304,138 +312,103 @@ function newFile(){
   const name = prompt("New note name (.md or .txt):");
   if(!name) return;
 
-  if(!/^[a-zA-Z0-9._-]+\\.(md|txt)$/i.test(name)){
-    alert("Use a simple filename ending in .md or .txt");
+  if(!/^[a-zA-Z0-9._-]+\.(md|txt)$/i.test(name)){
+    alert("Filename must end with .md or .txt");
     return;
   }
 
   current = {
     path:"notes/" + name,
     name:name,
-    sha:null,
-    content:""
+    sha:null
   };
 
-  $("filename").textContent = name;
+  $("fileName").textContent = name;
   $("editor").value = "";
   $("editor").classList.remove("hidden");
-  $("emptyState").classList.add("hidden");
+  $("empty").classList.add("hidden");
   $("saveBtn").classList.remove("hidden");
   $("deleteBtn").classList.add("hidden");
-  renderFiles();
   $("editor").focus();
 }
 
 async function saveFile(){
   if(!current) return;
 
-  const content = $("editor").value;
-  const message = current.sha
-    ? "Update " + current.name
-    : "Create " + current.name;
-
-  const body = {
-    message:message,
-    content:encodeBase64(content),
-    branch:cfg.branch
-  };
-
-  if(current.sha) body.sha = current.sha;
-
-  $("saveBtn").disabled = true;
-  $("saveBtn").textContent = "SAVING...";
+  const btn = $("saveBtn");
+  btn.disabled = true;
+  btn.textContent = "SAVING...";
 
   try{
-    const data = await github("/repos/" + encodeURIComponent(cfg.owner) + "/" +
-      encodeURIComponent(cfg.repo) + "/contents/" +
-      current.path.split("/").map(encodeURIComponent).join("/"), {
-        method:"PUT",
-        body:JSON.stringify(body)
-      });
+    const res = await fetch(ENDPOINTS.file,{
+      method:"PUT",
+      credentials:"include",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        path:current.path,
+        content:$("editor").value,
+        sha:current.sha
+      })
+    });
 
-    current.sha = data.content.sha;
-    current.content = content;
+    if(!res.ok) throw new Error("Could not save note.");
 
+    const data = await res.json();
+    current.sha = data.sha || current.sha;
+
+    btn.textContent = "SAVED";
     await loadFiles();
-    renderFiles();
-
-    $("saveBtn").textContent = "SAVED";
-    setTimeout(()=> $("saveBtn").textContent = "SAVE", 1200);
+    setTimeout(()=>btn.textContent="SAVE",1000);
   }catch(e){
-    alert("Could not save:\\n\\n" + e.message);
-    $("saveBtn").textContent = "SAVE";
+    alert(e.message);
+    btn.textContent = "SAVE";
   }finally{
-    $("saveBtn").disabled = false;
+    btn.disabled = false;
   }
 }
 
 async function deleteFile(){
-  if(!current || !current.sha) return;
-
-  if(!confirm("Delete " + current.name + "?")) return;
+  if(!current || !confirm("Delete " + current.name + "?")) return;
 
   try{
-    await github("/repos/" + encodeURIComponent(cfg.owner) + "/" +
-      encodeURIComponent(cfg.repo) + "/contents/" +
-      current.path.split("/").map(encodeURIComponent).join("/"), {
-        method:"DELETE",
-        body:JSON.stringify({
-          message:"Delete " + current.name,
-          sha:current.sha,
-          branch:cfg.branch
-        })
-      });
+    const res = await fetch(ENDPOINTS.file,{
+      method:"DELETE",
+      credentials:"include",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        path:current.path,
+        sha:current.sha
+      })
+    });
+
+    if(!res.ok) throw new Error("Could not delete note.");
 
     current = null;
-    $("filename").textContent = "No file selected";
+    $("fileName").textContent = "No file selected";
     $("editor").classList.add("hidden");
-    $("emptyState").classList.remove("hidden");
+    $("empty").classList.remove("hidden");
     $("saveBtn").classList.add("hidden");
     $("deleteBtn").classList.add("hidden");
-
     await loadFiles();
   }catch(e){
-    alert("Could not delete:\\n\\n" + e.message);
+    alert(e.message);
   }
 }
 
-function logout(){
-  localStorage.removeItem("setfop_notes_cfg");
-  cfg = {};
-  current = null;
-  $("app").classList.add("hidden");
-  $("loginScreen").classList.remove("hidden");
-  $("token").value = "";
+async function signOut(){
+  try{
+    await fetch(ENDPOINTS.logout,{method:"POST",credentials:"include"});
+  }catch(e){}
+  location.reload();
 }
 
-function encodeBase64(str){
-  const bytes = new TextEncoder().encode(str);
-  let binary = "";
-  for(const b of bytes) binary += String.fromCharCode(b);
-  return btoa(binary);
-}
-
-function decodeBase64(str){
-  const binary = atob(str);
-  const bytes = Uint8Array.from(binary, c=>c.charCodeAt(0));
-  return new TextDecoder().decode(bytes);
-}
-
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, c => ({
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,c=>({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[c]));
 }
 
-// Restore the configuration for this browser.
-// The token is never embedded in the HTML source.
-const saved = loadConfig();
-if(saved){
-  cfg = saved;
-  openApp().catch(()=>{
-    localStorage.removeItem("setfop_notes_cfg");
-  });
-}
+checkSession();
 </script>
 </body>
 </html>
