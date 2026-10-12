@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHABHARATA — CINEMATIC WARRIOR ARCHIVE</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pandava: {
+                            base: '#0B132B',
+                            card: '#1C2541',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            silver: '#8D99AE',
+                            accent: '#3A506B'
+                        },
+                        kaurava: {
+                            base: '#1A0507',
+                            card: '#2D0A0F',
+                            crimson: '#990012',
+                            bronze: '#CD7F32',
+                            bronzeLight: '#E6A15C',
+                            charcoal: '#212529'
+                        },
+                        neutral: {
+                            base: '#121214',
+                            card: '#1E1E24',
+                            border: '#383842'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+        }
+        @keyframes crimsonGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(153, 0, 18, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(205, 127, 50, 0.5); }
+        }
+        .pandava-glow { animation: pulseGlow 4s infinite; }
+        .kaurava-glow { animation: crimsonGlow 4s infinite; }
+        
+        .metallic-border-gold {
+            border: 1px solid #D4AF37;
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.15), 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .metallic-border-crimson {
+            border: 1px solid #990012;
+            box-shadow: inset 0 0 10px rgba(153, 0, 18, 0.2), 0 0 15px rgba(205, 127, 50, 0.2);
+        }
+        .metallic-border-neutral {
+            border: 1px solid #4A5568;
+            box-shadow: inset 0 0 10px rgba(74, 85, 104, 0.2);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0B132B; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #F3E5AB; }
+
+        .card-hover-zoom {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover-zoom:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+        
+        /* Backdrop Blur Support */
+        .glass-panel {
+            background: rgba(11, 19, 43, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-panel-kaurava {
+            background: rgba(26, 5, 7, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-neutral-base text-gray-100 font-inter antialiased selection:bg-amber-500 selection:text-black min-h-screen flex flex-col">
+
+    <header class="relative bg-gradient-to-r from-pandava-base via-neutral-900 to-kaurava-base border-b border-amber-500/30 sticky top-0 z-40 shadow-2xl">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Branding / Title -->
+            <div class="flex items-center gap-3 text-center md:text-left">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-black font-cinzel font-bold text-2xl shadow-lg border border-amber-300">
+                    M
+                </div>
+                <div>
+                    <h1 class="font-cinzel font-black text-xl sm:text-2xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-100 to-amber-500">
+                        MAHABHARATA ARCHIVE
+                    </h1>
+                    <p class="font-rajdhani text-xs tracking-wider text-amber-400/80 uppercase">
+                        Legends • Lineages • Kurukshetra &amp; Roster
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Navigation Stats & Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-rajdhani uppercase tracking-wider">
+                <button onclick="filterAlliance('all')" class="nav-tab px-3 py-1.5 rounded bg-amber-500/20 border border-amber-500 text-amber-300 hover:bg-amber-500 hover:text-black transition font-bold active">
+                    <i class="fa-solid fa-globe mr-1">></i> All Roster (<span id="count-all">0</span>)
+                </button>
+                <button onclick="filterAlliance('Pandava')" class="nav-tab px-3 py-1.5 rounded bg-blue-950/60 border border-blue-500/50 text-blue-300 hover:bg-blue-900 transition font-bold">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Pandavas (<span id="count-pandava">0</span>)
+                </button>
+                <button onclick="filterAlliance('Kaurava')" class="nav-tab px-3 py-1.5 rounded bg-red-950/60 border border-red-500/50 text-red-300 hover:bg-red-900 transition font-bold">
+                    <i class="fa-solid fa-skull mr-1"></i> Kauravas (<span id="count-kaurava">0</span>)
+                </button>
+                <button onclick="filterAlliance('Neutral')" class="nav-tab px-3 py-1.5 rounded bg-gray-800/85 border border-gray-600 text-gray-300 hover:bg-gray-700 transition font-bold">
+                    <i class="fa-solid fa-scale-balanced mr-1"></i> Neutral / Supports (<span id="count-neutral">0</span>)
+                </button>
+                <button onclick="openTimelineModal()" class="px-3 py-1.5 rounded bg-amber-600/30 border border-amber-500 text-amber-300 hover:bg-amber-600 hover:text-white transition font-bold">
+                    <i class="fa-solid fa-timeline mr-1"></i> 18-Day War Chronology
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900 to-neutral-base border-b border-gray-800">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="font-cinzel text-3xl sm:text-5xl font-bold mb-4 tracking-wider text-amber-200 drop-shadow-md">
+                KURUKSHETRA WARRIOR DOSSIERS
+            </h2>
+            <p class="font-inter text-sm sm:text-base text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                Explore the definitive database of legendary heroes, commanders, divine figures, and commanders of the epic. A cinematic introduction to the warriors, rivalries, families, and battles of the Mahabharata with verified lineages, weapons, war records, and tactical highlights.
+            </p>
+
+            <!-- Search & Filter Toolbar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-neutral-card/90 p-4 rounded-xl border border-amber-500/30 shadow-xl backdrop-blur-md">
+                <!-- Search Input -->
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-amber-400/70"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search by name, epithet, Telugu name..." 
+                           class="w-full bg-neutral-base border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 font-inter">
+                </div>
+
+                <!-- Tier Filter -->
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-layer-group absolute left-3.5 text-amber-400/70"></i>
+                    <select id="tierFilter" onchange="handleSearch()" 
+                            class="w-full bg-neutral-base border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 font-inter appearance-none cursor-pointer">
+                        <option value="all">All Tiers (1, 2 &amp; 3)</option>
+                        <option value="primary">Tier 1 — Primary Warriors</option>
+                        <option value="supporting">Tier 2 — Important Allies</option>
+                        <option value="minor">Tier 3 — Minor Combatants</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-3.5 text-xs text-gray-400 pointer-events-none"></i>
+                </div>
+
+                <!-- Reset Button -->
+                <div class="flex items-center gap-2">
+                    <button onclick="resetFilters()" class="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-black font-rajdhani font-bold uppercase tracking-wider text-sm py-2.5 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Stats Bar -->
+            <div class="flex flex-wrap items-center justify-center gap-6 mt-6 text-xs font-rajdhani uppercase tracking-widest text-amber-400/90">
+                <span><i class="fa-solid fa-shield-cat text-amber-500 mr-1"></i> Total Roster: <strong id="stat-total" class="text-white">0</strong></span>
+                <span><i class="fa-solid fa-fire text-amber-500 mr-1"></i> Tier 1 Cinematic: <strong id="stat-t1" class="text-white">0</strong></span>
+                <span><i class="fa-solid fa-user-shield text-amber-500 mr-1"></i> Tier 2 Allies: <strong id="stat-t2" class="text-white">0</strong></span>
+                <span><i class="fa-solid fa-users text-amber-500 mr-1"></i> Tier 3 Minor: <strong id="stat-t3" class="text-white">0</strong></span>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-16">
+
+        <!-- Tier 1: Primary Warriors Section -->
+        <section id="section-tier1" class="space-y-6">
+            <div class="border-b border-amber-500/40 pb-3 flex items-center justify-between">
+                <div>
+                    <h3 class="font-cinzel text-2xl font-bold text-amber-300 tracking-wide flex items-center gap-2">
+                        <i class="fa-solid fa-crown text-amber-500"></i> TIER 1 — PRIMARY WARRIORS &amp; COMMANDERS
+                    </h3>
+                    <p class="font-rajdhani text-xs tracking-wider text-gray-400">Cinematic dossiers with detailed battlefield records, weapons, and divine attributes.</p>
+                </div>
+                <span class="text-xs font-rajdhani bg-amber-500/10 border border-amber-500/30 text-amber-300 px-3 py-1 rounded-full uppercase tracking-widest">
+                    Featured Roster
+                </span>
+            </div>
+            <div id="grid-tier1" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Dynamically populated Tier 1 cards -->
+            </div>
+        </section>
+
+        <!-- Tier 2: Important Allies & Supporting Warriors -->
+        <section id="section-tier2" class="space-y-6">
+            <div class="border-b border-amber-500/40 pb-3 flex items-center justify-between">
+                <div>
+                    <h3 class="font-cinzel text-xl font-bold text-amber-300 tracking-wide flex items-center gap-2">
+                        <i class="fa-solid fa-chess-knight text-amber-500"></i> TIER 2 — IMPORTANT ALLIES &amp; SUPPORTING COMMANDERS
+                    </h3>
+                    <p class="font-rajdhani text-xs tracking-wider text-gray-400">Key allied kings, regional princes, and tactical field commanders.</p>
+                </div>
+                <span class="text-xs font-rajdhani bg-blue-950 border border-blue-500/30 text-blue-300 px-3 py-1 rounded-full uppercase tracking-widest">
+                    Medium Dossiers
+                </span>
+            </div>
+            <div id="grid-tier2" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <!-- Dynamically populated Tier 2 cards -->
+            </div>
+        </section>
+
+        <!-- Tier 3: Minor Warriors / Limited Data (Compact 6-8 Column Grid on Desktop) -->
+        <section id="section-tier3" class="space-y-6">
+            <div class="border-b border-amber-500/40 pb-3 flex items-center justify-between">
+                <div>
+                    <h3 class="font-cinzel text-lg font-bold text-amber-300 tracking-wide flex items-center gap-2">
+                        <i class="fa-solid fa-user-group text-amber-500"></i> TIER 3 — MINOR COMBATANTS &amp; LIMITED-DATA WARRIORS
+                    </h3>
+                    <p class="font-rajdhani text-xs tracking-wider text-gray-400">Compact high-density roster for minor allied figures and supporting combatants.</p>
+                </div>
+                <span class="text-xs font-rajdhani bg-neutral-800 border border-gray-600 text-gray-300 px-3 py-1 rounded-full uppercase tracking-widest">
+                    Compact Grid
+                </span>
+            </div>
+            <div id="grid-tier3" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
+                <!-- Dynamically populated Tier 3 cards -->
+            </div>
+        </section>
+
+        <!-- Empty State Message -->
+        <div id="no-results" class="hidden text-center py-20 bg-neutral-card/50 rounded-2xl border border-gray-800">
+            <i class="fa-solid fa-scroll text-5xl text-amber-500/40 mb-4"></i>
+            <h4 class="font-cinzel text-xl text-gray-300 font-bold">No Warriors Found</h4>
+            <p class="font-inter text-sm text-gray-500 mt-2">Try adjusting your search query or alliance/tier filters.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-amber-500 text-black font-rajdhani font-bold text-sm rounded shadow hover:bg-amber-400 transition">
+                Reset All Filters
+            </button>
+        </div>
+
+    </main>
+
+    <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300 opacity-0">
+        <div id="profile-modal-box" class="relative w-full max-w-5xl max-h-[92vh] bg-neutral-card border border-amber-500/60 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row transform scale-95 transition-transform duration-300">
+            
+            <!-- Close Button -->
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-neutral-base/90 border border-amber-500/50 text-amber-400 hover:bg-amber-500 hover:text-black flex items-center justify-center transition shadow-lg text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Left Side: Artwork & Quick Vital Stats -->
+            <div id="profile-left" class="w-full md:w-5/12 bg-gradient-to-b from-neutral-900 to-black p-6 flex flex-col items-center justify-between border-b md:border-b-0 md:border-r border-amber-500/20 relative overflow-y-auto max-h-[40vh] md:max-h-none">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:12px_12px] pointer-events-none"></div>
+                
+                <div class="w-full text-center relative z-10">
+                    <span id="p-alliance-badge" class="inline-block px-3 py-1 rounded-full text-xs font-rajdhani font-bold uppercase tracking-widest mb-3 bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                        Pandava Alliance
+                    </span>
+                    <h2 id="p-name" class="font-cinzel text-2xl sm:text-3xl font-bold text-amber-200 mb-1">Arjuna</h2>
+                    <p id="p-telugu" class="font-rajdhani text-sm text-amber-400/80 mb-1">అర్జునుడు</p>
+                    <p id="p-title" class="font-inter text-xs text-gray-400 italic">Wielder of Gandiva • Son of Indra</p>
+                </div>
+
+                <!-- Character Portrait -->
+                <div class="my-4 relative group w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border-2 border-amber-500/50 shadow-2xl bg-neutral-base flex items-center justify-center">
+                    <img id="p-artwork" src="" alt="Warrior Artwork" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0b132b/d4af37?text=Mahabharata+Archive';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                </div>
+
+                <!-- Quick Vitals Box -->
+                <div id="p-vitals" class="w-full space-y-2 text-xs font-rajdhani bg-neutral-base/80 p-3 rounded-xl border border-gray-800 relative z-10">
+                    <div class="flex justify-between border-b border-gray-800 pb-1">
+                        <span class="text-gray-400">Kingdom / Clan:</span>
+                        <span id="p-kingdom" class="text-amber-300 font-bold">Kuru / Indraprastha</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-800 pb-1">
+                        <span class="text-gray-400">Signature Bow/Weapon:</span>
+                        <span id="p-weapon" class="text-amber-300 font-bold">Gandiva</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-800 pb-1">
+                        <span class="text-gray-400">Charioteer / Banner:</span>
+                        <span id="p-charioteer" class="text-amber-300 font-bold">Sri Krishna / Kapidhvaja</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Survival Status:</span>
+                        <span id="p-status" class="text-emerald-400 font-bold">Survived War</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Complete Structured Data -->
+            <div id="profile-right" class="w-full md:w-7/12 p-6 sm:p-8 overflow-y-auto max-h-[75vh] md:max-h-[92vh] space-y-6">
+                
+                <!-- Alternate Names / Epithets -->
+                <div>
+                    <h4 class="font-cinzel text-xs uppercase tracking-widest text-amber-400 font-bold mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-signature"></i> Alternate Names &amp; Epithets
+                    </h4>
+                    <div id="p-epithets" class="flex flex-wrap gap-1.5">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Family Lineage -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-neutral-base/60 p-3.5 rounded-xl border border-gray-800">
+                        <h5 class="font-cinzel text-xs text-amber-400 uppercase font-bold mb-1.5"><i class="fa-solid fa-user-group mr-1"></i> Parents &amp; Teachers</h5>
+                        <p id="p-parents" class="text-xs text-gray-300 leading-relaxed">Pandu, Kunti / Guru: Dronacharya</p>
+                    </div>
+                    <div class="bg-neutral-base/60 p-3.5 rounded-xl border border-gray-800">
+                        <h5 class="font-cinzel text-xs text-amber-400 uppercase font-bold mb-1.5"><i class="fa-solid fa-ring mr-1"></i> Spouses &amp; Children</h5>
+                        <p id="p-family" class="text-xs text-gray-300 leading-relaxed">Draupadi, Subhadra / Abhimanyu</p>
+                    </div>
+                </div>
+
+                <!-- Tactical Highlights / Fast Revision Bullet Facts -->
+                <div>
+                    <h4 class="font-cinzel text-xs uppercase tracking-widest text-amber-400 font-bold mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Character Highlights
+                    </h4>
+                    <ul id="p-highlights-list" class="space-y-2 text-xs sm:text-sm text-gray-300 bg-neutral-base/80 p-4 rounded-xl border border-amber-500/20 list-disc list-inside">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+
+                <!-- Notable Deeds & War Record -->
+                <div>
+                    <h4 class="font-cinzel text-xs uppercase tracking-widest text-amber-400 font-bold mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-sword"></i> Battlefield Record &amp; Notable Deeds
+                    </h4>
+                    <div id="p-deeds" class="space-y-2 text-xs sm:text-sm text-gray-300">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Sources & References -->
+                <div class="pt-2 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
+                    <span>Source Tradition: <strong id="p-source" class="text-gray-400">Andhra Mahabharatamu / Vyasa Epic</strong></span>
+                    <button onclick="closeProfileModal()" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded font-rajdhani font-bold uppercase">
+                        Close Dossier
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="timeline-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="relative w-full max-w-4xl max-h-[85vh] bg-neutral-card border border-amber-500/60 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+            <div class="p-4 bg-gradient-to-r from-pandava-base to-kaurava-base border-b border-amber-500/30 flex items-center justify-between">
+                <div>
+                    <h3 class="font-cinzel text-xl font-bold text-amber-300">KURUKSHETRA WAR — 18-DAY CHRONOLOGY</h3>
+                    <p class="font-rajdhani text-xs text-gray-400 uppercase tracking-wider">Key commanding generals, fallen heroes, and decisive turning points</p>
+                </div>
+                <button onclick="closeTimelineModal()" class="w-8 h-8 rounded-full bg-neutral-base border border-amber-500/50 text-amber-400 hover:bg-amber-500 hover:text-black flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="timeline-content" class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-gray-300">
+                <!-- Dynamically populated war timeline -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-neutral-900 border-t border-amber-500/20 py-8 mt-auto text-center text-xs text-gray-500 space-y-2">
+        <p class="font-cinzel text-amber-400/80 tracking-widest font-bold">MAHABHARATA CINEMATIC WARRIOR ARCHIVE</p>
+        <p class="font-inter">An interactive exploration of the legendary warriors and stories of the Mahabharata. Built with HTML5, Tailwind CSS, and Vanilla JavaScript.</p>
+        <p class="font-rajdhani text-gray-600 uppercase tracking-wider">All rights reserved © 2026 • Kurukshetra Educational Database</p>
+    </footer>
+
+    <script>
+        // Comprehensive Mahabharata Character Database (Structured Data Model)
+        const warriorsData = [
+            // --- TIER 1: PANDAVA ALLIANCE ---
+            {
+                id: "arjuna",
+                name: "Arjuna",
+                alternateNames: ["Dhananjaya", "Partha", "Phalguna", "Savyasachi", "Kiritin", "Bibhatsu"],
+                teluguName: "అర్జునుడు",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Principal Pandava Commander & Supreme Archer",
+                kingdom: "Indraprastha / Kuru",
+                parents: ["Pandu", "Kunti (Devi Kunti / Pritha)"],
+                siblings: ["Yudhishthira", "Bhima", "Nakula", "Sahadeva", "Karna (half-brother)"],
+                spouses: ["Draupadi", "Subhadra", "Ulupi", "Chitrangada"],
+                children: ["Abhimanyu", "Iravan", "Babhruvahana", "Shrutakarma"],
+                guru: ["Dronacharya", "Lord Shiva (Pasupatastra)", "Indra"],
+                weapons: ["Gandiva (Celestial Bow)", "Pasupatastra", "Bramhastra"],
+                bow: "Gandiva",
+                conch: "Devadatta",
+                chariot: "Celestial Chariot with golden canopy",
+                charioteer: "Sri Krishna",
+                banner: "Kapidhvaja (Hanuman Banner)",
+                disguiseName: "Brihannala (Dance & Music Instructor in Virata kingdom)",
+                divineAssociations: ["Incarnation of Nara (sage Nara of Nara-Narayana)", "Son of Lord Indra"],
+                notableDeeds: [
+                    "Won Draupadi's swayamvara by piercing the fish target using reflection.",
+                    "Obtained the divine Pasupatastra from Lord Shiva after rigorous combat penance.",
+                    "Slew Jayadratha on Day 14 before sunset, fulfilling his solemn oath.",
+                    "Key hero of the Bhagavad Gita revelation delivered by Sri Krishna on Day 1."
+                ],
+                warRecord: [
+                    { day: "Day 10", opponent: "Bhishma", outcome: "Felled Bhishma using Shikhandi as a human shield.", context: "Decisive tactical turning point." },
+                    { day: "Day 12", opponent: "Bhagadatta", outcome: "Defeated Bhagadatta after overcoming the Vaishnavastra.", context: "Saved by Krishna absorbing the divine shaft." },
+                    { day: "Day 14", opponent: "Jayadratha", outcome: "Executed Jayadratha before sunset.", context: "Major vow fulfilled after breaking Kaurava formation." },
+                    { day: "Day 17", opponent: "Karna", outcome: "Killed Karna with an Anjalika weapon while Karna's chariot wheel was stuck.", context: "Climactic duel of the war." }
+                ],
+                killedBy: null,
+                deathDay: null,
+                survivalStatus: "Survived War",
+                highlights: [
+                    "Wielder of the legendary divine bow Gandiva",
+                    "Charioted by Sri Krishna with Hanuman banner (Kapidhvaja)",
+                    "Defeated Jayadratha on Day 14 and Karna on Day 17",
+                    "Spent 1 year exile disguise as Brihannala in Matsya kingdom",
+                    "Son of Indra and eternal companion of Nara-Narayana"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Arjuna",
+                sources: ["Mahabharata - Drona Parva, Karna Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "bhima",
+                name: "Bhima",
+                alternateNames: ["Vrikodara", "Bhimasena", "Jarasandhajit"],
+                teluguName: "భీముడు",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Pandava Commander & Mace Combat Master",
+                kingdom: "Indraprastha / Kuru",
+                parents: ["Pandu", "Kunti"],
+                siblings: ["Yudhishthira", "Arjuna", "Nakula", "Sahadeva"],
+                spouses: ["Draupadi", "Hidimbi", "Valandhara"],
+                children: ["Ghatotkacha", "Sutasoma", "Sarvaga"],
+                guru: ["Balarama (Mace warfare)", "Dronacharya"],
+                weapons: ["Kaumodaki Mace", "Heavy Iron Club"],
+                bow: "Vajra-reinforced bow",
+                conch: "Paundra",
+                chariot: "Lions-emblazoned war chariot",
+                charioteer: "Visashana",
+                banner: "Nardana (Giant Lion Banner)",
+                disguiseName: "Ballava (Royal Cook in Virata kingdom)",
+                divineAssociations: ["Aurasa son of Vayu (Wind God)"],
+                notableDeeds: [
+                    "Slew King Jarasandha of Magadha in a gruelling wrestling duel.",
+                    "Annihilated all 100 Kaurava brothers, fulfilling his fierce battlefield vows.",
+                    "Killed Dushasana on Day 15 and drank his blood to fulfill Draupadi's vow.",
+                    "Slew Duryodhana in a mace duel on Day 18 by striking below the belt (thigh strike)."
+                ],
+                warRecord: [
+                    { day: "Day 11-14", opponent: "Kaurava Princes", outcome: "Slaughtered dozens of Kaurava brothers.", context: "Systematic elimination of Dhritarashtra's sons." },
+                    { day: "Day 15", opponent: "Dushasana", outcome: "Killed Dushasana and fulfilled Draupadi's vow.", context: "Brutal battlefield retribution." },
+                    { day: "Day 18", opponent: "Duryodhana", outcome: "Shattered Duryodhana's thighs in mace combat.", context: "Ending the Kurukshetra War." }
+                ],
+                killedBy: null,
+                deathDay: null,
+                survivalStatus: "Survived War",
+                highlights: [
+                    "Son of Vayu (Wind God) with immense supernatural strength",
+                    "Wielder of the giant conch Paundra and heavy mace",
+                    "Fulfiller of vows: killed Dushasana and Duryodhana",
+                    "Worked undercover as royal cook Ballava during disguise exile",
+                    "Father of the mighty rakshasa warrior Ghatotkacha"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Bhima",
+                sources: ["Mahabharata - Sabha Parva, Shalya Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "yudhishthira",
+                name: "Yudhishthira",
+                alternateNames: ["Dharmaraja", "Ajatasatru", "Bharata"],
+                teluguName: "యుధిష్ఠిరుడు",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Supreme Leader & Emperor of Pandavas",
+                kingdom: "Indraprastha / Hastinapura",
+                parents: ["Pandu", "Madri (divine boon from Dharma)"],
+                siblings: ["Bhima", "Arjuna", "Nakula", "Sahadeva"],
+                spouses: ["Draupadi", "Devika"],
+                children: ["Prativindhya"],
+                guru: ["Dronacharya", "Kripacharya"],
+                weapons: ["Sword", "Sacred Spear"],
+                bow: "Vijaya-equivalent royal bow",
+                conch: "Anantavijaya",
+                chariot: "Golden chariot with white horses",
+                charioteer: "Nandaka",
+                banner: "Nandivardhana (Moon and Stars Emblem)",
+                disguiseName: "Kanka (Royal Courtier & Dice Master to King Virata)",
+                divineAssociations: ["Incarnation of Yama Dharma Raja (Lord of Justice)"],
+                notableDeeds: [
+                    "Maintained absolute adherence to truth and righteousness throughout trials.",
+                    "Correctly answered the Yaksha Prashnas at the enchanted lake.",
+                    "Uttered the ambiguous truth 'Ashwatthama hatah- naro va kunjara va' on Day 15, causing Drona to drop arms.",
+                    "Sole mortal to ascend to heaven in mortal physical form."
+                ],
+                warRecord: [
+                    { day: "Day 15", opponent: "Shalya / Drona", outcome: "Stood firm as Supreme Commander of Pandava forces.", context: "Guided moral strategy of the war." },
+                    { day: "Day 18", opponent: "Duryodhana", outcome: "Accepted final surrender and crowned Emperor.", context: "Restoration of Dharma." }
+                ],
+                killedBy: null,
+                deathDay: null,
+                survivalStatus: "Survived War",
+                highlights: [
+                    "Incarnation of Yama Dharma Raja (Lord of Righteousness)",
+                    "Conchshell: Anantavijaya; Disguise name: Kanka",
+                    "Crucial role in Dronacharya's downfall via the truth-ambiguity",
+                    "Renowned for never letting his chariot wheels touch the ground until moral collapse",
+                    "Ascended to Svarga in physical body"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Yudhishthira",
+                sources: ["Mahabharata - Vana Parva, Swargarohana Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "krishna",
+                name: "Sri Krishna",
+                alternateNames: ["Vasudeva", "Govinda", "Madhava", "Parthasarathi", "Yogeshwara"],
+                teluguName: "శ్రీ కృష్ణుడు",
+                alliance: "Neutral",
+                tier: "primary",
+                role: "Supreme Guide, Diplomat & Charioteer of Arjuna",
+                kingdom: "Dwarka",
+                parents: ["Vasudeva", "Devaki"],
+                siblings: ["Balarama", "Subhadra"],
+                spouses: ["Rukmini", "Satyabhama", "Jambavati", "Kalindi", "Mitravinda", "Nagnajiti", "Bhadra", "Lakshmana"],
+                children: ["Pradyumna", "Samba", "Bhanu"],
+                guru: ["Sandipani Muni"],
+                weapons: ["Sudarshana Chakra", "Kaumodaki Mace", "Sharanga Bow"],
+                bow: "Sharanga",
+                conch: "Panchajanya",
+                chariot: "Divine gold and gem-studded chariot",
+                charioteer: "Self (Charioteer to Arjuna)",
+                banner: "Garudadhvaja (Garuda Emblem)",
+                disguiseName: "Peace Envoy to Hastinapura",
+                divineAssociations: ["Purna Avatar of Lord Vishnu (Supreme Godhead)"],
+                notableDeeds: [
+                    "Delivered the immortal Bhagavad Gita discourse on Day 1 of Kurukshetra.",
+                    "Acted as Arjuna's infallible charioteer and strategic protector.",
+                    "Lifted Govardhana hill and vanquished numerous demons prior to the war.",
+                    "Absorbed the celestial weapons aimed at Arjuna, preserving Dharma."
+                ],
+                warRecord: [
+                    { day: "Day 1-18", opponent: "Strategic Advisor", outcome: "Guided Pandavas to absolute victory without bearing weapons.", context: "Vow of non-combatant arbiter." }
+                ],
+                killedBy: " Jara (Hunter's arrow in mortal avatar exit at Veraval)",
+                deathDay: "End of Dvapara Yuga",
+                survivalStatus: "Ascended to Vaikuntha",
+                highlights: [
+                    "Supreme avatar of Lord Vishnu acting as Arjuna's charioteer (Parthasarathi)",
+                    "Delivered the Bhagavad Gita (Song of God)",
+                    "Wielder of Panchajanya conch and Sudarshana Chakra",
+                    "Vowed not to pick up weapons in the Kurukshetra War",
+                    "Master strategist ensuring the triumph of righteousness"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Sri+Krishna",
+                sources: ["Mahabharata - Udyoga Parva, Bhishma Parva (Gita), Mausala Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "abhimanyu",
+                name: "Abhimanyu",
+                alternateNames: ["Saubhadra", "Arjunaputra"],
+                teluguName: "అభిమన్యుడు",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Legendary Young Warrior & Chakravyuha Breacher",
+                kingdom: "Indraprastha / Dwarka",
+                parents: ["Arjuna", "Subhadra"],
+                siblings: [],
+                spouses: ["Uttara (Princess of Matsya)"],
+                children: ["Parikshit (Emperor who inherited the Kuru throne)"],
+                guru: ["Arjuna", "Sri Krishna", "Pradyumna"],
+                weapons: ["Sword", "Bow", "Celestial arrows"],
+                bow: "Roudra bow",
+                conch: "Devadatta-variant",
+                chariot: "Standard golden war chariot",
+                charioteer: "Sumitra",
+                banner: "Golden Garuda Banner",
+                disguiseName: null,
+                divineAssociations: ["Incarnation of Varchas (son of Moon God Chandra)"],
+                notableDeeds: [
+                    "Learned the secret of entering the Chakravyuha while in his mother's womb.",
+                    "Single-handedly breached the impenetrable Chakravyuha formation on Day 13.",
+                    "Fought valiantly against all Kaurava महारथीs (Maharathis) simultaneously until his chariot was destroyed."
+                ],
+                warRecord: [
+                    { day: "Day 13", opponent: "Kaurava Generals (Drona, Karna, Kripa, etc.)", outcome: "Heroic martyrdom inside the Chakravyuha after being unfairly swarmed.", context: "Immortalized youth valor." }
+                ],
+                killedBy: "Karna, Duryodhana, Drona, and six other commanders simultaneously (unfair breach of war ethics)",
+                deathDay: "Day 13 of Kurukshetra War",
+                survivalStatus: "Martyred in Combat",
+                highlights: [
+                    "Son of Arjuna and Subhadra; husband of Uttara",
+                    "Breached the complex Chakravyuha formation on Day 13",
+                    "Fought off principal Kaurava generals single-handedly",
+                    "Father of Emperor Parikshit, securing the Kuru lineage",
+                    "Epitome of youthful heroism and supreme military skill"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Abhimanyu",
+                sources: ["Mahabharata - Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "ghatotkacha",
+                name: "Ghatotkacha",
+                alternateNames: ["Rakshasaraja", "Hidimbeya"],
+                teluguName: "ఘటోత్కచుడు",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Mighty Rakshasa General & Night Warfare Specialist",
+                kingdom: "Kamarupa / Himalayan Forests",
+                parents: ["Bhima", "Hidimbi (Rakshasi princess)"],
+                siblings: [],
+                spouses: ["Moorvi"],
+                children: ["Anjanaparvan", "Barbarika (in regional folklore)"],
+                guru: ["Bhima", "Hidimba clan masters"],
+                weapons: ["Illusionary Maya Warfare", "Giant Iron Maces", "Mystical Tridents"],
+                bow: "Massive Rakshasa bow",
+                conch: "Thunderous war horn",
+                chariot: "Flying aerial chariot",
+                charioteer: "Magical driver",
+                banner: "Bleeding Vulture Banner",
+                disguiseName: null,
+                divineAssociations: ["Half-Rakshasa divine hybrid with mastery over nocturnal illusion"],
+                notableDeeds: [
+                    "Devastated the Kaurava army during night combat on Day 14.",
+                    "Compelled Karna to unleash his infallible divine weapon, the Vasavi Shakti, saving Arjuna's life.",
+                    "Grew to gigantic cosmic proportions before expiring, crushing thousands of Kaurava soldiers upon falling."
+                ],
+                warRecord: [
+                    { day: "Day 14", opponent: "Karna & Kaurava Night Army", outcome: "Caused immense devastation before falling to Vasavi Shakti.", context: "Supreme sacrifice for Arjuna." }
+                ],
+                killedBy: "Karna (using Vasavi Shakti / Indrastra)",
+                deathDay: "Day 14 (Night Battle)",
+                survivalStatus: "Martyred in Combat",
+                highlights: [
+                    "Son of Bhima and Hidimbi with immense shape-shifting powers",
+                    "Master of nocturnal illusion (Maya) warfare",
+                    "Forced Karna to expend the divine Vasavi Shakti meant for Arjuna",
+                    "Magnificent sacrifice that saved the Pandava supreme archer",
+                    "Celebrated for aerial combat and devastating troop destruction"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Ghatotkacha",
+                sources: ["Mahabharata - Drona Parva (Ghatotkacha-vadha)", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "dhrishtadyumna",
+                name: "Dhrishtadyumna",
+                alternateNames: ["Panchalaraja", "Yagnasenasuta"],
+                teluguName: "ధృష్టద్యుమ్నుడు",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Supreme Commander-in-Chief of Pandava Army",
+                kingdom: "Panchala",
+                parents: ["King Drupada (born out of sacrificial fire yajna)"],
+                siblings: ["Draupadi", "Shikhandi"],
+                spouses: [],
+                children: ["Kshatradharman"],
+                guru: ["Dronacharya (ironically taught military science)"],
+                weapons: ["Sword", "Bow", "Sacred Spear"],
+                bow: "Panchala royal bow",
+                conch: "Vijaya conch",
+                chariot: "Panchala chariot",
+                charioteer: "Satyajit",
+                banner: "Sacred Fire Altar Emblem",
+                disguiseName: null,
+                divineAssociations: ["Born from the sacrificial fire yajna specifically ordained to slay Dronacharya"],
+                notableDeeds: [
+                    "Appointed Supreme Commander (Senapati) of the Pandava 7 akshauhini army.",
+                    "Executed Dronacharya on Day 15 when Drona entered deep yogic trance.",
+                    "Fought valiantly throughout all 18 days of Kurukshetra."
+                ],
+                warRecord: [
+                    { day: "Day 15", opponent: "Dronacharya", outcome: "Beheaded Dronacharya during his meditation.", context: "Fulfilling birth destiny." }
+                ],
+                killedBy: "Ashwatthama (during the midnight massacre on Day 18)",
+                deathDay: "Day 18 (Night Massacre)",
+                survivalStatus: "Martyred in Combat",
+                highlights: [
+                    "Commander-in-Chief (Senapati) of the Pandava forces",
+                    "Born miraculously from sacrificial fire to slay Drona",
+                    "Brother of Draupadi and Shikhandi",
+                    "Slain by Ashwatthama in the cowardly night camp raid",
+                    "Panchala prince of supreme tactical leadership"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Dhrishtadyumna",
+                sources: ["Mahabharata - Adi Parva, Drona Parva, Sauptika Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "shikhandi",
+                name: "Shikhandi",
+                alternateNames: ["Shikhandini", "Prishatputra"],
+                teluguName: "శిఖండి",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Frontline Commander & Shield against Bhishma",
+                kingdom: "Panchala",
+                parents: ["King Drupada"],
+                siblings: ["Draupadi", "Dhrishtadyumna"],
+                spouses: ["Princess of Dasharna"],
+                children: [],
+                guru: ["Drupada"],
+                weapons: ["Bow and arrows", "Sword"],
+                bow: "Panchala bow",
+                conch: "Shikhandi conch",
+                chariot: "Panchala chariot",
+                charioteer: "Satyajit",
+                banner: "Lion and Sun Emblem",
+                disguiseName: null,
+                divineAssociations: ["Reincarnation of Amba, sworn to cause Bhishma's downfall"],
+                notableDeeds: [
+                    "Stood before Arjuna on Day 10 to act as human shield against Bhishma.",
+                    "Facilitated Bhishma's withdrawal from the war due to Bhishma's vow not to raise weapons against a woman/born-female."
+                ],
+                warRecord: [
+                    { day: "Day 10", opponent: "Bhishma", outcome: "Stood as shield while Arjuna pierced Bhishma with arrows.", context: "Fulfilling Amba's vengeance." }
+                ],
+                killedBy: "Ashwatthama (during the midnight massacre on Day 18)",
+                deathDay: "Day 18 (Night Massacre)",
+                survivalStatus: "Martyred in Combat",
+                highlights: [
+                    "Reincarnation of Princess Amba seeking vengeance on Bhishma",
+                    "Acted as the crucial human shield on Day 10 for Arjuna",
+                    "Born female (Shikhandini) and later transformed into male",
+                    "Slain by Ashwatthama in the sleep raid",
+                    "Pivotal catalyst in Bhishma's fall"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Shikhandi",
+                sources: ["Mahabharata - Udyoga Parva, Bhishma Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "satyaki",
+                name: "Satyaki",
+                alternateNames: ["Yuyudhana", "Shini", "Vrishni-shreshtha"],
+                teluguName: "సాత్యకి",
+                alliance: "Pandava",
+                tier: "primary",
+                role: "Supreme Vrishni Hero & Principal Pandava General",
+                kingdom: "Dwarka / Vrishni Clan",
+                parents: ["Satyaka"],
+                siblings: [],
+                spouses: [],
+                children: ["Asmahanja"],
+                guru: ["Arjuna (master archery student)"],
+                weapons: ["Sharanga bow", "Sword", "Celestial mace"],
+                bow: "Vrishni bow",
+                conch: "Satyaki conch",
+                chariot: "Gold-plated chariot",
+                charioteer: "Chariot master",
+                banner: "Lion banner",
+                disguiseName: null,
+                divineAssociations: ["Peerless Yadava warrior allied with Arjuna"],
+                notableDeeds: [
+                    "Fought ferociously on Day 14 during Jayadratha protection breakthrough.",
+                    "Slew Bhurishravas in a controversial duel during evening twilight on Day 14.",
+                    "Protected Yudhishthira from Dronacharya's onslaughts."
+                ],
+                warRecord: [
+                    { day: "Day 14", opponent: "Bhurishravas & Kaurava host", outcome: "Slaughtered enemy battalions; defeated Bhurishravas.", context: "Intense daylight/sunset combat." }
+                ],
+                killedBy: "Kritavarma (during the drunken Yadava civil massacre at Prabhasa)",
+                deathDay: "Post-War (Prabhasa Kshetra civil war)",
+                survivalStatus: "Survived Kurukshetra War (Dies later in Yadava civil war)",
+                highlights: [
+                    "Peerless Yadava warrior and prime disciple of Arjuna",
+                    "Fought fiercely on Day 14 in the Chakravyuha/Jayadratha battle",
+                    "Defeated Bhurishravas in a tense twilight duel",
+                    "Survives Kurukshetra but perishes in the later Yadava fratricidal civil war",
+                    "Pillar of the Pandava military strength"
+                ],
+                artwork: "https://placehold.co/400x400/0b132b/d4af37?text=Satyaki",
+                sources: ["Mahabharata - Drona Parva, Mausala Parva", "Andhra Mahabharatamu"]
+            },
+
+            // --- TIER 1: KAURAVA ALLIANCE ---
+            {
+                id: "duryodhana",
+                name: "Duryodhana",
+                alternateNames: ["Suyodhana", "Gandharaja", "Kauraveshwara"],
+                teluguName: "దుర్యోధనుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Supreme Leader & Emperor of Kaurava Empire",
+                kingdom: "Hastinapura",
+                parents: ["Dhritarashtra", "Gandhari"],
+                siblings: ["Dushasana and 98 other Kaurava brothers", "Dussala (sister)"],
+                spouses: ["Bhanumati (Princess of Kalinga)"],
+                children: ["Lakshmana Kumara", "Lakshmana"],
+                guru: ["Balarama (Mace warfare)", "Dronacharya"],
+                weapons: ["Kaumodaki-grade Iron Mace", "Royal Sword"],
+                bow: "Kuru royal bow",
+                conch: "Kaurava victory conch",
+                chariot: "Diamond-encrusted imperial chariot",
+                charioteer: "Sanatkumara / Chariot master",
+                banner: "Nagadhvaja (Jeweled Serpent Banner)",
+                disguiseName: null,
+                divineAssociations: ["Incarnation of Kali (demon spirit embodiment)"],
+                notableDeeds: [
+                    "Ordered the infamous dice game and attempted disrobing of Draupadi.",
+                    "Ruled Hastinapura justly in appearance while driven by deep jealousy and ego.",
+                    "Fought gallantly in mace combat on Day 18 after all allies had fallen, hiding in Dwaipayana lake before Bhima dragged him out."
+                ],
+                warRecord: [
+                    { day: "Day 18", opponent: "Bhima", outcome: "Defeated and fatally mortally wounded in a mace duel.", context: "Conclusion of the Kurukshetra War." }
+                ],
+                killedBy: "Bhima (Mace strike to thighs on Day 18)",
+                deathDay: "Day 18 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Crown prince and emperor of Hastinapura leading the Kaurava alliance",
+                    "Master of mace warfare trained under Balarama",
+                    "Banner emblem: Nagadhvaja (Jeweled Serpent)",
+                    "Perished on Day 18 after a grueling mace duel with Bhima",
+                    "Incarnation of Kali entity in epic theology"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Duryodhana",
+                sources: ["Mahabharata - Sabha Parva, Shalya Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "dushasana",
+                name: "Dushasana",
+                alternateNames: ["Dushtasana"],
+                teluguName: "దుశ్శాసనుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Senior Kaurava Commander & Enforcer",
+                kingdom: "Hastinapura",
+                parents: ["Dhritarashtra", "Gandhari"],
+                siblings: ["Duryodhana and 98 brothers"],
+                spouses: [],
+                children: ["Dushasana's son"],
+                guru: ["Dronacharya", "Kripacharya"],
+                weapons: ["Sword", "Bow", "Mace"],
+                bow: "Kuru bow",
+                conch: "Kaurava conch",
+                chariot: "Royal crimson chariot",
+                charioteer: "Experienced charioteer",
+                banner: "Boar banner",
+                disguiseName: null,
+                divineAssociations: ["Principal accomplice to Duryodhana's plots"],
+                notableDeeds: [
+                    "Dragged Draupadi by her hair into the royal assembly hall during the dice game.",
+                    "Led multiple frontline charges against Bhima and Arjuna."
+                ],
+                warRecord: [
+                    { day: "Day 15", opponent: "Bhima", outcome: "Slain by Bhima in single combat on the battlefield.", context: "Fulfilling Bhima's fierce vow." }
+                ],
+                killedBy: "Bhima (Day 15)",
+                deathDay: "Day 15 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Second of the 100 Kaurava brothers",
+                    "Primary perpetrator of Draupadi's humiliation in the assembly hall",
+                    "Slain by Bhima on Day 15 in brutal battlefield confrontation",
+                    "Fierce frontline commander of the Kaurava host",
+                    "Symbol of arrogance and adharma"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Dushasana",
+                sources: ["Mahabharata - Sabha Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "bhishma",
+                name: "Bhishma",
+                alternateNames: ["Devavrata", "Gangaputra", "Grandfather Bhishma", "Pitamaha", "Ichchha-Mrityu"],
+                teluguName: "భీష్ముడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Supreme Commander of Kaurava Army (Days 1–10)",
+                kingdom: "Hastinapura",
+                parents: ["King Shantanu", "Goddess Ganga"],
+                siblings: ["Chitrangada", "Vichitravirya (stepbrothers)"],
+                spouses: [],
+                children: [],
+                guru: ["Lord Parasurama (Master of all weapons)", "Sage Vasistha"],
+                weapons: ["Celestial Bow", "Brahmastra", "Sword"],
+                bow: "Mahadeva-blessed bow",
+                conch: "Gangodbhava conch",
+                chariot: "Golden sun chariot",
+                charioteer: "Experienced Kuru charioteer",
+                banner: "Palmyra tree emblem (Taladhvaja)",
+                disguiseName: null,
+                divineAssociations: ["Incarnation of Dyu (Vasu celestial)", "Granted boon of Ichchha-Mrityu (death by choice)"],
+                notableDeeds: [
+                    "Took the terrible Bhishma Pratishtha vow of lifelong celibacy and throne renunciation.",
+                    "Served as Supreme Commander of Kauravas for the first 10 days, decimating thousands of Pandava troops.",
+                    "Fell on Day 10 upon a bed of arrows (Sharashayana) with the aid of Shikhandi."
+                ],
+                warRecord: [
+                    { day: "Days 1-10", opponent: "Pandava Army & Arjuna", outcome: "Slaughtered endless troops; incapacitated on Day 10.", context: "Supreme Commander era." }
+                ],
+                killedBy: "Arjuna (with Shikhandi as shield, falling on bed of arrows)",
+                deathDay: "Passed away on Uttarayana (Day 58 after war commencement)",
+                survivalStatus: "Fell in Combat / Ascended at Will",
+                highlights: [
+                    "Grand uncle of both Pandavas and Kauravas with boon of voluntary death",
+                    "Supreme Commander of Kaurava forces for Days 1 to 10",
+                    "Master student of Lord Parasurama",
+                    "Fell on a bed of arrows on Day 10, awaiting Uttarayana to exit",
+                    "Epitomy of supreme oath-keeping (Bhishma Pratishtha)"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Bhishma",
+                sources: ["Mahabharata - Adi Parva, Bhishma Parva, Anushasana Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "dronacharya",
+                name: "Dronacharya",
+                alternateNames: ["Drona", "Bharadvaja", "Acharya Drona"],
+                teluguName: "ద్రోణాచార్యుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Supreme Commander (Days 11–15) & Royal Military Preceptor",
+                kingdom: "Hastinapura / Panchal-border",
+                parents: ["Sage Bharadvaja"],
+                siblings: [],
+                spouses: ["Kripi"],
+                children: ["Ashwatthama"],
+                guru: ["Sage Agnivesha", "Lord Parasurama"],
+                weapons: ["Celestial Divyastras", "Brahmastra", "Sword"],
+                bow: "Dhanur-veda bow",
+                conch: "Drona conch",
+                chariot: "Red chariot with black horses",
+                charioteer: "Chariot master",
+                banner: "Golden Altar / Water Pot (Kumbha) Emblem",
+                disguiseName: null,
+                divineAssociations: ["Born in a clay pot (Drona) from Sage Bharadvaja's seed", "Partial incarnation of Brihaspati"],
+                notableDeeds: [
+                    "Trained both Pandavas and Kauravas in advanced military arts.",
+                    "Demanded Ekalavya's right thumb as Gurudakshina to protect Arjuna's supremacy.",
+                    "Served as Supreme Commander (Days 11-15), forming the lethal Chakravyuha and Padmavyuha formations."
+                ],
+                warRecord: [
+                    { day: "Days 11-15", opponent: "Pandava Army & Dhrishtadyumna", outcome: "Slaughtered countless troops; beheaded on Day 15.", context: "Commander era." }
+                ],
+                killedBy: "Dhrishtadyumna (Beheaded while in deep meditation after false death rumor)",
+                deathDay: "Day 15 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Grand preceptor of military arts to both Kauravas and Pandavas",
+                    "Supreme Commander of Kaurava forces from Days 11 to 15",
+                    "Father of Ashwatthama; born in a clay pot (Drona)",
+                    "Beheaded by Dhrishtadyumna while in meditation after Yudhishthira's truth-ruse",
+                    "Master of all divine celestial astras"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Dronacharya",
+                sources: ["Mahabharata - Adi Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "karna",
+                name: "Karna",
+                alternateNames: ["Radheya", "Vasusena", "Angaraja", "Kaunteya (by birth)", "Suta Putra"],
+                teluguName: "కర్ణుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Supreme Commander (Day 16–17) & Supreme Archery Rival to Arjuna",
+                kingdom: "Anga",
+                parents: ["Surya (Sun God - biological)", "Kunti (birth mother)", "Radha & Adhiratha (foster parents)"],
+                siblings: ["Pandavas (half-brothers)"],
+                spouses: ["Vrishavali, Supriya"],
+                children: ["Vrishasena", "Vrishaketu", "Sushena"],
+                guru: ["Lord Parasurama (learned Brahmastra via disguise)", "Dronacharya (basic training)"],
+                weapons: ["Vijaya Bow (celestial bow gifted by Parasurama)", "Vasavi Shakti (divine spear)", "Kundala and Kavacha"],
+                bow: "Vijaya",
+                conch: "Vijaya conch",
+                chariot: "Magnificent golden chariot driven by Shalya",
+                charioteer: "King Shalya of Madra",
+                banner: "Elephant Cord Emblem",
+                disguiseName: null,
+                divineAssociations: ["Aura of natural Kavacha (armor) and Kundala (earrings) born from Surya"],
+                notableDeeds: [
+                    "Generous philanthropist (Danashura Karna) who never turned away any petitioner.",
+                    "Acquired the infallible Vasavi Shakti from Lord Indra in exchange for his divine armor.",
+                    "Served as Supreme Commander on Days 16-17 before falling to Arjuna in a legendary duel."
+                ],
+                warRecord: [
+                    { day: "Day 16-17", opponent: "Arjuna & Pandava Army", outcome: "Killed Ghatotkacha with Vasavi Shakti; slain by Arjuna on Day 17.", context: "Climactic duels." }
+                ],
+                killedBy: "Arjuna (Day 17, while his chariot wheel was stuck in mud)",
+                deathDay: "Day 17 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Biological son of Surya and Kunti; foster son of Adhiratha and Radha",
+                    "Wielder of the celestial bow Vijaya and divine spear Vasavi Shakti",
+                    "Renowned across all eras as Danashura (The Great Philanthropist)",
+                    "Supreme Commander of Kaurava forces on Days 16 and 17",
+                    "Slain by Arjuna on Day 17 during wheel-mired vulnerability"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Karna",
+                sources: ["Mahabharata - Vana Parva, Karna Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "ashwatthama",
+                name: "Ashwatthama",
+                alternateNames: ["Dronaputra", "Chiranjivi"],
+                teluguName: "అశ్వత్థామ",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Immortal Kaurava General & Night Massacre Perpetrator",
+                kingdom: "Hastinapura / Northern Panchala",
+                parents: ["Dronacharya", "Kripi"],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: ["Dronacharya", "Lord Shiva"],
+                weapons: ["Narayana Astra", "Agneyastra", "Brahmashirsha Astra", "Sword"],
+                bow: "Drona clan bow",
+                conch: "Kaurava conch",
+                chariot: "War chariot",
+                charioteer: "Kritavarma (during night raid)",
+                banner: "Lion emblem",
+                disguiseName: null,
+                divineAssociations: ["One of the 7 Chiranjivis (Immortals)", "Blessed with a gem (mani) on his forehead"],
+                notableDeeds: [
+                    "Fired the terrifying Narayana Astra which forced the Pandava army to surrender temporarily on Day 15.",
+                    "Executed the devastating midnight revenge raid on the Pandava camp on Day 18, slaughtering Dhrishtadyumna, Shikhandi, and the Upapandavas.",
+                    "Fired the Brahmashirsha Astra against Uttara's womb, later neutralized by Sri Krishna."
+                ],
+                warRecord: [
+                    { day: "Day 18 (Night)", opponent: "Pandava Sleeping Camp", outcome: "Slaughtered remaining Pandava generals in sleep raid.", context: "Desperate vengeance." }
+                ],
+                killedBy: "Cursed to wander the earth immortal in pain for 3,000 years by Sri Krishna",
+                deathDay: "Immortal (Chiranjivi - alive across yugas)",
+                survivalStatus: "Immortal / Cursed Wanderer",
+                highlights: [
+                    "One of the 7 immortals (Chiranjivis) born with a divine gem on his forehead",
+                    "Son of Dronacharya; master of the unstoppable Narayana and Brahmashirsha astras",
+                    "Perpetrated the midnight slaughter of the Pandava camp on Day 18",
+                    "Cursed by Sri Krishna with sores and immortal wandering across realms",
+                    "Fierce general driven by grief over his father's execution"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Ashwatthama",
+                sources: ["Mahabharata - Drona Parva, Sauptika Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "shalya",
+                name: "Shalya",
+                alternateNames: ["Madraparadipati", "Madra-Naatha"],
+                teluguName: "శల్యుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "King of Madra & Supreme Commander (Day 18)",
+                kingdom: "Madra",
+                parents: ["King of Madra"],
+                siblings: ["Madri (Pandu's second wife - sister to Shalya)"],
+                spouses: ["Queen of Madra"],
+                children: ["Rukmaratha", "Sudakshina"],
+                guru: ["Kshatriya masters"],
+                weapons: ["Mace", "Spear", "Sword", "Bow"],
+                bow: "Madra royal bow",
+                conch: "Madra conch",
+                chariot: "Golden imperial chariot",
+                charioteer: "Karna (initially drove Karna's chariot, demoralizing him with sarcasm)",
+                banner: "Boar and Spear Emblem",
+                disguiseName: null,
+                divineAssociations: ["Maternal uncle of Nakula and Sahadeva"],
+                notableDeeds: [
+                    "Tricked by Duryodhana into joining the Kaurava side via hospitality deception.",
+                    "Acted as Karna's charioteer, continuously demoralizing Karna with psychological barbs to balance Arjuna's advantage.",
+                    "Served as Supreme Commander on Day 18 after Karna's fall."
+                ],
+                warRecord: [
+                    { day: "Day 18", opponent: "Yudhishthira & Pandava Army", outcome: "Fought valiantly as Commander; slain by Yudhishthira in single combat.", context: "Final day general." }
+                ],
+                killedBy: "Yudhishthira (Day 18)",
+                deathDay: "Day 18 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "King of Madra and maternal uncle to Nakula and Sahadeva",
+                    "Tricked into supporting Kauravas by Duryodhana's hospitality",
+                    "Served as Karna's charioteer while demoralizing Karna with caustic psychological barbs",
+                    "Supreme Commander of Kaurava forces on Day 18",
+                    "Slain in single combat by Yudhishthira"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Shalya",
+                sources: ["Mahabharata - Udyoga Parva, Shalya Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "shakuni",
+                name: "Shakuni",
+                alternateNames: ["Gandharaja", "Subala-putra"],
+                teluguName: "శకుని",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Master Tactician, Dice Master & Strategist",
+                kingdom: "Gandhara",
+                parents: ["King Subala of Gandhara"],
+                siblings: ["Gandhari (Duryodhana's mother)"],
+                spouses: ["Pooja"],
+                children: ["Uluka"],
+                guru: ["Gandhara royal scholars"],
+                weapons: ["Magical Dice (made from his father's bones)", "Sword", "Dagger"],
+                bow: "Gandhara bow",
+                conch: "Subala conch",
+                chariot: "Chariot",
+                charioteer: "Chariot driver",
+                banner: "Black Eagle Emblem",
+                disguiseName: null,
+                divineAssociations: ["Master illusionist and psychological tactician"],
+                notableDeeds: [
+                    "Masterminded the rigged dice game that exiled the Pandavas to the forest.",
+                    "Acted as Duryodhana's primary advisor and geopolitical manipulator throughout the epic.",
+                    "Fought on the battlefield until slain by Sahadeva on Day 18."
+                ],
+                warRecord: [
+                    { day: "Days 1-18", opponent: "Pandava Army & Sahadeva", outcome: "Manipulated Kaurava strategy; slain by Sahadeva on Day 18.", context: "Mastermind of the war." }
+                ],
+                killedBy: "Sahadeva (Day 18)",
+                deathDay: "Day 18 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Prince of Gandhara and brother of Queen Gandhari",
+                    "Mastermind of the rigged dice game and Pandava exile",
+                    "Wielded magical dice carved from his father's skeletal remains",
+                    "Primary geopolitical advisor to Duryodhana",
+                    "Slain in combat by Sahadeva on Day 18"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Shakuni",
+                sources: ["Mahabharata - Sabha Parva, Shalya Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "kripacharya",
+                name: "Kripacharya",
+                alternateNames: ["Kripa", "Sharadvat"],
+                teluguName: "కృపాచార్యుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "Kuru Royal Preceptor & Immortal General",
+                kingdom: "Hastinapura",
+                parents: ["Sage Sharadvat", "Janapadi"],
+                siblings: ["Kripi (Dronacharya's wife)"],
+                spouses: [],
+                children: [],
+                guru: ["Sage Sharadvat"],
+                weapons: ["Bow", "Sword", "Celestial arrows"],
+                bow: "Kuru bow",
+                conch: "Kripa conch",
+                chariot: "Royal chariot",
+                charioteer: "Chariot master",
+                banner: "Red Bull Emblem",
+                disguiseName: null,
+                divineAssociations: ["One of the 7 Chiranjivis (Immortals)"],
+                notableDeeds: [
+                    "Served as joint teacher to both Pandava and Kaurava princes alongside Drona.",
+                    "Survived the entire Kurukshetra War and later crowned Parikshit as emperor."
+                ],
+                warRecord: [
+                    { day: "Days 1-18", opponent: "Pandava Army", outcome: "Fought bravely throughout all 18 days; survived war.", context: "Veteran preceptor." }
+                ],
+                killedBy: null,
+                deathDay: "Immortal (Chiranjivi)",
+                survivalStatus: "Survived War (Became advisor to Parikshit)",
+                highlights: [
+                    "One of the 7 immortals (Chiranjivis) and royal tutor to princes",
+                    "Brother-in-law of Dronacharya and twin brother of Kripi",
+                    "Fought valiantly on the Kaurava side throughout all 18 days",
+                    "Survives the war and later tutors Emperor Parikshit",
+                    "Epitome of martial wisdom and duty"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Kripacharya",
+                sources: ["Mahabharata - Adi Parva, Sauptika Parva, Stri Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "jayadratha",
+                name: "Jayadratha",
+                alternateNames: ["Sindhuraja", "Sindhu King"],
+                teluguName: "జయద్రథుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "King of Sindhu & Chakravyuha Architect",
+                kingdom: "Sindhu / Sauvira",
+                parents: ["King Vridhakshatra"],
+                siblings: [],
+                spouses: ["Dussala (Duryodhana's sister)"],
+                children: ["Suratha"],
+                guru: [],
+                weapons: ["Bow and arrow", "Sword"],
+                bow: "Sindhu bow",
+                conch: "Sindhu conch",
+                chariot: "Royal chariot",
+                charioteer: "Chariot driver",
+                banner: "Boar emblem",
+                disguiseName: null,
+                divineAssociations: ["Granted boon by Lord Shiva blocking Pandava advance on Day 13"],
+                notableDeeds: [
+                    "Attempted to abduct Draupadi during forest exile (Drifing episode).",
+                    "Blocked the Pandava exit of the Chakravyuha on Day 13, trapping and causing Abhimanyu's martyrdom.",
+                    "Slain by Arjuna on Day 14 in a dramatic sunset duel aided by Krishna's solar eclipse illusion."
+                ],
+                warRecord: [
+                    { day: "Day 13", opponent: "Abhimanyu & Pandavas", outcome: "Blocked Pandava rescue forces, trapping Abhimanyu.", context: "Controversial tactical trap." },
+                    { day: "Day 14", opponent: "Arjuna", outcome: "Beheaded by Arjuna before sunset.", context: "Fulfilling Arjuna's fierce oath." }
+                ],
+                killedBy: "Arjuna (Day 14)",
+                deathDay: "Day 14 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "King of Sindhu and husband of Duryodhana's sister Dussala",
+                    "Blocked the Pandava rescue party during Abhimanyu's entrapment on Day 13",
+                    "Protected by Lord Shiva's boon that anyone dropping his head on the ground would die",
+                    "Beheaded by Arjuna on Day 14 via Krishna's sun-concealment illusion",
+                    "Major antagonist of the mid-war phase"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Jayadratha",
+                sources: ["Mahabharata - Vana Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "bhagadatta",
+                name: "Bhagadatta",
+                alternateNames: ["Pragjyotisha King", "Lord of Kamarupa"],
+                teluguName: "భగదత్తుడు",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "King of Pragjyotisha & Elephant Warfare Master",
+                kingdom: "Pragjyotisha (Assam / Kamarupa)",
+                parents: ["Narakasura"],
+                siblings: [],
+                spouses: [],
+                children: ["Vajradatta"],
+                guru: [],
+                weapons: ["Vaishnavastra", "Iron darts", "Elephant tusks and spears"],
+                bow: "Pragjyotisha bow",
+                conch: "Elephant conch",
+                chariot: "Riding the legendary celestial war elephant Supratika",
+                charioteer: "Mahout",
+                banner: "Imperial Elephant Banner",
+                disguiseName: null,
+                divineAssociations: ["Friend of Indra; former ally of Narakasura"],
+                notableDeeds: [
+                    "Fought fiercely on his war elephant Supratika on Day 12.",
+                    "Unleashed the infallible Vaishnavastra against Arjuna, which Sri Krishna intercepted and absorbed upon his chest."
+                ],
+                warRecord: [
+                    { day: "Day 12", opponent: "Arjuna & Sri Krishna", outcome: "Nearly killed Arjuna before Krishna intervened; slain by Arjuna's arrow.", context: "Fierce elephant charge." }
+                ],
+                killedBy: "Arjuna (Day 12)",
+                deathDay: "Day 12 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Aged and invincible King of Pragjyotisha (Kamarupa / Assam)",
+                    "Rode the legendary celestial war elephant Supratika",
+                    "Unleashed the divine Vaishnavastra absorbed by Sri Krishna",
+                    "Formidable ally of Duryodhana on the battlefield",
+                    "Slain by Arjuna on Day 12"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Bhagadatta",
+                sources: ["Mahabharata - Bhishma Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "susharma",
+                name: "Susharma",
+                alternateNames: ["Trigartaraja"],
+                teluguName: "సుశర్మ",
+                alliance: "Kaurava",
+                tier: "primary",
+                role: "King of Trigarta & Commander of Samsaptakas",
+                kingdom: "Trigarta",
+                parents: ["Trigarta King"],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow and arrows", "Sword"],
+                bow: "Trigarta bow",
+                conch: "Trigarta conch",
+                chariot: "War chariot",
+                charioteer: "Chariot driver",
+                banner: "Fire Emblem",
+                disguiseName: null,
+                divineAssociations: ["Sworn enemy of Virata and Arjuna"],
+                notableDeeds: [
+                    "Led the Samsaptaka suicide squadron sworn to engage and draw Arjuna away from the main battlefield on Day 14.",
+                    "Fought fiercely in multiple engagements against the Pandavas."
+                ],
+                warRecord: [
+                    { day: "Day 14", opponent: "Arjuna & Samsaptakas", outcome: "Engaged Arjuna in diversionary combat; ultimately slain.", context: "Samsaptaka pact." }
+                ],
+                killedBy: "Arjuna (Day 14 or 17)",
+                deathDay: "Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "King of Trigarta and leader of the Samsaptaka suicide squadron",
+                    "Swore suicide pacts to lure Arjuna away from Jayadratha's protection on Day 14",
+                    "Fierce frontline combatant allied with Duryodhana",
+                    "Ancient rival of the Matsya kingdom",
+                    "Slain in combat by Arjuna"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Susharma",
+                sources: ["Mahabharata - Virata Parva, Drona Parva, Karna Parva", "Andhra Mahabharatamu"]
+            },
+
+            // --- TIER 2: IMPORTANT ALLIES & SUPPORTING ---
+            {
+                id: "drupada",
+                name: "King Drupada",
+                alternateNames: ["Yagnasena", "Panchaladhipati"],
+                teluguName: "ద్రుపదుడు",
+                alliance: "Pandava",
+                tier: "supporting",
+                role: "King of Panchala & Pandava Father-in-Law",
+                kingdom: "Panchala",
+                parents: ["King Prishata"],
+                siblings: [],
+                spouses: ["Queen of Panchala"],
+                children: ["Draupadi", "Dhrishtadyumna", "Shikhandi"],
+                guru: [],
+                weapons: ["Royal sword", "Bow"],
+                bow: "Panchala royal bow",
+                conch: "Panchala conch",
+                chariot: "Golden royal chariot",
+                charioteer: "Chariot driver",
+                banner: "Sacred Fire Emblem",
+                disguiseName: null,
+                divineAssociations: ["Childhood friend turned rival of Dronacharya"],
+                notableDeeds: [
+                    "Performed the yajna that birthed Dhrishtadyumna and Draupadi.",
+                    "Joined the Pandava alliance with a major contingent of Panchala troops.",
+                    "Fought as a senior allied commander until slain by Dronacharya."
+                ],
+                warRecord: [
+                    { day: "Day 15", opponent: "Dronacharya", outcome: "Slain in battle by Dronacharya.", context: "Senior ally casualty." }
+                ],
+                killedBy: "Dronacharya (Day 15)",
+                deathDay: "Day 15 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "King of Panchala and father of Draupadi, Dhrishtadyumna, and Shikhandi",
+                    "Childhood rival turned bitter enemy of Dronacharya",
+                    "Contributed major military divisions to the Pandava alliance",
+                    "Slain in combat on Day 15 by Dronacharya",
+                    "Pillar of the Pandava coalition"
+                ],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=King+Drupada",
+                sources: ["Mahabharata - Adi Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "virata",
+                name: "King Virata",
+                alternateNames: ["Matsyaraja"],
+                teluguName: "విరాటుడు",
+                alliance: "Pandava",
+                tier: "supporting",
+                role: "King of Matsya & Protector during Exile",
+                kingdom: "Matsya",
+                parents: [],
+                siblings: [],
+                spouses: ["Queen Sudeshna"],
+                children: ["Uttara", "Uttarika", "Shveta", "Satyajit"],
+                guru: [],
+                weapons: ["Royal sword", "Bow"],
+                bow: "Matsya bow",
+                conch: "Matsya conch",
+                chariot: "Matsya chariot",
+                charioteer: "Chariot driver",
+                banner: "Fish Emblem (Matsya)",
+                disguiseName: null,
+                divineAssociations: ["Provided sanctuary to Pandavas during their 13th year disguise exile"],
+                notableDeeds: [
+                    "Hosted the Pandavas in disguise during their agnatavasa (exile disguise year).",
+                    "Fought valiantly in the Kurukshetra War alongside his sons.",
+                    "Slain by Dronacharya on Day 15."
+                ],
+                warRecord: [
+                    { day: "Day 15", opponent: "Dronacharya", outcome: "Slain in battle by Dronacharya.", context: "Matsya royal casualty." }
+                ],
+                killedBy: "Dronacharya (Day 15)",
+                deathDay: "Day 15 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "King of Matsya who sheltered the Pandavas during their 13th year disguise exile",
+                    "Father of Prince Uttara and Princess Uttara (Abhimanyu's wife)",
+                    "Contributed the Matsya army divisions to the Pandava alliance",
+                    "Slain in combat by Dronacharya on Day 15",
+                    "Banner emblem features the sacred Fish (Matsya)"
+                ],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=King+Virata",
+                sources: ["Mahabharata - Virata Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "uttara-matsya",
+                name: "Prince Uttara",
+                alternateNames: ["Uttara Kumar"],
+                teluguName: "ఉత్తరుడు",
+                alliance: "Pandava",
+                tier: "supporting",
+                role: "Prince of Matsya & Arjuna's Charioteer during Go-Grahana",
+                kingdom: "Matsya",
+                parents: ["King Virata", "Queen Sudeshna"],
+                siblings: ["Shveta", "Uttara (Princess)"],
+                spouses: [],
+                children: [],
+                guru: ["Brihannala (Arjuna in disguise)"],
+                weapons: ["Bow", "Sword"],
+                bow: "Matsya royal bow",
+                conch: "Matsya conch",
+                chariot: "Chariot",
+                charioteer: "Arjuna (during Go-Grahana cattle raid)",
+                banner: "Fish Emblem",
+                disguiseName: null,
+                divineAssociations: ["Fought Kaurava army under Brihannala's mentorship"],
+                notableDeeds: [
+                    "Challenged the Kaurava army during the Virata cattle raid (Go-Grahana) with Brihannala as charioteer.",
+                    "Fought bravely in the early days of Kurukshetra."
+                ],
+                warRecord: [
+                    { day: "Early War Days", opponent: "Kaurava Generals", outcome: "Fought bravely before falling in combat.", context: "Matsya prince casualty." }
+                ],
+                killedBy: "Shalya or Salya's forces",
+                deathDay: "Early Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Crown prince of Matsya kingdom",
+                    "Fought the Kaurava army during Go-Grahana with Brihannala (Arjuna) as charioteer",
+                    "Brother of Princess Uttara (Abhimanyu's wife)",
+                    "Died valiantly fighting in the early days of Kurukshetra",
+                    "Symbol of youthful Matsya valor"
+                ],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=Prince+Uttara",
+                sources: ["Mahabharata - Virata Parva, Bhishma Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "vrishasena",
+                name: "Vrishasena",
+                alternateNames: ["Karnaputra"],
+                teluguName: "వృషసేనుడు",
+                alliance: "Kaurava",
+                tier: "supporting",
+                role: "Prince of Anga & Karna's Eldest Son",
+                kingdom: "Anga",
+                parents: ["Karna", "Vrishavali"],
+                siblings: ["Vrishaketu"],
+                spouses: [],
+                children: [],
+                guru: ["Karna", "Dronacharya"],
+                weapons: ["Bow and celestial arrows", "Sword"],
+                bow: "Anga bow",
+                conch: "Anga conch",
+                chariot: "Golden chariot",
+                charioteer: "Chariot driver",
+                banner: "Sun Emblem",
+                disguiseName: null,
+                divineAssociations: ["Skilled archer trained by Karna"],
+                notableDeeds: [
+                    "Fought with extraordinary valor on Day 17 alongside his father Karna.",
+                    "Slain by Arjuna in front of Karna, intensifying the climactic duel between Karna and Arjuna."
+                ],
+                warRecord: [
+                    { day: "Day 17", opponent: "Nakula & Arjuna", outcome: "Slain by Arjuna on Day 17.", context: "Intense father-son emotional catalyst." }
+                ],
+                killedBy: "Arjuna (Day 17)",
+                deathDay: "Day 17 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Eldest son of Karna and prince of Anga",
+                    "Fierce and skilled archer who challenged Pandava generals on Day 17",
+                    "Slain by Arjuna right in front of Karna, sparking intense grief",
+                    "Crucial emotional and tactical catalyst in the Karna-Arjuna climax",
+                    "Brave youth warrior of the Kaurava army"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Vrishasena",
+                sources: ["Mahabharata - Karna Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "bhurishravas",
+                name: "Bhurishravas",
+                alternateNames: ["Somadattaputra"],
+                teluguName: "భూరిశ్రవుడు",
+                alliance: "Kaurava",
+                tier: "supporting",
+                role: "Kaurava Allied Commander & Kuru Descendant",
+                kingdom: "Bahlika / Somadatta clan",
+                parents: ["Somadatta"],
+                siblings: ["Slain brothers"],
+                spouses: [],
+                children: [],
+                guru: ["Bahlika elders"],
+                weapons: ["Sword", "Bow", "Celestial weapons"],
+                bow: "Bahlika bow",
+                conch: "Somadatta conch",
+                chariot: "War chariot",
+                charioteer: "Chariot driver",
+                banner: "Sacrificial Post Emblem",
+                disguiseName: null,
+                divineAssociations: ["Descendant of the Kuru-Bahlika royal branch"],
+                notableDeeds: [
+                    "Fought fiercely on the Kaurava side.",
+                    "Engaged Satyaki in a grueling duel on Day 14, nearly slaying him before being interrupted by Arjuna's arrow cutting off his arm."
+                ],
+                warRecord: [
+                    { day: "Day 14", opponent: "Satyaki & Arjuna", outcome: "Arm severed by Arjuna while dueling Satyaki; sat in yoga posture and attained liberation.", context: "Controversial twilight duel." }
+                ],
+                killedBy: "Satyaki (beheaded while in meditation after arm severance)",
+                deathDay: "Day 14 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Prince of the Bahlika-Somadatta royal branch fighting for Kauravas",
+                    "Engaged Satyaki in a fierce duel on Day 14",
+                    "Arm severed by Arjuna while attempting to slay Satyaki",
+                    "Sat in meditative yoga posture before being slain by Satyaki",
+                    "Renowned for warrior code and tragic end"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Bhurishravas",
+                sources: ["Mahabharata - Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "kritavarma",
+                name: "Kritavarma",
+                alternateNames: ["Hridika-putra"],
+                teluguName: "కృతవర్మ",
+                alliance: "Kaurava",
+                tier: "supporting",
+                role: "Yadava General Allied with Kauravas",
+                kingdom: "Dwarka / Narayani Sena",
+                parents: ["Hridika"],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Sword", "Bow", "Shield"],
+                bow: "Yadava bow",
+                conch: "Yadava conch",
+                chariot: "Narayani Sena chariot",
+                charioteer: "Chariot driver",
+                banner: "Yadava Emblem",
+                disguiseName: null,
+                divineAssociations: ["Commander of the Narayani Sena troops assigned to Duryodhana"],
+                notableDeeds: [
+                    "Commanded the elite Narayani Sena divisions given to Duryodhana while Krishna joined the Pandavas unarmed.",
+                    "Joined Ashwatthama in the midnight massacre of the Pandava camp on Day 18.",
+                    "Survived Kurukshetra but perished later in the Yadava civil war."
+                ],
+                warRecord: [
+                    { day: "Days 1-18", opponent: "Pandava Army", outcome: "Commanded Narayani Sena; participated in night raid.", context: "Yadava commander." }
+                ],
+                killedBy: "Satyaki (during the Prabhasa Yadava civil war)",
+                deathDay: "Post-War (Prabhasa civil war)",
+                survivalStatus: "Survived Kurukshetra (Dies later)",
+                highlights: [
+                    "Commander of the elite Yadava Narayani Sena allied with Kauravas",
+                    "Accompanied Ashwatthama in the cowardly midnight camp raid on Day 18",
+                    "Survives Kurukshetra but dies in the later Yadava fratricidal civil war at Prabhasa",
+                    "Experienced tactician and cavalry leader",
+                    "Key antagonist among Yadava generals"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Kritavarma",
+                sources: ["Mahabharata - Udyoga Parva, Sauptika Parva, Mausala Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "lakshmana-kumara",
+                name: "Lakshmana Kumara",
+                alternateNames: ["Lakshmana"],
+                teluguName: "లక్ష్మణ కుమారుడు",
+                alliance: "Kaurava",
+                tier: "supporting",
+                role: "Crown Prince of Hastinapura & Duryodhana's Son",
+                kingdom: "Hastinapura",
+                parents: ["Duryodhana", "Bhanumati"],
+                siblings: ["Lakshmana"],
+                spouses: [],
+                children: [],
+                guru: ["Dronacharya", "Kripacharya"],
+                weapons: ["Sword", "Bow"],
+                bow: "Kuru royal bow",
+                conch: "Kuru conch",
+                chariot: "Royal chariot",
+                charioteer: "Chariot driver",
+                banner: "Nagadhvaja",
+                disguiseName: null,
+                divineAssociations: ["Beloved heir to Duryodhana's throne"],
+                notableDeeds: [
+                    "Fought courageously inside the Chakravyuha arena on Day 13.",
+                    "Slain by Abhimanyu in a fierce youthful duel inside the formation."
+                ],
+                warRecord: [
+                    { day: "Day 13", opponent: "Abhimanyu", outcome: "Slain in single combat by Abhimanyu inside Chakravyuha.", context: "Prince casualty." }
+                ],
+                killedBy: "Abhimanyu (Day 13)",
+                deathDay: "Day 13 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "Crown prince of Hastinapura and beloved son of Duryodhana and Bhanumati",
+                    "Fought inside the Chakravyuha arena on Day 13",
+                    "Slain in single combat by Abhimanyu in a dramatic youthful clash",
+                    "His death plunged Duryodhana and the Kaurava camp into immense grief",
+                    "Heir apparent to the Kuru throne"
+                ],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Lakshmana+Kumara",
+                sources: ["Mahabharata - Drona Parva", "Andhra Mahabharatamu"]
+            },
+            {
+                id: "dhrishtaketu",
+                name: "Dhrishtaketu",
+                alternateNames: ["Chediraja"],
+                teluguName: "ధృష్టకేతువు",
+                alliance: "Pandava",
+                tier: "supporting",
+                role: "King of Chedi & Pandava Allied General",
+                kingdom: "Chedi",
+                parents: ["Shishupala (former King of Chedi)"],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow and arrows", "Sword"],
+                bow: "Chedi bow",
+                conch: "Chedi conch",
+                chariot: "War chariot",
+                charioteer: "Chariot driver",
+                banner: "Chedi Emblem",
+                disguiseName: null,
+                divineAssociations: ["Son of Shishupala who chose alliance with Pandavas despite paternal rivalry with Krishna"],
+                notableDeeds: [
+                    "Led the Chedi army divisions supporting the Pandavas.",
+                    "Fought valiantly across multiple engagements until falling in battle."
+                ],
+                warRecord: [
+                    { day: "Mid-War", opponent: "Kaurava Generals", outcome: "Fought as senior allied commander; fell in battle.", context: "Chedi ally casualty." }
+                ],
+                killedBy: "Dronacharya or Kaurava host",
+                deathDay: "Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: [
+                    "King of Chedi and son of Shishupala",
+                    "Chose alliance with the Pandavas despite his father's enmity with Sri Krishna",
+                    "Led Chedi military divisions throughout the war",
+                    "Valiant allied commander who fell in battle",
+                    "Symbol of honor overcoming familial feuds"
+                ],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=Dhrishtaketu",
+                sources: ["Mahabharata - Udyoga Parva, Drona Parva", "Andhra Mahabharatamu"]
+            },
+
+            // --- TIER 3: MINOR WARRIORS & LIMITED-DATA COMBATANTS ---
+            {
+                id: "yudhamanyu",
+                name: "Yudhamanyu",
+                alternateNames: ["Panchala Prince"],
+                teluguName: "యుధమన్యవు",
+                alliance: "Pandava",
+                tier: "minor",
+                role: "Panchala Protector & Chariot Guard to Arjuna",
+                kingdom: "Panchala",
+                parents: [],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Sword"],
+                bow: "Panchala bow",
+                conch: "Conch",
+                chariot: "War chariot",
+                charioteer: "Driver",
+                banner: "Panchala banner",
+                disguiseName: null,
+                divineAssociations: ["Assigned as wheel-guard and personal bodyguard to Arjuna"],
+                notableDeeds: [
+                    "Served as Arjuna's rear-guard chariot wheel protector alongside Uttamaujas.",
+                    "Slain during the midnight massacre by Ashwatthama."
+                ],
+                warRecord: [{ day: "Days 1-18", opponent: "Kaurava army", outcome: "Protected Arjuna; slain in night camp raid.", context: "Bodyguard duty." }],
+                killedBy: "Ashwatthama (Day 18 Night Raid)",
+                deathDay: "Day 18 (Night Massacre)",
+                survivalStatus: "Martyred in Combat",
+                highlights: ["Panchala prince and personal chariot wheel guard to Arjuna", "Slain in the sleeping camp massacre on Day 18"],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=Yudhamanyu",
+                sources: ["Mahabharata - Drona Parva, Sauptika Parva"]
+            },
+            {
+                id: "uttamaujas",
+                name: "Uttamaujas",
+                alternateNames: ["Panchala Prince 2"],
+                teluguName: "ఉత్తమౌజసు",
+                alliance: "Pandava",
+                tier: "minor",
+                role: "Panchala Protector & Chariot Guard to Arjuna",
+                kingdom: "Panchala",
+                parents: [],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Sword"],
+                bow: "Panchala bow",
+                conch: "Conch",
+                chariot: "War chariot",
+                charioteer: "Driver",
+                banner: "Panchala banner",
+                disguiseName: null,
+                divineAssociations: ["Assigned as wheel-guard and personal bodyguard to Arjuna"],
+                notableDeeds: [
+                    "Served alongside Yudhamanyu as Arjuna's chariot wheel protector.",
+                    "Slain during the midnight massacre by Ashwatthama."
+                ],
+                warRecord: [{ day: "Days 1-18", opponent: "Kaurava army", outcome: "Protected Arjuna; slain in night camp raid.", context: "Bodyguard duty." }],
+                killedBy: "Ashwatthama (Day 18 Night Raid)",
+                deathDay: "Day 18 (Night Massacre)",
+                survivalStatus: "Martyred in Combat",
+                highlights: ["Panchala prince and wheel guard to Arjuna", "Slain in the sleeping camp massacre on Day 18"],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=Uttamaujas",
+                sources: ["Mahabharata - Drona Parva, Sauptika Parva"]
+            },
+            {
+                id: "chekitana",
+                name: "Chekitana",
+                alternateNames: ["Vrishni Allied Hero"],
+                teluguName: "చేకితానుడు",
+                alliance: "Pandava",
+                tier: "minor",
+                role: "Vrishni Yadava Ally & Warrior",
+                kingdom: "Dwarka / Yadava clan",
+                parents: [],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Sword"],
+                bow: "Yadava bow",
+                conch: "Conch",
+                chariot: "Chariot",
+                charioteer: "Driver",
+                banner: "Yadava banner",
+                disguiseName: null,
+                divineAssociations: ["Yadava hero fighting on the Pandava side"],
+                notableDeeds: [
+                    "Led Yadava contingents supporting the Pandavas.",
+                    "Slain during the war by Duryodhana or Drona."
+                ],
+                warRecord: [{ day: "Mid-War", opponent: "Kaurava host", outcome: "Fought bravely; fell in combat.", context: "Yadava ally." }],
+                killedBy: "Duryodhana / Karna",
+                deathDay: "Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: ["Yadava hero supporting the Pandavas", "Fought bravely across multiple engagements"],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=Chekitana",
+                sources: ["Mahabharata - Udyoga Parva, Drona Parva"]
+            },
+            {
+                id: "shveta",
+                name: "Shveta",
+                alternateNames: ["Matsya Prince Shveta"],
+                teluguName: "శ్వేతుడు",
+                alliance: "Pandava",
+                tier: "minor",
+                role: "Prince of Matsya & Early War Commander",
+                kingdom: "Matsya",
+                parents: ["King Virata", "Queen Sudeshna"],
+                siblings: ["Uttara"],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Sword"],
+                bow: "Matsya bow",
+                conch: "Conch",
+                chariot: "Chariot",
+                charioteer: "Driver",
+                banner: "Fish banner",
+                disguiseName: null,
+                divineAssociations: ["Eldest prince of Matsya"],
+                notableDeeds: [
+                    "Fought fiercely on Day 1 of Kurukshetra, nearly defeating Bhishma's vanguard before falling to Bhishma's arrow."
+                ],
+                warRecord: [{ day: "Day 1", opponent: "Bhishma", outcome: "Fought heroically; slain by Bhishma on Day 1.", context: "Early war casualty." }],
+                killedBy: "Bhishma (Day 1)",
+                deathDay: "Day 1 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: ["Eldest prince of Matsya kingdom", "Slain on Day 1 by Bhishma after challenging his vanguard"],
+                artwork: "https://placehold.co/400x400/1e1e24/d4af37?text=Shveta",
+                sources: ["Mahabharata - Bhishma Parva"]
+            },
+            {
+                id: "bahlika",
+                name: "Bahlika",
+                alternateNames: ["King Bahlika of Bahlika"],
+                teluguName: "బాహ్లికుడు",
+                alliance: "Kaurava",
+                tier: "minor",
+                role: "King of Bahlika & Elder Kuru Uncle",
+                kingdom: "Bahlika (Bactria)",
+                parents: ["Pratipa (Shantanu's elder brother)"],
+                siblings: ["Shantanu"],
+                spouses: [],
+                children: ["Somadatta"],
+                guru: [],
+                weapons: ["Mace", "Bow"],
+                bow: "Bahlika bow",
+                conch: "Conch",
+                chariot: "Chariot",
+                charioteer: "Driver",
+                banner: "Kuru-Bahlika banner",
+                disguiseName: null,
+                divineAssociations: ["Elder uncle of Bhishma"],
+                notableDeeds: [
+                    "Elder statesman and king who fought on the Kaurava side.",
+                    "Slain by Bhima on Day 14 in a fierce duel."
+                ],
+                warRecord: [{ day: "Day 14", opponent: "Bhima", outcome: "Slain in battle by Bhima.", context: "Elder Kuru casualty." }],
+                killedBy: "Bhima (Day 14)",
+                deathDay: "Day 14 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: ["Elder uncle of Bhishma and King of Bahlika", "Slain on Day 14 in combat by Bhima"],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Bahlika",
+                sources: ["Mahabharata - Bhishma Parva, Drona Parva"]
+            },
+            {
+                id: "sudakshina",
+                name: "Sudakshina",
+                alternateNames: ["Kamboja King Sudakshina"],
+                teluguName: "సుదక్షిణుడు",
+                alliance: "Kaurava",
+                tier: "minor",
+                role: "King of Kamboja",
+                kingdom: "Kamboja",
+                parents: [],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Spear"],
+                bow: "Kamboja bow",
+                conch: "Conch",
+                chariot: "Chariot",
+                charioteer: "Driver",
+                banner: "Kamboja banner",
+                disguiseName: null,
+                divineAssociations: ["Ruler of renowned horse-breeding Kamboja realm"],
+                notableDeeds: [
+                    "Led Kamboja cavalry divisions supporting Duryodhana.",
+                    "Slain by Arjuna."
+                ],
+                warRecord: [{ day: "Mid-War", opponent: "Arjuna", outcome: "Slain in battle by Arjuna.", context: "Kamboja ally." }],
+                killedBy: "Arjuna",
+                deathDay: "Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: ["King of Kamboja leading cavalry divisions", "Slain in combat by Arjuna"],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Sudakshina",
+                sources: ["Mahabharata - Udyoga Parva, Drona Parva"]
+            },
+            {
+                id: "nila",
+                name: "King Nila",
+                alternateNames: ["King of Mahishmati"],
+                teluguName: "నీలుడు",
+                alliance: "Kaurava",
+                tier: "minor",
+                role: "King of Mahishmati",
+                kingdom: "Mahishmati",
+                parents: [],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Sword"],
+                bow: "Mahishmati bow",
+                conch: "Conch",
+                chariot: "Chariot",
+                charioteer: "Driver",
+                banner: "Mahishmati banner",
+                disguiseName: null,
+                divineAssociations: ["Ruler of historic Haihaya city of Mahishmati"],
+                notableDeeds: [
+                    "Fought on the Kaurava side; slain by Ashwatthama or Arjuna's allies."
+                ],
+                warRecord: [{ day: "Mid-War", opponent: "Pandava host", outcome: "Fought and fell in battle.", context: "Ally casualty." }],
+                killedBy: "Ashwatthama",
+                deathDay: "Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: ["King of Mahishmati supporting Kauravas", "Fell during the epic engagements"],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=King+Nila",
+                sources: ["Mahabharata - Udyoga Parva, Bhishma Parva"]
+            },
+            {
+                id: "brihadbala",
+                name: "Brihadbala",
+                alternateNames: ["King of Kosala"],
+                teluguName: "బృహద్బలుడు",
+                alliance: "Kaurava",
+                tier: "minor",
+                role: "King of Kosala & Ikshvaku Heir",
+                kingdom: "Kosala (Ayodhya)",
+                parents: [],
+                siblings: [],
+                spouses: [],
+                children: [],
+                guru: [],
+                weapons: ["Bow", "Sword"],
+                bow: "Kosala royal bow",
+                conch: "Conch",
+                chariot: "Chariot",
+                charioteer: "Driver",
+                banner: "Ikshvaku Sun banner",
+                disguiseName: null,
+                divineAssociations: ["Descendant of Lord Rama's Ikshvaku dynasty"],
+                notableDeeds: [
+                    "Fought on the Kaurava side as an illustrious descendant of Ayodhya's solar dynasty.",
+                    "Slain by Abhimanyu on Day 13."
+                ],
+                warRecord: [{ day: "Day 13", opponent: "Abhimanyu", outcome: "Slain in single combat by Abhimanyu.", context: "Ikshvaku ally casualty." }],
+                killedBy: "Abhimanyu (Day 13)",
+                deathDay: "Day 13 of Kurukshetra War",
+                survivalStatus: "Killed in Combat",
+                highlights: ["King of Kosala and descendant of Lord Rama's Ikshvaku lineage", "Slain in combat by Abhimanyu on Day 13"],
+                artwork: "https://placehold.co/400x400/2d0a0f/cd7f32?text=Brihadbala",
+                sources: ["Mahabharata - Drona Parva"]
+            }
+        ];
+
+        // Global State Filters
+        let currentAllianceFilter = 'all';
+
+        // Initialize Application on Window Load
+        window.onload = function() {
+            renderRoster();
+            updateStats();
+        };
+
+        // Render Roster based on current filters & search query
+        function renderRoster() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+            const tierSelect = document.getElementById('tierFilter').value;
+
+            const gridTier1 = document.getElementById('grid-tier1');
+            const gridTier2 = document.getElementById('grid-tier2');
+            const gridTier3 = document.getElementById('grid-tier3');
+            const sectionTier1 = document.getElementById('section-tier1');
+            const sectionTier2 = document.getElementById('section-tier2');
+            const sectionTier3 = document.getElementById('section-tier3');
+            const noResults = document.getElementById('no-results');
+
+            gridTier1.innerHTML = '';
+            gridTier2.innerHTML = '';
+            gridTier3.innerHTML = '';
+
+            let countT1 = 0;
+            let countT2 = 0;
+            let countT3 = 0;
+
+            warriorsData.forEach(w => {
+                // Apply Alliance filter
+                if (currentAllianceFilter !== 'all' && w.alliance !== currentAllianceFilter) return;
+                // Apply Tier filter
+                if (tierSelect !== 'all' && w.tier !== tierSelect) return;
+                // Apply Search query (name, alternate names, telugu name, role, kingdom)
+                if (searchQuery) {
+                    const matchName = w.name.toLowerCase().includes(searchQuery);
+                    const matchTelugu = w.teluguName.includes(searchQuery);
+                    const matchAlt = w.alternateNames.some(a => a.toLowerCase().includes(searchQuery));
+                    const matchRole = w.role.toLowerCase().includes(searchQuery);
+                    const matchKingdom = w.kingdom && w.kingdom.toLowerCase().includes(searchQuery);
+                    if (!matchName && !matchTelugu && !matchAlt && !matchRole && !matchKingdom) return;
+                }
+
+                if (w.tier === 'primary') {
+                    countT1++;
+                    gridTier1.appendChild(createTier1Card(w));
+                } else if (w.tier === 'supporting') {
+                    countT2++;
+                    gridTier2.appendChild(createTier2Card(w));
+                } else if (w.tier === 'minor') {
+                    countT3++;
+                    gridTier3.appendChild(createTier3Card(w));
+                }
+            });
+
+            // Toggle section visibility based on counts
+            sectionTier1.style.display = (countT1 === 0 || (tierSelect !== 'all' && tierSelect !== 'primary')) ? 'none' : 'block';
+            sectionTier2.style.display = (countT2 === 0 || (tierSelect !== 'all' && tierSelect !== 'supporting')) ? 'none' : 'block';
+            sectionTier3.style.display = (countT3 === 0 || (tierSelect !== 'all' && tierSelect !== 'minor')) ? 'none' : 'block';
+
+            if (countT1 === 0 && countT2 === 0 && countT3 === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Create Tier 1 Cinematic Card with Hover Highlights Panel
+        function createTier1Card(w) {
+            const card = document.createElement('div');
+            const isKaurava = w.alliance === 'Kaurava';
+            const borderClass = isKaurava ? 'metallic-border-crimson kaurava-glow' : 'metallic-border-gold pandava-glow';
+            const bgClass = isKaurava ? 'bg-kaurava-card' : 'bg-pandava-card';
+            
+            card.className = `relative group rounded-xl overflow-hidden ${bgClass} ${borderClass} card-hover-zoom cursor-pointer flex flex-col h-96 shadow-xl`;
+            card.onclick = () => openProfileModal(w.id);
+
+            // Build highlights bullet HTML
+            let highlightsHtml = '';
+            w.highlights.slice(0, 4).forEach(h => {
+                highlightsHtml += `<li class="flex items-start gap-1.5 mb-1"><i class="fa-solid fa-caret-right text-amber-400 mt-0.5"></i><span>${h}</span></li>`;
+            });
+
+            card.innerHTML = `
+                <!-- Character Artwork & Overlay -->
+                <div class="relative w-full h-full overflow-hidden">
+                    <img src="${w.artwork}" alt="${w.name}" class="w-full h-full object-cover object-center group-hover:scale-110 group-hover:blur-sm group-hover:brightness-50 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0b132b/d4af37?text=${encodeURIComponent(w.name)}';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-95 transition duration-300"></div>
+                    
+                    <!-- Top Badges -->
+                    <div class="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                        <span class="px-2.5 py-0.5 rounded text-[10px] font-rajdhani font-bold uppercase tracking-wider ${isKaurava ? 'bg-red-950/80 text-red-300 border border-red-500/40' : 'bg-blue-950/80 text-blue-300 border border-blue-500/40'}">
+                            ${w.alliance}
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-rajdhani font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                            Tier 1
+                        </span>
+                    </div>
+
+                    <!-- Default Bottom Title & Role -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10 transition-transform duration-300 group-hover:translate-y-full group-hover:opacity-0">
+                        <h4 class="font-cinzel text-xl font-bold text-amber-200">${w.name}</h4>
+                        <p class="font-rajdhani text-xs text-amber-400/90">${w.teluguName} • ${w.role}</p>
+                    </div>
+
+                    <!-- Hover Highlights Panel (Revealed on Hover) -->
+                    <div class="absolute inset-0 p-5 flex flex-col justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/85 backdrop-blur-sm">
+                        <h5 class="font-cinzel text-xs uppercase tracking-widest text-amber-400 font-bold mb-3 border-b border-amber-500/30 pb-1 flex items-center justify-between">
+                            <span><i class="fa-solid fa-bolt mr-1"></i> Highlights</span>
+                            <span class="text-[10px] text-gray-400 font-inter">Click for Dossier</span>
+                        </h5>
+                        <ul class="text-xs text-gray-200 font-inter space-y-1.5 leading-relaxed">
+                            ${highlightsHtml}
+                        </ul>
+                        <div class="mt-4 text-center">
+                            <span class="inline-block px-3 py-1 bg-amber-500 text-black font-rajdhani font-bold text-xs rounded uppercase tracking-wider shadow">
+                                View Full Dossier <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Create Tier 2 Medium Card
+        function createTier2Card(w) {
+            const card = document.createElement('div');
+            const isKaurava = w.alliance === 'Kaurava';
+            const borderClass = isKaurava ? 'border-red-900/60' : 'border-amber-500/40';
+            
+            card.className = `relative group rounded-xl overflow-hidden bg-neutral-card border ${borderClass} card-hover-zoom cursor-pointer flex flex-col h-72 shadow-lg`;
+            card.onclick = () => openProfileModal(w.id);
+
+            let highlightsHtml = '';
+            w.highlights.slice(0, 3).forEach(h => {
+                highlightsHtml += `<li class="flex items-start gap-1 mb-1"><i class="fa-solid fa-caret-right text-amber-400"></i><span>${h}</span></li>`;
+            });
+
+            card.innerHTML = `
+                <div class="relative w-full h-full overflow-hidden">
+                    <img src="${w.artwork}" alt="${w.name}" class="w-full h-full object-cover object-center group-hover:scale-105 group-hover:blur-sm group-hover:brightness-50 transition duration-400" onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e1e24/d4af37?text=${encodeURIComponent(w.name)}';">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                    
+                    <div class="absolute top-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
+                        <span class="px-2 py-0.5 rounded text-[9px] font-rajdhani font-bold uppercase tracking-wider ${isKaurava ? 'bg-red-950 text-red-300' : 'bg-blue-950 text-blue-300'}">
+                            ${w.alliance}
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[9px] font-rajdhani font-bold uppercase tracking-wider bg-gray-800 text-amber-300">
+                            Tier 2
+                        </span>
+                    </div>
+
+                    <div class="absolute bottom-0 left-0 right-0 p-3.5 z-10 transition-transform duration-300 group-hover:translate-y-full group-hover:opacity-0">
+                        <h4 class="font-cinzel text-base font-bold text-amber-200">${w.name}</h4>
+                        <p class="font-rajdhani text-[11px] text-gray-400">${w.teluguName} • ${w.role}</p>
+                    </div>
+
+                    <div class="absolute inset-0 p-4 flex flex-col justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/90">
+                        <h5 class="font-cinzel text-[11px] uppercase tracking-widest text-amber-400 font-bold mb-2 border-b border-amber-500/30 pb-1">
+                            Key Facts
+                        </h5>
+                        <ul class="text-[11px] text-gray-300 font-inter space-y-1">
+                            ${highlightsHtml}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Create Tier 3 Compact Card (Optimized for 6-8 column grid)
+        function createTier3Card(w) {
+            const card = document.createElement('div');
+            const isKaurava = w.alliance === 'Kaurava';
+            
+            card.className = `relative group rounded-lg overflow-hidden bg-neutral-card/90 border border-gray-800 hover:border-amber-500/50 card-hover-zoom cursor-pointer flex flex-col p-2.5 shadow transition`;
+            card.onclick = () => openProfileModal(w.id);
+
+            card.innerHTML = `
+                <div class="w-full h-24 rounded overflow-hidden mb-2 relative bg-neutral-base">
+                    <img src="${w.artwork}" alt="${w.name}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.onerror=null; this.src='https://placehold.co/200x200/1e1e24/d4af37?text=Combatant';">
+                    <span class="absolute top-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-rajdhani font-bold uppercase ${isKaurava ? 'bg-red-950 text-red-300' : 'bg-blue-950 text-blue-300'}">
+                        ${w.alliance[0]}
+                    </span>
+                </div>
+                <h5 class="font-cinzel text-xs font-bold text-amber-200 truncate">${w.name}</h5>
+                <p class="font-rajdhani text-[10px] text-gray-400 truncate">${w.role}</p>
+            `;
+            return card;
+        }
+
+        // Filter Alliance tabs
+        function filterAlliance(alliance) {
+            currentAllianceFilter = alliance;
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('bg-amber-500', 'text-black'));
+            event.currentTarget.classList.add('bg-amber-500', 'text-black');
+            renderRoster();
+        }
+
+        // Search & Filter Handler
+        function handleSearch() {
+            renderRoster();
+        }
+
+        // Reset Filters
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('tierFilter').value = 'all';
+            currentAllianceFilter = 'all';
+            document.querySelectorAll('.nav-tab').forEach((btn, idx) => {
+                if (idx === 0) btn.classList.add('bg-amber-500', 'text-black');
+                else btn.classList.remove('bg-amber-500', 'text-black');
+            });
+            renderRoster();
+        }
+
+        // Update Header Stats
+        function updateStats() {
+            document.getElementById('stat-total').innerText = warriorsData.length;
+            document.getElementById('stat-t1').innerText = warriorsData.filter(w => w.tier === 'primary').length;
+            document.getElementById('stat-t2').innerText = warriorsData.filter(w => w.tier === 'supporting').length;
+            document.getElementById('stat-t3').innerText = warriorsData.filter(w => w.tier === 'minor').length;
+
+            document.getElementById('count-all').innerText = warriorsData.length;
+            document.getElementById('count-pandava').innerText = warriorsData.filter(w => w.alliance === 'Pandava').length;
+            document.getElementById('count-kaurava').innerText = warriorsData.filter(w => w.alliance === 'Kaurava').length;
+            document.getElementById('count-neutral').innerText = warriorsData.filter(w => w.alliance === 'Neutral').length;
+        }
+
+        // Open Profile Modal with Full Structured Data
+        function openProfileModal(id) {
+            const w = warriorsData.find(item => item.id === id);
+            if (!w) return;
+
+            // Populate Left Side
+            document.getElementById('p-name').innerText = w.name;
+            document.getElementById('p-telugu').innerText = w.teluguName || '';
+            document.getElementById('p-title').innerText = `${w.role} • ${w.kingdom || 'Kuru Empire'}`;
+            document.getElementById('p-alliance-badge').innerText = `${w.alliance} Alliance`;
+            document.getElementById('p-artwork').src = w.artwork;
+            
+            document.getElementById('p-kingdom').innerText = w.kingdom || 'Not Specified';
+            document.getElementById('p-weapon').innerText = w.bow || w.weapons[0] || 'Standard Arms';
+            document.getElementById('p-charioteer').innerText = `${w.charioteer || 'None'} / ${w.banner || 'Standard'}`;
+            
+            const statusEl = document.getElementById('p-status');
+            statusEl.innerText = w.survivalStatus;
+            statusEl.className = w.survivalStatus.includes('Survived') ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold';
+
+            // Populate Alternate Names / Epithets
+            const epithetsContainer = document.getElementById('p-epithets');
+            epithetsContainer.innerHTML = '';
+            if (w.alternateNames && w.alternateNames.length > 0) {
+                w.alternateNames.forEach(e => {
+                    const tag = document.createElement('span');
+                    tag.className = 'px-2 py-0.5 rounded bg-neutral-base border border-amber-500/30 text-[11px] text-amber-300 font-rajdhani';
+                    tag.innerText = e;
+                    epithetsContainer.appendChild(tag);
+                });
+            } else {
+                epithetsContainer.innerHTML = '<span class="text-xs text-gray-500">None documented</span>';
+            }
+
+            // Parents & Teachers
+            let parentsText = `Parents: ${w.parents && w.parents.length ? w.parents.join(', ') : 'Not established'}`;
+            if (w.guru && w.guru.length) parentsText += ` | Guru: ${w.guru.join(', ')}`;
+            document.getElementById('p-parents').innerText = parentsText;
+
+            // Spouses & Children
+            let familyText = `Spouses: ${w.spouses && w.spouses.length ? w.spouses.join(', ') : 'None / Celibate'}`;
+            if (w.children && w.children.length) familyText += ` | Children: ${w.children.join(', ')}`;
+            document.getElementById('p-family').innerText = familyText;
+
+            // Highlights list
+            const highlightsList = document.getElementById('p-highlights-list');
+            highlightsList.innerHTML = '';
+            w.highlights.forEach(h => {
+                const li = document.createElement('li');
+                li.innerText = h;
+                highlightsList.appendChild(li);
+            });
+
+            // Notable Deeds & War Record
+            const deedsContainer = document.getElementById('p-deeds');
+            deedsContainer.innerHTML = '';
+            
+            if (w.notableDeeds && w.notableDeeds.length > 0) {
+                const deedHeading = document.createElement('p');
+                deedHeading.className = 'font-bold text-amber-300 text-xs uppercase mb-1';
+                deedHeading.innerText = 'Key Deeds & Exploits:';
+                deedsContainer.appendChild(deedHeading);
+
+                w.notableDeeds.forEach(d => {
+                    const p = document.createElement('p');
+                    p.className = 'text-xs text-gray-300 mb-1 flex items-start gap-1.5';
+                    p.innerHTML = `<i class="fa-solid fa-check text-amber-500 mt-0.5"></i><span>${d}</span>`;
+                    deedsContainer.appendChild(p);
+                });
+            }
+
+            if (w.warRecord && w.warRecord.length > 0) {
+                const recHeading = document.createElement('p');
+                recHeading.className = 'font-bold text-amber-300 text-xs uppercase mt-3 mb-1';
+                recHeading.innerText = 'Kurukshetra War Chronology:';
+                deedsContainer.appendChild(recHeading);
+
+                w.warRecord.forEach(r => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-neutral-base/70 p-2 rounded border border-gray-800 text-xs mb-1.5';
+                    div.innerHTML = `<strong class="text-amber-400">${r.day}</strong> vs <span class="text-white">${r.opponent}</span>: ${r.outcome} <br><em class="text-gray-400 text-[11px]">${r.context}</em>`;
+                    deedsContainer.appendChild(div);
+                });
+            }
+
+            if (w.killedBy) {
+                const deathDiv = document.createElement('div');
+                deathDiv.className = 'mt-3 p-2 rounded bg-red-950/40 border border-red-500/40 text-xs text-red-300';
+                deathDiv.innerHTML = `<strong>Martyrdom / Fate:</strong> Slain by <span class="text-white font-bold">${w.killedBy}</span> on <span class="text-white">${w.deathDay || 'Kurukshetra War'}</span>.`;
+                deedsContainer.appendChild(deathDiv);
+            }
+
+            // Sources
+            document.getElementById('p-source').innerText = w.sources ? w.sources.join(', ') : 'Andhra Mahabharatamu / Vyasa Epic';
+
+            // Show Modal with animation
+            const modal = document.getElementById('profile-modal');
+            const box = document.getElementById('profile-modal-box');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                box.classList.remove('scale-95');
+            }, 10);
+        }
+
+        // Close Profile Modal
+        function closeProfileModal() {
+            const modal = document.getElementById('profile-modal');
+            const box = document.getElementById('profile-modal-box');
+            modal.classList.add('opacity-0');
+            box.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Open 18-Day War Chronology Modal
+        function openTimelineModal() {
+            const container = document.getElementById('timeline-content');
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="p-3 bg-neutral-base rounded-xl border border-amber-500/30">
+                        <h4 class="font-cinzel font-bold text-amber-300 text-sm">Days 1–10: Supreme Commander Bhishma</h4>
+                        <p class="text-xs text-gray-400 mt-1">Bhishma leads the Kaurava host, inflicting massive casualties on the Pandavas. Prince Shveta falls on Day 1. On Day 10, Bhishma falls on a bed of arrows with Shikhandi as Arjuna's human shield.</p>
+                    </div>
+                    <div class="p-3 bg-neutral-base rounded-xl border border-amber-500/30">
+                        <h4 class="font-cinzel font-bold text-amber-300 text-sm">Days 11–15: Supreme Commander Dronacharya</h4>
+                        <p class="text-xs text-gray-400 mt-1">Drona forms the Chakravyuha on Day 13 where Abhimanyu is martyred after heroic breach. King Drupada and King Virata fall on Day 15. Drona is beheaded by Dhrishtadyumna after the truth-ambiguity ruse.</p>
+                    </div>
+                    <div class="p-3 bg-neutral-base rounded-xl border border-amber-500/30">
+                        <h4 class="font-cinzel font-bold text-amber-300 text-sm">Days 16–17: Supreme Commander Karna</h4>
+                        <p class="text-xs text-gray-400 mt-1">Karna takes command, slaying Ghatotkacha with Vasavi Shakti on Day 14 night. On Day 17, Karna's son Vrishasena falls, followed by Karna's climactic death duel against Arjuna.</p>
+                    </div>
+                    <div class="p-3 bg-neutral-base rounded-xl border border-amber-500/30">
+                        <h4 class="font-cinzel font-bold text-amber-300 text-sm">Day 18: Supreme Commander Shalya & Conclusion</h4>
+                        <p class="text-xs text-gray-400 mt-1">Shalya commands the final day and falls to Yudhishthira. Duryodhana is defeated in mace combat by Bhima on Day 18 evening, concluding the Kurukshetra War.</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('timeline-modal').classList.remove('hidden');
+        }
+
+        // Close War Chronology Modal
+        function closeTimelineModal() {
+            document.getElementById('timeline-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
