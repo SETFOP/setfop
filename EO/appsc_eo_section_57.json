@@ -1,0 +1,221 @@
+
+{
+  "metadata": {
+    "title": "APPSC EO Grade-III — Special Topic Notes: Sources of Income & Allocation of Temple Funds",
+    "act": "Andhra Pradesh Endowments Act, 1987",
+    "statutoryFocus": "Section 57 — Budget of Charitable or Religious Institution or Endowment",
+    "exam": "APPSC Executive Officer Grade-III, Endowments Department",
+    "paper": "Paper II — Hindu Philosophy and Temple System",
+    "relatedProvisions": ["Section 6", "Section 29", "Section 65", "Section 69", "Section 70", "Sections 57–64"]
+  },
+  "part1_overview": {
+    "sectionCoverage": [
+      "Preparation of the annual budget",
+      "Submission of the budget to the competent authority",
+      "Mandatory budget provisions and expenditure priorities",
+      "Limits on salaries of religious and secular establishment",
+      "Allocations for pilgrim safety and convenience",
+      "Contributions to the institution's reserve fund",
+      "Provisions for construction, repairs and renovation",
+      "Contribution towards the Common Good Fund",
+      "Alterations made by the competent authority",
+      "Supplementary or revised budgets",
+      "Reporting and possible ratification of excess expenditure"
+    ],
+    "eoResponsibilities": [
+      "Estimating next year's income and expenditure",
+      "Checking expected income from Hundi offerings, donations, services, property, and investments",
+      "Ensuring sufficient funds for worship, rituals, Dittam, and essential staff",
+      "Providing for existing liabilities and contracts",
+      "Budgeting for pilgrim amenities, sanitation, water, safety, and convenience",
+      "Planning repairs and renovation",
+      "Monitoring whether expenditure stays within sanctioned heads",
+      "Obtaining approval for a revised budget when necessary",
+      "Reporting expenditure beyond the approved budget",
+      "Maintaining financial records for scrutiny and audit"
+    ],
+    "corePrinciple": "Temple money is institutional money. It must be applied to authorised purposes, not treated as the personal money of the trustee or EO."
+  },
+  "part2_sources_of_income": [
+    {
+      "category": "A. Religious offerings",
+      "items": [
+        "Hundi collections",
+        "Kanukas and offerings made by devotees",
+        "Cash offerings",
+        "Offerings in kind, where legally received and accounted for"
+      ]
+    },
+    {
+      "category": "B. Donations and gifts",
+      "items": [
+        "General donations",
+        "Donations for specified religious or charitable purposes",
+        "Gifts of movable or immovable property",
+        "Donations received from philanthropists or other permitted donors"
+      ]
+    },
+    {
+      "category": "C. Seva and service receipts",
+      "items": [
+        "Archana or other permitted service charges",
+        "Seva tickets",
+        "Special darshan or other authorised service receipts",
+        "Charges for permitted religious ceremonies",
+        "Tonsuring-related receipts, where applicable"
+      ]
+    },
+    {
+      "category": "D. Income from immovable property",
+      "items": [
+        "Rent from shops and buildings",
+        "Lease income from agricultural land",
+        "Rent from institution-owned premises",
+        "Income from other lawfully leased institutional properties"
+      ]
+    },
+    {
+      "category": "E. Investment and financial income",
+      "items": [
+        "Interest on permitted bank deposits",
+        "Returns on authorised investments",
+        "Other lawful financial receipts"
+      ]
+    },
+    {
+      "category": "F. Grants and institutional assistance",
+      "items": [
+        "Government grants where sanctioned",
+        "Other permitted assistance",
+        "Donations or contributions from eligible institutions or persons"
+      ]
+    },
+    {
+      "category": "G. Income from charitable activities",
+      "items": [
+        "Fees from educational institutions",
+        "Receipts from medical or charitable services",
+        "Income from other permitted institutional activities"
+      ]
+    },
+    {
+      "category": "H. Specific endowments",
+      "items": [
+        "Income arising from property, money or assets dedicated to a particular religious or charitable purpose"
+      ]
+    }
+  ],
+  "part3_section_57_1_budget_preparation": {
+    "definition": "A forward-looking estimate of probable receipts + probable disbursements for the following financial year.",
+    "submittedBy": "Trustee",
+    "deadline": "90 days before the close of every financial year",
+    "routingTable": [
+      {
+        "section6Classification": "Section 6(a) and Section 6(d)",
+        "submissionAuthority": "Commissioner"
+      },
+      {
+        "section6Classification": "Section 6(b)",
+        "submissionAuthority": "Deputy Commissioner"
+      },
+      {
+        "section6Classification": "Section 6(c)",
+        "submissionAuthority": "Assistant Commissioner"
+      }
+    ],
+    "note": "Section 6(d) covers Maths irrespective of income classification."
+  },
+  "part4_section_57_2_allocations": {
+    "clause_i_maintenance_worship_services": {
+      "coverage": ["Proper maintenance of institution objects", "Performance of services", "Remuneration for services", "Dittam in force"],
+      "salaryCeiling": "Salaries of religious and secular establishment <= 30% of annual income calculated under Section 65"
+    },
+    "clause_ii_liabilities": {
+      "coverage": ["Outstanding liabilities", "Existing contractual commitments", "Other subsisting obligations"]
+    },
+    "clause_iii_working_balance": {
+      "coverage": ["Sufficient available funds for day-to-day financial continuity"]
+    },
+    "clause_iv_health_safety_convenience": {
+      "coverage": ["Drinking water", "Sanitation and cleanliness", "Crowd management", "Safe access and movement"],
+      "threshold": "Annual income exceeds ₹20,000",
+      "minimumAllocation": "At least 40% of the balance remaining after provisions for items (i), (ii) and (iii)",
+      "formula": "40% * (Income - Item_i - Item_ii - Item_iii)"
+    },
+    "clause_v_reserve_fund": {
+      "minimumAllocation": "10% of the balance remaining after provisions for items (i), (ii) and (iii)",
+      "formula": "10% * (Income - Item_i - Item_ii - Item_iii)"
+    },
+    "clause_vi_construction_repairs_renovation": {
+      "coverage": ["Construction", "Repairs", "Renovation", "Improvement of institution and connected buildings"],
+      "threshold": "Annual income is not less than ₹1,00,000",
+      "minimumAllocation": "At least 30% of the balance remaining after provisions for items (i), (ii), (iii) and (iv)",
+      "formula": "30% * (Balance after items i to iv)"
+    },
+    "clause_b_common_good_fund": {
+      "threshold": "Annual income calculated under Section 65 exceeds ₹50,000",
+      "provision": "Prescribed amount paid to the Common Good Fund (governed by Section 70)"
+    }
+  },
+  "part5_section_57_3_alteration_by_authority": {
+    "power": "Competent authority may alter, omit or add budget provisions.",
+    "mandatoryProcess": [
+      "1. Notice must be given to the trustee in the prescribed manner.",
+      "2. The trustee must have an opportunity to make a representation.",
+      "3. The authority must consider that representation.",
+      "4. The authority may then make the appropriate alterations, omissions or additions."
+    ]
+  },
+  "part6_section_57_4_revised_budget": {
+    "purpose": "Submitted during the financial year if modification is necessary for receipts or distribution.",
+    "protectedHeads": [
+      "Item (ii): liabilities and subsisting commitments",
+      "Item (iii): working balance"
+    ]
+  },
+  "part7_section_57_5_excess_expenditure": {
+    "actionRequired": [
+      "1. Report the excess expenditure forthwith.",
+      "2. Give reasons for the excess.",
+      "3. Report to the competent authority for possible ratification."
+    ]
+  },
+  "part8_high_yield_summary": [
+    {"provision": "57(1)", "rule": "Budget submitted 90 days before close of financial year showing probable receipts and disbursements"},
+    {"provision": "57(1)(i)", "rule": "Commissioner for Section 6(a) and 6(d)"},
+    {"provision": "57(1)(ii)", "rule": "Deputy Commissioner for Section 6(b)"},
+    {"provision": "57(1)(iii)", "rule": "Assistant Commissioner for Section 6(c)"},
+    {"provision": "57(2)(a)(i)", "rule": "Maintenance, services, remuneration & Dittam (Salaries <= 30% of Sec 65 income)"},
+    {"provision": "57(2)(a)(ii)", "rule": "Liabilities and subsisting commitments"},
+    {"provision": "57(2)(a)(iii)", "rule": "Working balance"},
+    {"provision": "57(2)(a)(iv)", "rule": "Pilgrim health, safety & convenience (Income > ₹20,000 -> >= 40% of balance after i-iii)"},
+    {"provision": "57(2)(a)(v)", "rule": "Reserve fund = 10% of balance after i-iii"},
+    {"provision": "57(2)(a)(vi)", "rule": "Construction/repairs (Income >= ₹1 lakh -> >= 30% of balance after i-iv)"},
+    {"provision": "57(2)(b)", "rule": "Income > ₹50,000 -> provision for prescribed Common Good Fund payment"},
+    {"provision": "57(3)", "rule": "Notice and representation required before budget alteration"},
+    {"provision": "57(4)", "rule": "Revised budget cannot affect allocations for liabilities and working balance"},
+    {"provision": "57(5)", "rule": "Excess expenditure reported forthwith with reasons; may be ratified"}
+  ],
+  "part9_key_numbers": {
+    "90_days": "Budget submission deadline before financial year end",
+    "30_percent_salaries": "Maximum establishment salary allocation against Sec 65 income",
+    "20000_rupees": "Income threshold for pilgrim health/safety 40% provision",
+    "40_percent": "Minimum provision for pilgrim health/safety against specified balance",
+    "10_percent": "Reserve fund contribution against specified balance",
+    "100000_rupees": "Income threshold for construction/repairs 30% provision",
+    "30_percent_repairs": "Minimum construction/repairs provision against specified balance",
+    "50000_rupees": "Income threshold for Common Good Fund budget provision"
+  },
+  "part10_common_mcq_traps": [
+    {"q": "What period does the budget cover?", "a": "The following financial year."},
+    {"q": "Who submits the budget?", "a": "The trustee."},
+    {"q": "Submission deadline?", "a": "90 days before close of financial year."},
+    {"q": "Maximum salary ceiling?", "a": "30% of annual income under Section 65."},
+    {"q": "Calculation base for 40% pilgrim provision?", "a": "Balance remaining after items (i), (ii) and (iii), NOT gross income."},
+    {"q": "Threshold for 30% construction minimum?", "a": "Annual income not less than ₹1,00,000."},
+    {"q": "Common Good Fund threshold?", "a": "Annual income exceeding ₹50,000 under Section 65."},
+    {"q": "Protected heads in budget revision?", "a": "Liabilities and working balance."},
+    {"q": "Reporting deadline for excess expenditure?", "a": "Forthwith, accompanied with reasons."}
+  ],
+  "finalMemoryLine": "90 days -> 30% salaries -> 40% pilgrim provision -> 10% reserve -> 30% repairs -> ₹50,000 Common Good Fund threshold -> notice before alteration -> liabilities and working balance protected -> excess reported forthwith."
+}
