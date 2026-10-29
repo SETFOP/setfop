@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APPSC EO — 28 Districts Revision Atlas & Flashcards</title>
+  <meta name="description" content="APPSC Endowment Officer Grade-III examination study tool covering all districts of Andhra Pradesh from official primary sources.">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --primary-dark: #1e293b;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --success: #166534;
+      --success-bg: #dcfce7;
+      --warning-bg: #fef9c3;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --radius: 8px;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #ffffff;
+      padding: 1.5rem 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+    .subtitle { font-size: 0.95rem; color: #93c5fd; }
+    .badge {
+      background-color: rgba(255,255,255,0.15);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .disclaimer {
+      background-color: rgba(0,0,0,0.2);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      border-left: 3px solid var(--accent);
+    }
+
+    nav.tab-nav {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.85rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+    main { max-width: 1200px; margin: 1.5rem auto; padding: 0 1rem; }
+
+    .controls-bar {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    select, button.btn {
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background-color: #ffffff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    button.btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    button.btn-primary:hover { background-color: #1d4ed8; }
+
+    button.btn-accent {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .district-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background: #ffffff;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .district-title-display {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .district-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-header {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-top: 0.5rem;
+    }
+
+    ul.fact-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    ul.fact-list li {
+      position: relative;
+      padding-left: 1rem;
+      font-size: 0.92rem;
+    }
+
+    ul.fact-list li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .temple-block {
+      background-color: #f1f5f9;
+      border-left: 3px solid var(--primary);
+      padding: 0.75rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .temple-name { font-weight: 700; color: var(--primary-dark); font-size: 0.95rem; }
+    .temple-meta { font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .tag-endowments { background-color: #dbeafe; color: #1e40af; }
+    .tag-asi { background-color: #fef3c7; color: #92400e; }
+
+    .flashcard-wrapper {
+      max-width: 680px;
+      margin: 1rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .flashcard-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .flashcard-container {
+      width: 100%;
+      min-height: 280px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flashcard {
+      width: 100%;
+      min-height: 280px;
+      background: #ffffff;
+      border: 2px solid var(--primary-light);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .flashcard.flipped {
+      background-color: #f8fafc;
+      border-color: var(--accent);
+    }
+
+    .card-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .card-question { font-size: 1.2rem; font-weight: 600; color: var(--primary-dark); }
+    .card-answer { font-size: 1.1rem; color: var(--text); display: none; margin-top: 1rem; }
+    .flashcard.flipped .card-answer { display: block; }
+    .click-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; }
+
+    .flashcard-controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      background: #ffffff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .sources-list { font-size: 0.8rem; color: var(--text-muted); word-break: break-all; }
+    .sources-list a { color: var(--primary-light); text-decoration: none; }
+    .sources-list a:hover { text-decoration: underline; }
+
+    .source-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--primary-light);
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .highlight { background-color: #fef08a; padding: 0 0.15rem; border-radius: 2px; }
+
+    @media print {
+      header, nav, .controls-bar, .district-nav, .flashcard-wrapper, .btn { display: none !important; }
+      body { background: white; color: black; }
+      .card { page-break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
+      .district-grid { display: block; }
+      .card { margin-bottom: 1.5rem; }
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .error-box {
+      background-color: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      margin: 2rem auto;
+      max-width: 600px;
+    }
+
+
+    /* Appearance controls */
+    .appearance-controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.15rem;
+    }
+    .appearance-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #f8fafc;
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+      flex: 0 0 auto;
+    }
+    .switch input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+    .switch-track {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      background: #64748b;
+      border: 1px solid rgba(255,255,255,.65);
+      transition: background .18s ease;
+    }
+    .switch-track::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 3px;
+      left: 3px;
+      border-radius: 50%;
+      background: white;
+      transition: transform .18s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,.35);
+    }
+    .switch input:checked + .switch-track { background: #2563eb; }
+    .switch input:checked + .switch-track::before { transform: translateX(18px); }
+    .switch input:focus-visible + .switch-track { outline: 3px solid #fbbf24; outline-offset: 3px; }
+    .switch input:disabled + .switch-track { opacity: .42; cursor: not-allowed; }
+    .appearance-control .control-state { min-width: 2.2rem; opacity: .9; }
+
+    /* Calm light theme: soft slate-blue rather than a saturated banner */
+    body:not(.dark-mode):not(.bw-mode) header {
+      background: linear-gradient(135deg, #24344b 0%, #1e2b3e 100%);
+      color: #f6f7f9;
+    }
+    body:not(.dark-mode):not(.bw-mode) .subtitle { color: #c5d2e3; }
+    body:not(.dark-mode):not(.bw-mode) .disclaimer {
+      background: rgba(0,0,0,.16);
+      color: #e0e6ee;
+      border-left-color: #c7a66b;
+    }
+
+    /* Soft, low-glare dark theme inspired by restrained native-app palettes */
+    body.dark-mode {
+      --primary: #a8bfdc;
+      --primary-light: #a8bfdc;
+      --primary-dark: #e7eaf0;
+      --accent: #c8b58a;
+      --accent-light: #3b3a35;
+      --bg: #111214;
+      --card-bg: #1c1d20;
+      --text: #e8e9ed;
+      --text-muted: #b0b3bb;
+      --border: #36383e;
+      --success: #b7d3bd;
+      --success-bg: #26352b;
+      --warning-bg: #3b3528;
+      --shadow: 0 8px 24px rgba(0,0,0,.18);
+      color-scheme: dark;
+    }
+
+    body.dark-mode header {
+      background: linear-gradient(135deg, #202329 0%, #181a1f 100%);
+      color: #f1f2f5;
+      border-bottom: 1px solid #30333a;
+      box-shadow: 0 4px 18px rgba(0,0,0,.12);
+    }
+    body.dark-mode .subtitle { color: #b8c4d6; }
+    body.dark-mode .disclaimer {
+      background: rgba(255,255,255,.045);
+      color: #c5c8d0;
+      border-left-color: #9c8b67;
+    }
+    body.dark-mode .badge {
+      background: rgba(255,255,255,.065);
+      color: #dfe2e8;
+      border-color: rgba(255,255,255,.12);
+    }
+    body.dark-mode nav.tab-nav {
+      background: #181a1e;
+      border-color: #303239;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    body.dark-mode .tab-btn { color: #b8bbc3; }
+    body.dark-mode .tab-btn:hover { color: #e7eaf0; }
+    body.dark-mode .tab-btn.active {
+      color: #d5e0ef;
+      border-bottom-color: #8ea8ca;
+    }
+    body.dark-mode .controls-bar,
+    body.dark-mode .district-nav,
+    body.dark-mode .card,
+    body.dark-mode .flashcard,
+    body.dark-mode .stats-bar,
+    body.dark-mode table,
+    body.dark-mode select,
+    body.dark-mode input:not([type="checkbox"]),
+    body.dark-mode button.btn {
+      background-color: #1c1d20;
+      color: #e8e9ed;
+      border-color: #383a41;
+    }
+    body.dark-mode .controls-bar,
+    body.dark-mode .district-nav,
+    body.dark-mode .card { box-shadow: 0 5px 18px rgba(0,0,0,.10); }
+    body.dark-mode .temple-block { background: #24262b; border-left-color: #8ea8ca; }
+    body.dark-mode .card-title,
+    body.dark-mode .temple-name,
+    body.dark-mode .card-question,
+    body.dark-mode .district-title-display { color: #e7eaf0; }
+    body.dark-mode .section-header { color: #a8bfdc; }
+    body.dark-mode .tag { background: #303239; color: #dfe2e8; }
+    body.dark-mode .tag-endowments { background: #293545; color: #d1deef; }
+    body.dark-mode .tag-asi { background: #3b3528; color: #e4d6b7; }
+    body.dark-mode .error-box { background: #302326; border-color: #68464b; color: #edc7cb; }
+    body.dark-mode .flashcard.flipped { background: #24262b; }
+    body.dark-mode table th { background: #181a1e !important; color: #e8e9ed !important; }
+    body.dark-mode table td { background: #1c1d20 !important; color: #e8e9ed !important; }
+    body.dark-mode .highlight { background: #514633; color: #f0e6d2; }
+    body.dark-mode .appearance-control { color: #e3e5ea; }
+    body.dark-mode .switch input:checked + .switch-track { background: #7188a7; }
+    body.dark-mode .switch input:focus-visible + .switch-track { outline-color: #a8bfdc; }
+
+    /* Keep transitions subtle; avoid flashy/neon colour shifts. */
+    body, header, nav.tab-nav, .tab-btn, .card, .controls-bar,
+    .district-nav, .flashcard, .temple-block, button.btn, select, input {
+      transition: background-color .22s ease, color .22s ease,
+                  border-color .22s ease, box-shadow .22s ease;
+    }
+
+    /* B&W night-reading mode: monochrome, dark background, high-contrast text. */
+    body.bw-mode {
+      --primary: #f5f5f5;
+      --primary-light: #e5e5e5;
+      --primary-dark: #fafafa;
+      --accent: #d4d4d4;
+      --accent-light: #404040;
+      --bg: #050505;
+      --card-bg: #111111;
+      --text: #f5f5f5;
+      --text-muted: #d4d4d4;
+      --border: #525252;
+      --success: #f5f5f5;
+      --success-bg: #262626;
+      --warning-bg: #262626;
+      --shadow: 0 4px 12px rgba(0,0,0,.5);
+      filter: grayscale(1);
+    }
+    body.bw-mode header { background: #050505; border-bottom: 1px solid #737373; }
+    body.bw-mode nav.tab-nav,
+    body.bw-mode .controls-bar,
+    body.bw-mode .district-nav,
+    body.bw-mode .card,
+    body.bw-mode .flashcard,
+    body.bw-mode .stats-bar,
+    body.bw-mode table,
+    body.bw-mode select,
+    body.bw-mode input:not([type="checkbox"]),
+    body.bw-mode button.btn {
+      background: #111111 !important;
+      color: #f5f5f5 !important;
+      border-color: #737373 !important;
+    }
+    body.bw-mode .temple-block { background: #1a1a1a; }
+    body.bw-mode .card-title,
+    body.bw-mode .temple-name,
+    body.bw-mode .card-question,
+    body.bw-mode .district-title-display,
+    body.bw-mode .section-header,
+    body.bw-mode .subtitle,
+    body.bw-mode .sources-list a { color: #f5f5f5; }
+    body.bw-mode .tag,
+    body.bw-mode .tag-endowments,
+    body.bw-mode .tag-asi { background: #262626; color: #f5f5f5; border: 1px solid #737373; }
+    body.bw-mode .error-box { background: #111; border-color: #a3a3a3; color: #fafafa; }
+    body.bw-mode .flashcard.flipped { background: #1a1a1a; }
+    body.bw-mode table th,
+    body.bw-mode table td { background: #111 !important; color: #f5f5f5 !important; border-color: #737373 !important; }
+    body.bw-mode .highlight { background: #525252; color: #fff; }
+    body.bw-mode .appearance-control { color: #fff; }
+    @media (max-width: 640px) {
+      .appearance-controls { justify-content: flex-start; }
+      .header-top { align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .switch-track, .switch-track::before { transition: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="header-top">
+        <div>
+          <h1>APPSC EO — 28 Districts</h1>
+          <div class="subtitle">Paper-I (General Studies) + Paper-II (Endowments) | Official-Source Revision Atlas</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.65rem;">
+          <div class="badge" id="district-count-badge">Loading Data...</div>
+          <div class="appearance-controls" aria-label="Appearance settings">
+            <div class="appearance-control">
+              <span aria-hidden="true">☀</span>
+              <label class="switch" title="Switch between light and dark mode">
+                <input id="theme-toggle" type="checkbox" role="switch" aria-label="Dark mode">
+                <span class="switch-track"></span>
+              </label>
+              <span aria-hidden="true">☾</span>
+              <span id="theme-state" class="control-state">Light</span>
+            </div>
+            <div class="appearance-control">
+              <span>B&amp;W</span>
+              <label class="switch" title="Enable black-and-white night-reading mode">
+                <input id="bw-toggle" type="checkbox" role="switch" aria-label="Black and white night reading mode">
+                <span class="switch-track"></span>
+              </label>
+              <span id="bw-state" class="control-state">Off</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="disclaimer">
+        <strong>Source Policy Disclaimer:</strong> Facts compiled exclusively from verified official primary sources (AP Gazette, Endowments Dept, ASI, Water Resources, IMD, District Portals). In case of disputed or time-sensitive claims, verify against the cited official record.
+      </div>
+    </div>
+  </header>
+
+  <nav class="tab-nav">
+    <div class="nav-container">
+      <button class="tab-btn active" onclick="switchView('reading')">District Overview</button>
+      <button class="tab-btn" onclick="switchView('flashcards')">Interactive Flashcards Mode</button>
+      <button class="tab-btn" onclick="switchView('compact')">Compact Rapid Revision</button>
+    </div>
+  </nav>
+
+  <main id="app-container">
+    <div id="loading" class="loading-spinner">
+      Loading the embedded district revision dataset...
+    </div>
+  </main>
+
+  <script id="embedded-district-dataset" type="application/json">{"metadata":{"title":"APPSC EO Grade-III — Andhra Pradesh 28 Districts Revision Atlas","version":"1.0","sourcePolicy":"Official sources only","districtCount":26,"workingDistrictCount":28,"note":"Andhra Pradesh comprises 26 official administrative districts as per Act 12 of 1920 / April 2022 Gazette notifications. The working list of 28 includes proposed/unnotified divisions Markapuram (under Prakasam) and Polavaram (under Eluru/ASR), which are fully documented under their respective official parent districts."},"districts":[{"id":"asr","name":"Alluri Sitharama Raju (ASR)","headquarters":"Paderu","neighbouringDistricts":["Parvathipuram Manyam","Anakapalli","Vizianagaram","East Godavari","Eluru","Odisha State","Chhattisgarh State","Telangana State"],"physiography":["Eastern Ghats (Agency / High Hills Zone)"],"rivers":["Godavari (border)","Sabari","Sileru","Machkund (Duduma)","Varaha"],"waterResources":["Jalaput Reservoir (Machkund)","Upper Sileru Hydroelectric Project","Lower Sileru Project","Polavaram Irrigation Project (headworks area near Anguluru/Ramachandrapuram)"],"terrain":["High hills","Steep slopes","Thick forests","Armakonda / Jindhagada peak (1,680m - highest peak in AP)"],"disasters":["Flash floods","Landslides during heavy monsoons","Extreme cyclone rainfall runoff"],"crops":["Coffee (Araku Organic Coffee - GI Tagged)","Rajma (Beans)","Turmeric","Pineapple","Pepper"],"economy":["Bauxite reserves (Ananthagiri)","Eco-tourism","Non-Timber Forest Produce (NTFP)"],"forestsWildlifeEnvironment":["Kambalakonda WLS (border/adjacent)","Papikonda National Park (covers parts of ASR and Eluru)","Tropical moist deciduous and dry deciduous forests"],"dynasties":["Matsyas of Oddadi","Rampa Zamindars","British Agency Administration"],"historicalNotes":["Rampa Rebellion (1922–24): Alluri Sitharama Raju led tribal revolt against British Forest Act 1882 (Muttam system)"],"temples":[{"name":"Modamamba Temple","location":"Paderu","administrativeStatus":"Endowments Department Managed","deity":"Modamamba (Local tribal deity)","style":"Tribal/Regional Shrine","uniqueFacts":["Revered as the principal protective mother deity of the Agency region"],"festivals":["Modakondamma Jatara (Annual festival in May)"]},{"name":"Ananthagiri Cave Temple","location":"Ananthagiri (near Borra Caves)","administrativeStatus":"Local/Endowments","deity":"Shiva / Local Form","style":"Natural Formation / Cave Temple","uniqueFacts":["Associated with natural formations near Borra Caves"]}],"festivalsAndCulture":["Modakondamma Jatara (Paderu)","Dhimsa Folk Dance (tribal heritage)"],"quickExtras":["Borra Caves: Karst limestone caves formed by the Gosthani River"],"dontConfuse":["Araku is the main tourism hub, but Paderu is the official district headquarters."],"sources":[{"title":"AP Gazette Reorganisation Notification 2022","url":"https://www.ap.gov.in"},{"title":"ASR District Official Portal","url":"https://asr.ap.gov.in"},{"title":"AP Tourism \u0026 Forest Department Records","url":"https://forests.ap.gov.in"}]},{"id":"anakapalli","name":"Anakapalli","headquarters":"Anakapalli","neighbouringDistricts":["Visakhapatnam","Alluri Sitharama Raju","Vizianagaram","Kakinada"],"physiography":["North Coastal Plains","Eastern Ghats foothills"],"rivers":["Sarada","Varaha","Tandava"],"waterResources":["Raiwada Reservoir (across Sarada River)","Tandava Reservoir"],"terrain":["Coastal plains interspersed with isolated hillocks"],"disasters":["High cyclone vulnerability (Bay of Bengal coast)","Inundation of Sarada river basin"],"crops":["Sugarcane (Anakapalli Jaggery Market - one of the largest in India)","Paddy","Coconut","Cashew"],"economy":["APSEZ (Atchutapuram)","Brandix India Apparel City","Jawaharlal Nehru Pharma City"],"forestsWildlifeEnvironment":["Mixed deciduous hill forests","Coastal cashew and coconut plantations"],"dynasties":["Eastern Chalukyas","Kalingas","Gajapatis","Vizianagaram Samsthanam"],"historicalNotes":["Buddhist Era (3rd c. BCE - 7th c. CE): Major Theravada/Mahayana Buddhist monastic complexes at Bojjannakonda and Lingalakonda (Sankaram village)"],"temples":[{"name":"Nookambika Temple","location":"Anakapalli Town","administrativeStatus":"Endowments Department Managed","deity":"Nookambika Ammavaru (Shakti)","style":"Dravida/Regional","uniqueFacts":["Major regional Shakti shrine; annual Jatara starts on Kotappakonda/Mahashivaratri bahula amavasya"],"festivals":["Nookambika Ammavari Jatara"]},{"name":"Upamaka Venkateswara Swamy Temple","location":"Nakkapalle","administrativeStatus":"Endowments Department Managed","deity":"Venkateswara Swamy","style":"Ancient South Indian Temple","uniqueFacts":["Ancient Vaishnava Kshetram featuring Swayambhu idol on Garudadri hill"]},{"name":"Bojjannakonda \u0026 Lingalakonda","location":"Sankaram village","administrativeStatus":"ASI Protected Monument","deity":"Buddhist Monastic / Stupas","style":"Monolithic Rock-cut Caves \u0026 Stupas","uniqueFacts":["3rd c. BCE - 7th c. CE rock-cut Buddhist stupas, chaityas, and Viharas"]}],"festivalsAndCulture":["Nookambika Ammavari Jatara"],"quickExtras":["Pudimadaka Port: Proposed non-major port/fishing harbor"],"dontConfuse":["Bojjannakonda is an ASI Monolithic Archaeological Site, NOT an Endowments-managed functioning temple."],"sources":[{"title":"Anakapalli District Official Portal","url":"https://anakapalli.ap.gov.in"},{"title":"ASI Hyderabad Circle Monument List","url":"https://asihyderabadcircle.in"}]},{"id":"ananthapuramu","name":"Ananthapuramu","headquarters":"Ananthapuramu","neighbouringDistricts":["Sri Sathya Sai","Kurnool","YSR Kadapa","Karnataka State"],"physiography":["Rayalaseema / Deccan Plateau (Semi-arid zone)"],"rivers":["Penna","Chitravathi","Hundri","Hagari (Vedavathi)"],"waterResources":["Mid-Pennar Reservoir","Peruru Dam","Handri-Neeva Sujala Sravanthi (HNSS) Canal network"],"terrain":["Undulating plateau","Rocky outcrops","Red soil plains"],"disasters":["Severe chronic drought (lowest average rainfall district in AP after Leh in India context historically)"],"crops":["Groundnut (main rainfed crop)","Bengalgram","Sweet Lime","Pomegranate","Tomato"],"economy":["Ramagiri gold fields (inactive)","Corundum \u0026 Granite reserves","Solar power installations"],"forestsWildlifeEnvironment":["Dry scrub forests","Great Indian Bustard habitat fringe zone (near Kurnool border)"],"dynasties":["Vijayanagara Empire","Nolamba Pallavas","Rayadurgam Poligars"],"temples":[{"name":"Bugga Ramalingeswara Swamy Temple","location":"Tadipatri","administrativeStatus":"Endowments Department / ASI Protected","deity":"Shiva (Ramalingeswara)","style":"Vijayanagara Style","uniqueFacts":["Famous for intricate Vijayanagara stone carvings and granite cutwork; features a continuous underground spring under the main Shiva Lingam"]},{"name":"Chintala Venkataramana Swamy Temple","location":"Tadipatri","administrativeStatus":"ASI Protected Monument","deity":"Venkataramana Swamy (Vishnu)","style":"Vijayanagara Architecture","uniqueFacts":["Complete Ramayana and Bhagavata narratives sculpted across the prakara walls; stone chariot in courtyard"]},{"name":"Kasapuram Nettikanti Anjaneya Swamy Temple","location":"Kasapuram (near Guntakal)","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Anjaneya Swamy (Hanuman)","style":"Dravida","uniqueFacts":["Major Endowments-administered Hanuman shrine drawing millions of pilgrims"]}],"festivalsAndCulture":["Tadipatri Car Festival","Kasapuram Hanuman Jayanti"],"quickExtras":["Gooty Fort: Citadel built on a massive monolith rock; held by Chalukyas, Vijayanagara, Marathas (Murari Rao), Hyder Ali, and the British"],"dontConfuse":["Lepakshi (Veerabhadra Temple) is now located in Sri Sathya Sai District, NOT in Ananthapuramu District post-2022 reorganisation."],"sources":[{"title":"Ananthapuramu District Portal","url":"https://ananthapuramu.ap.gov.in"},{"title":"ASI Archaeological Gazetteers","url":"https://asi.nic.in"}]},{"id":"annamayya","name":"Annamayya","headquarters":"Rayachoti","neighbouringDistricts":["YSR Kadapa","Chittoor","Tirupati","Sri Sathya Sai","Karnataka State"],"physiography":["Southern Rayalaseema Upland","Seshachalam Hill Ranges"],"rivers":["Bahuda","Mandavi","Cheyyeru","Papagni"],"waterResources":["Annamayya Project (Badvel/Cheyyeru reservoir)","Veligallu Reservoir (across Papagni)"],"terrain":["Rugged hills","Seshachalam quartzite ranges","Valleys"],"disasters":["Flash floods in river valleys (e.g., 2021 Cheyyeru dam burst flooding)","Drought in upland mandals"],"crops":["Tomato (Madanapalle market - largest tomato trading center in Asia)","Mango","Papaya","Groundnut"],"economy":["Red Sanders (*Pterocarpus santalinus*) extraction","Barytes \u0026 Clay mining","Horticulture trade"],"forestsWildlifeEnvironment":["Seshachalam Biosphere Reserve (partly in district)","Sri Venkateswara National Park boundary","Endemic Red Sanders wood reserves"],"dynasties":["Cholas","Matli Chiefs (feudatories of Vijayanagara)","Kadapa Nawabs"],"temples":[{"name":"Tallapaka Temples (Siddheswara \u0026 Chennakesava)","location":"Tallapaka (near Rajampet)","administrativeStatus":"Endowments / TTD Merged Administration","deity":"Siddheswara \u0026 Chennakesava Swamy","style":"Vijayanagara / Dravida","uniqueFacts":["Birthplace of Saint Composer Tallapaka Annamacharya (Annamayya)"]},{"name":"Parasurama Temple","location":"Attirala (Cheyyeru Riverbank)","administrativeStatus":"Endowments Department Managed","deity":"Parasurama / Shiva","style":"Ancient Regional Shrine","uniqueFacts":["Believed site where Parasurama was cleansed of his sin of matricide; major holy bath site"]},{"name":"Veerabhadra Swamy Temple","location":"Rayachoti","administrativeStatus":"Endowments Department Managed","deity":"Veerabhadra Swamy","style":"Vijayanagara Architecture","uniqueFacts":["Features a distinct Vijayanagara Rajagopuram; central temple of the district HQ"]}],"festivalsAndCulture":["Annamacharya Jayanti (Tallapaka)","Attirala Parasurama Tirtham"],"quickExtras":["Horsley Hills (Yenugulla Mallamma Konda): Summer hill station at ~1,265m elevation near Madanapalle"],"dontConfuse":["Annamayya District HQ is Rayachoti, not Rajampet or Madanapalle."],"sources":[{"title":"Annamayya District Portal","url":"https://annamayya.ap.gov.in"},{"title":"AP Forest Dept Seshachalam Notifications","url":"https://forests.ap.gov.in"}]},{"id":"bapatla","name":"Bapatla","headquarters":"Bapatla","neighbouringDistricts":["Guntur","Palnadu","Prakasam","Krishna"],"physiography":["Coastal Deltaic Plains (Krishna South Delta)"],"rivers":["Krishna (border river/delta streams)","Romperu","Tungabhadra drain channel"],"waterResources":["Krishna Western Delta Canal System","Kommamuru Canal"],"terrain":["Flat coastal plain","Beach ridges","Agricultural delta"],"disasters":["Severe vulnerability to tropical cyclones","Storm surges","High coastal erosion","Flood plain inundation"],"crops":["Paddy","Blackgram","Chilies","Cashew","Marine and brackish water Aquaculture (Prawn/Shrimp)"],"economy":["Agricultural College Bapatla (ANGRAU premier historic institution)","Aquaculture","Coastal tourism"],"forestsWildlifeEnvironment":["Suryalanka beach coastal vegetation","Coastal shelterbelts","Mangrove patches near Nizampatnam"],"dynasties":["Eastern Chalukyas","Kakatiyas","Reddi Kingdom of Kondaveedu","British Maritime Presidency"],"temples":[{"name":"Bhavanarayana Swamy Temple","location":"Bapatla Town","administrativeStatus":"Endowments Department Managed","deity":"Bhavanarayana Swamy (Swayambhu Vishnu)","style":"Chola / Eastern Chalukya","uniqueFacts":["Major ancient Swayambhu Vishnu shrine featuring documented Chola and Eastern Chalukya epigraphs and structural additions"]},{"name":"Ramalingeswara Temple","location":"Vodarevu / Chirala","administrativeStatus":"Endowments Department Managed","deity":"Shiva (Ramalingeswara)","style":"Coastal Regional Style","uniqueFacts":["Historic coastal Shaivite shrine near fishing centers"]}],"festivalsAndCulture":["Bhavanarayana Swamy Brahmotsavams","Kotappakonda-style Prabhalu traditions in rural mandals"],"quickExtras":["Nizampatnam Port: Historic maritime trade port (site of first British factory setup point on the Coromandel Coast - 1611)"],"dontConfuse":["Bhavanarayana Swamy Temple is at Bapatla town, distinct from Mangalagiri Panakala Narasimha Swamy in Guntur."],"sources":[{"title":"Bapatla District Official Portal","url":"https://bapatla.ap.gov.in"},{"title":"AP Endowments Dept Records","url":"https://endowments.ap.gov.in"}]},{"id":"chittoor","name":"Chittoor","headquarters":"Chittoor","neighbouringDistricts":["Tirupati","Annamayya","Tamil Nadu State (Vellore/Tiruvallur)","Karnataka State (Kolar)"],"physiography":["Southern Rayalaseema Plateau","Palamaner Upland"],"rivers":["Neeva","Palar","Bahuda","Swarnamukhi (tributaries)"],"waterResources":["NTR Jalashayam","Kalavagunta Reservoir"],"terrain":["Granite boulders","Plateau edge","Scrub-covered hills"],"disasters":["Seasonal drought","Human-elephant conflict along the Palamaner-Kaundinya forest corridor"],"crops":["Mango (Totapuri/Alphonso - leading fruit processing hub in AP)","Sugarcane","Tomato","Milk/Dairy (Vijaya \u0026 Heritage hubs)"],"economy":["Sri City Industrial Park (border zone)","Amara Raja Batteries Manufacturing Hub","Agro-food processing"],"forestsWildlifeEnvironment":["Kaundinya Wildlife Sanctuary (only Asian Elephant sanctuary in Andhra Pradesh)"],"dynasties":["Cholas","Pallavas","Ganga-Banas","Vijayanagara Emperors","Arcot Nawabs"],"temples":[{"name":"Kanipakam Varasiddhi Vinayaka Temple","location":"Kanipakam","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Varasiddhi Vinayaka (Ganesha)","style":"Dravida Style","uniqueFacts":["Famous Swayambhu Ganesha shrine situated in the Neeva riverbed; tradition records growing stone idol; Grade-I temple"],"festivals":["Kanipakam Annual Brahmotsavams (21-day festival starting on Vinayaka Chavithi)"]},{"name":"Mogileswara Swamy Temple","location":"Mogili","administrativeStatus":"Endowments Department Managed","deity":"Shiva (Mogileswara)","style":"Dravida","uniqueFacts":["Ancient Shiva temple with a continuous natural spring flowing out of Nandi's mouth"]},{"name":"Aragonda Anjaneya Swamy Temple","location":"Aragonda","administrativeStatus":"Endowments Managed","deity":"Anjaneya Swamy","style":"Regional Shrine","uniqueFacts":["Associated with Sanjeevani hill drops legend during Ramayana epic era"]}],"festivalsAndCulture":["Kanipakam Annual Brahmotsavams"],"quickExtras":["Gurramkonda Fort: Historic hill fortress held by Vijayanagara, Nawabs of Cuddapah, Hyder Ali, and Tipu Sultan"],"dontConfuse":["Tirumala/Tirupati and Srikalahasti are now in Tirupati District, NOT in Chittoor District."],"sources":[{"title":"Chittoor District Portal","url":"https://chittoor.ap.gov.in"},{"title":"Kanipakam Devasthanam Official Portal","url":"https://kanipakamsivaraddhivinayaka.org"}]},{"id":"konaseema","name":"Dr. B.R. Ambedkar Konaseema","headquarters":"Amalapuram","neighbouringDistricts":["East Godavari","Kakinada","West Godavari"],"physiography":["Central Godavari Delta","Coastal Alluvial Island Plain"],"rivers":["Gautami Godavari","Vasishta Godavari","Vriddha Gautami","Hainateeya (Delta distributaries of Godavari)"],"waterResources":["Sir Arthur Cotton Barrage canals network (Central Delta Canal, Bank Canal)"],"terrain":["Extremely fertile deltaic island","Coconut palm groves","Estuaries"],"disasters":["Riverine floods during Godavari peak discharge","Tropical cyclones","Tidal inundation","Riverbank erosion"],"crops":["Paddy","Coconut","Banana","Cocoa","Arecanut","Brackish water Aquaculture (Shrimp)"],"economy":["ONGC / GAIL Natural Gas and Petroleum onshore wells (KG Basin)","Coconut trade","Aquaculture exports"],"forestsWildlifeEnvironment":["Coringa Wildlife Sanctuary (southern section adjacent to delta mouth - mangroves, Fishing Cat, Otters)"],"dynasties":["Eastern Chalukyas (Vengi)","Velanati Chodas","Kakatiyas","Reddy Dynasty"],"temples":[{"name":"Ainavilli Siddhi Vinayaka Temple","location":"Ainavilli","administrativeStatus":"Endowments Department Managed","deity":"Siddhi Vinayaka","style":"Dravida / Delta Style","uniqueFacts":["Renowned Swayambhu Ganesha shrine located in the central delta"]},{"name":"Antarvedi Laxmi Narasimha Swamy Temple","location":"Antarvedi","administrativeStatus":"Endowments Department Managed","deity":"Laxmi Narasimha Swamy","style":"Dravida Temple Architecture","uniqueFacts":["Situated at Sagara Sangam (confluence of Vasishta Godavari and Bay of Bengal); features historic temple chariot (Ratham)"],"festivals":["Antarvedi Kalyanotsavam \u0026 Ratha Saptami"]},{"name":"Ryali Jaganmohini Kesava Swamy Temple","location":"Ryali","administrativeStatus":"Endowments Department Managed","deity":"Kesava Swamy / Jaganmohini","style":"Chalukya-era Carving","uniqueFacts":["Single Salagrama stone carved into Lord Kesava (Vishnu) on front side and Jaganmohini (female avatar) on rear side"]},{"name":"Muramalla Veereswara Swamy Temple","location":"Muramalla","administrativeStatus":"Endowments Department Managed","deity":"Veereswara Swamy","style":"Dravida","uniqueFacts":["Famous for daily Nitya Kalyanam rituals performed for divine couple"]},{"name":"Appanapalli Bala Balaji Temple","location":"Appanapalli","administrativeStatus":"Endowments Department Managed","deity":"Bala Balaji (Venkateswara)","style":"Modern Delta Shrine","uniqueFacts":["Popular regional pilgrimage shrine known as Second Chinna Tirupati"]}],"festivalsAndCulture":["Antarvedi Kalyanotsavam","Prabhala Tirtham (Jaganna Thota during Sankranti - unique coconut-trunk decorated arches carried across paddy fields)"],"quickExtras":["Prabhala Tirtham: Centuries-old eco-cultural tradition where villages assemble giant bamboo-and-coconut arches (Prabhas)"],"dontConfuse":["Ryali Kesava Swamy is NOT two separate images placed back to back; it is a single carved Salagrama stone displaying Male/Female avatars on opposite sides."],"sources":[{"title":"Dr. B.R. Ambedkar Konaseema District Portal","url":"https://konaseema.ap.gov.in"},{"title":"AP Endowments Dept Records","url":"https://endowments.ap.gov.in"}]},{"id":"eastgodavari","name":"East Godavari","headquarters":"Rajamahendravaram (Rajahmundry)","neighbouringDistricts":["West Godavari","Eluru","Alluri Sitharama Raju","Kakinada","Dr. B.R. Ambedkar Konaseema"],"physiography":["Godavari River Plain","Alluvial Delta Apex"],"rivers":["Godavari (broad riverbed at Rajahmundry)"],"waterResources":["Sir Arthur Cotton Barrage (Dowleswaram) - splits Godavari into Gautami and Vasishta branches"],"terrain":["Alluvial plains","River islands (Lankas)"],"disasters":["High river flood risk from Godavari discharge (monsoon discharges above 20 lakh cusecs cause major inundation)"],"crops":["Paddy","Maize","Sugarcane","Nursery plants (Kadiyam - largest plant nursery hub in India)"],"economy":["Paper manufacturing (APPM)","Textile processing","Commercial plant nurseries","Agro-processing"],"forestsWildlifeEnvironment":["Riverine vegetation","Social forestry","Commercial plant nurseries"],"dynasties":["Rajaraja Narendra (Eastern Chalukya)","Reddy Dynasty (Anavota Reddy / Kataya Vema Reddy)"],"historicalNotes":["Rajaraja Narendra established Rajamahendravaram as capital in 11th Century; patronized Adikavi Nannaya for Telugu Mahabharatam translation"],"temples":[{"name":"Kotilingeswara Swamy Temple","location":"Rajamahendravaram","administrativeStatus":"Endowments Department Managed","deity":"Kotilingeswara Swamy (Shiva)","style":"Dravida Ghat Temple","uniqueFacts":["Ancient Shaivite temple located on the banks of Godavari with 55 bathing ghats"]},{"name":"Pattiseema Veerabhadra Swamy Temple","location":"Pattiseema (border with Eluru)","administrativeStatus":"Endowments Department Managed","deity":"Veerabhadra Swamy","style":"Hillock Island Shrine","uniqueFacts":["Situated on Devakuta hillock in the middle of the Godavari River"]},{"name":"Markandeya Swamy Temple","location":"Rajamahendravaram","administrativeStatus":"Endowments Department Managed","deity":"Markandeya Swamy / Shiva","style":"Urban Dravida Shrine","uniqueFacts":["Ancient temple associated with Sage Markandeya on Godavari bank"]}],"festivalsAndCulture":["Godavari Pushkarams (occurs once every 12 years)","Mahashivaratri at Kotilingeswara Ghat"],"quickExtras":["Dowleswaram Barrage: Historic hydraulic structure designed by Sir Arthur Cotton (1847–1852), transforming the Godavari delta"],"dontConfuse":["Headquarters of East Godavari post-2022 reorganisation is Rajamahendravaram (Kakinada is now a separate district)."],"sources":[{"title":"East Godavari District Portal","url":"https://eastgodavari.ap.gov.in"},{"title":"AP Irrigation Dept / ASI","url":"https://irrigationap.cigg.in"}]},{"id":"eluru","name":"Eluru","headquarters":"Eluru","neighbouringDistricts":["West Godavari","NTR","Krishna","East Godavari","Alluri Sitharama Raju","Telangana State"],"physiography":["Coastal Deltaic Plain","Kolleru Basin","Agency Foothills"],"rivers":["Tammileru","Yerrakalava","Budameru (inflow to Kolleru)","Godavari (northern border)"],"waterResources":["Kolleru Lake (freshwater lake)","Polavaram Right Canal passing through district","Tammileru Dam"],"terrain":["Flat alluvial plain merging into agency forest slopes in the north"],"disasters":["Severe drainage congestion around Kolleru Lake during rains","Tammileru flash floods in Eluru city"],"crops":["Paddy","Oil Palm (Eluru/Pedavegi leading hub in India)","Sugarcane","Cocoa","Tobacco (FCV)"],"economy":["Eluru Hand-woven Woollen Carpets (GI Tagged)","Oil Palm processing mills","Agriculture \u0026 Horticulture"],"forestsWildlifeEnvironment":["Kolleru Wildlife Sanctuary (Ramsar Site \u0026 Important Bird Area - major breeding ground for Spot-billed Pelicans and Grey Herons)"],"dynasties":["Salankayanas","Vishnukundins","Eastern Chalukyas of Vengi"],"historicalNotes":["Pedavegi (Vengipura) near Eluru served as capital of Salankayanas and Vishnukundins (4th–7th Century CE)"],"temples":[{"name":"Dwaraka Tirumala (Chinna Tirupati)","location":"Dwaraka Tirumala","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Venkateswara Swamy","style":"Dravida Architecture","uniqueFacts":["Swayambhu hill temple dedicated to Lord Venkateswara; major Grade-I shrine in AP"],"festivals":["Dwaraka Tirumala Annual Brahmotsavams (Vaisakha and Asvin months)"]},{"name":"Pedavegi Archaeological Site","location":"Pedavegi","administrativeStatus":"ASI Protected Site","deity":"Vengi Kingdom Historical Ruins","style":"Ancient Structural Remains","uniqueFacts":["Capital of ancient Vengi kingdom; features ruins of ancient stupas and structural temples"]},{"name":"Guntupalli Buddhist Caves","location":"Jilakaragudem / Guntupalli","administrativeStatus":"ASI Protected Monument","deity":"Buddhist Monastic Complex","style":"Rock-cut Cave Architecture","uniqueFacts":["Rock-cut Buddhist caves, circular chaitya griha, and stupas dating from 3rd c. BCE to 2nd c. CE"]}],"festivalsAndCulture":["Dwaraka Tirumala Annual Brahmotsavams"],"quickExtras":["Polavaram Project Hub: Key canal headworks and administrative resettlements located in this belt"],"dontConfuse":["Kolleru Lake spans Eluru and West Godavari districts, but the main sanctuary administrative headquarters is centered at Eluru."],"sources":[{"title":"Eluru District Portal","url":"https://eluru.ap.gov.in"},{"title":"Dwaraka Tirumala Devasthanam Portal","url":"https://dwarakatirumala.org"},{"title":"ASI Hyderabad Circle","url":"https://asihyderabadcircle.in"}]},{"id":"guntur","name":"Guntur","headquarters":"Guntur","neighbouringDistricts":["NTR","Krishna","Bapatla","Palnadu"],"physiography":["Krishna River South Plain","Central Coastal AP"],"rivers":["Krishna (northern border)","Tungabhadra drain stream"],"waterResources":["Prakasam Barrage canals (Krishna Western Main Canal)","Guntur Channel"],"terrain":["Fertile black cotton soils (Regur)","Coastal plain transition"],"disasters":["Urban flash floods","Seasonal droughts in non-irrigated pockets","Heatwaves during summer"],"crops":["Chili (Guntur Mirchi Market - largest chili yard in Asia, GI Tag for Guntur Sannam Chili)","Cotton","Tobacco (Tobacco Board HQ at Guntur)","Paddy"],"economy":["Guntur Chili Market Yard","Tobacco Board Headquarters","Spice processing \u0026 Textile spinning mills","Cement factories"],"forestsWildlifeEnvironment":["Scrub forests on Kondaveedu / Mangalagiri hillocks"],"dynasties":["Satavahanas","Reddy Kings of Kondaveedu","French \u0026 British East India Companies"],"temples":[{"name":"Mangalagiri Panakala Narasimha Swamy Temple","location":"Mangalagiri","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Panakala Lakshmi Narasimha Swamy","style":"Dravida / High Gopuram","uniqueFacts":["Swayambhu shrine on hillock where deity accepts jaggery water (Panakam) poured into mouth; foot temple features tall 11-storey Gopuram built by Raja Vasireddy Venkatadri Nayudu"],"festivals":["Panakala Swamy Brahmotsavams"]},{"name":"Amaralingeswara Swamy Temple","location":"Amaravati Town","administrativeStatus":"Endowments Department Managed","deity":"Amaralingeswara (Shiva)","style":"Dravida / Pancharama","uniqueFacts":["One of the 5 Pancharama Kshetrams (Amareshwara); located on Krishna riverbank; features a 15-foot high white marble Shiva Lingam"],"festivals":["Amaravati Mahashivaratri"]},{"name":"Agastyeswara Temple","location":"Pedakakani","administrativeStatus":"Endowments Department Managed","deity":"Agastyeswara Swamy","style":"Dravida","uniqueFacts":["Major Shaivite and Rahu-Ketu dosha nivarana shrine in central AP"]}],"festivalsAndCulture":["Mahashivaratri at Amaravati","Panakala Swamy Brahmotsavams at Mangalagiri"],"quickExtras":["Kondaveedu Fort: Hill fortress with 21 structures, ramparts, and ancient reservoirs built by Reddi dynasty"],"dontConfuse":["Amaravati Heritage Stupa site is in Palnadu/Guntur border belt, but the Amaralingeswara Pancharama Temple is directly managed under AP Endowments."],"sources":[{"title":"Guntur District Official Portal","url":"https://guntur.ap.gov.in"},{"title":"Mangalagiri Devasthanam Site","url":"https://mangalagiri.org"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"kakinada","name":"Kakinada","headquarters":"Kakinada","neighbouringDistricts":["East Godavari","Dr. B.R. Ambedkar Konaseema","Visakhapatnam","Anakapalli"],"physiography":["North Coastal Plain","Godavari Delta North Margin"],"rivers":["Yeleru","Coringa river estuaries"],"waterResources":["Yeleru Reservoir Project (Yeleswaram) - supplies water to Kakinada port city and Visakhapatnam Steel Plant"],"terrain":["Flat coastal plain","Mudflats","Hope Island spit forming natural harbor bay"],"disasters":["High vulnerability to severe cyclonic storms","Storm surge","Coastal erosion"],"crops":["Paddy","Sugarcane","Coconut","Salt production"],"economy":["Kakinada Deep Water Port \u0026 Anchorage Port","Fertilizer plants (NFCL, GFCL)","SEZ \u0026 Marine exports"],"forestsWildlifeEnvironment":["Coringa Wildlife Sanctuary (2nd largest mangrove ecosystem in India; home to endangered White-backed Vulture, Fishing Cat, Saltwater Crocodile)"],"dynasties":["Eastern Chalukyas of Vengi","Pithapuram Samsthanam (Rao Venkata Kumara Mahipathi Surya Rao Bahadur)"],"temples":[{"name":"Pithapuram Kukkuteswara Swamy Temple","location":"Pithapuram","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Kukkuteswara Swamy / Puruhootika Devi","style":"Dravida / Ancient Shrine","uniqueFacts":["One of the 18 Maha Shakti Peethas (Puruhootika Devi) and a Pada Gaya Kshetram; features Swayambhu Dattatreya (Sripada Srivallabha birth context)"]},{"name":"Draksharama Bheemeshwara Swamy Temple","location":"Draksharama","administrativeStatus":"Endowments Department / ASI Protected","deity":"Bheemeshwara Swamy / Manikyamba Devi","style":"Vesara / Eastern Chalukyan Dual-Storey","uniqueFacts":["One of the Pancharama Kshetrams and a Maha Shakti Peetha (Manikyamba); built by Eastern Chalukya King Bhima I (892–922 CE); features a 14-foot crystalline Shiva Lingam extending through two storeys"]},{"name":"Annavaram Veera Venkata Satyanarayana Swamy Temple","location":"Annavaram (Ratnagiri Hill)","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Veera Venkata Satyanarayana Swamy","style":"Two-Story Yantra Style","uniqueFacts":["Second richest Endowments temple in AP after Tirupati; unique two-story temple layout representing Brahma, Vishnu, Shiva; world-famous for Satyanarayana Vratam"],"festivals":["Annavaram Kalyanotsavam"]}],"festivalsAndCulture":["Annavaram Kalyanotsavam","Draksharama Mahashivaratri","Pithapuram Sripada Jayanti"],"quickExtras":["Hope Island: A 16-km long narrow sand spit formed by Godavari sediment outflow, protecting Kakinada coast from open sea waves"],"dontConfuse":["Both Draksharama and Samalkota (Kumara Bheemeshwara) are Pancharama temples located within Kakinada District."],"sources":[{"title":"Kakinada District Portal","url":"https://kakinada.ap.gov.in"},{"title":"Annavaram Devasthanam Portal","url":"https://annavaramdevasthanam.nic.in"},{"title":"ASI Hyderabad Circle","url":"https://asihyderabadcircle.in"}]},{"id":"krishna","name":"Krishna","headquarters":"Machilipatnam","neighbouringDistricts":["NTR","Guntur","Bapatla","Eluru","Dr. B.R. Ambedkar Konaseema"],"physiography":["Krishna River Deltaic Plain","Central Coast"],"rivers":["Krishna (forms southern border)","Upputeru"],"waterResources":["Prakasam Barrage (at Vijayawada/border)","Krishna East Delta canal network (Bandar Canal, Ryves Canal, Eluru Canal)"],"terrain":["Flat coastal delta","Mudflats","Mangrove creeks"],"disasters":["High cyclone risk","Coastal flooding","Tidal surges (e.g., 1977 Diviseema Cyclone impact zone)"],"crops":["Paddy","Mango (Banganapalle/Totapuri - Nuzvid/Mylavaram belt)","Sugarcane","Brackish aquaculture"],"economy":["Machilipatnam Kalamkari (GI Tagged)","Machilipatnam Port","Pedana block printing","Aquaculture exports"],"forestsWildlifeEnvironment":["Krishna Wildlife Sanctuary (mangrove habitat at Krishna delta mouth - otters, fishing cats, migratory birds)"],"dynasties":["Satavahanas","Andhra Ikshvakus","Eastern Chalukyas","Golconda Qutb Shahis","European trading companies (Dutch, French, British)"],"temples":[{"name":"Srikrikakuleswara Swamy Temple","location":"Srikakulam village (Ghantasala Mandal)","administrativeStatus":"Endowments Department Managed","deity":"Andhra Vishnu (Srikakuleswara)","style":"Dravida Architecture","uniqueFacts":["Temple where Andhra Vishnu is worshipped; patronized by Vijayanagara Emperor Krishnadevaraya who was inspired here to compose Amuktamalyada"]},{"name":"Mova Venugopala Swamy Temple","location":"Movva","administrativeStatus":"Endowments Department Managed","deity":"Venugopala Swamy","style":"Dravida","uniqueFacts":["Associated with Siddhendra Yogi (founder of Kuchipudi) and Kshetrayya (famous Padams composer)"]},{"name":"Ghantasala Buddhist Stupa","location":"Ghantasala","administrativeStatus":"ASI Protected Site","deity":"Buddhist Stupa Ruins","style":"Ancient Buddhist Architecture","uniqueFacts":["Historic 2nd-century Buddhist monastic mound and trade settlement"]}],"festivalsAndCulture":["Kuchipudi Classical Dance heritage traditions (Kuchipudi village is located in this district)"],"quickExtras":["Diviseema: Island formed by the bifurcating arms of Krishna River before joining Bay of Bengal"],"dontConfuse":["Andhra Vishnu Srikakuleswara Temple is in Krishna District (Srikakulam village), NOT in North-Coastal Srikakulam District."],"sources":[{"title":"Krishna District Official Portal","url":"https://krishna.ap.gov.in"},{"title":"AP Tourism \u0026 Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"kurnool","name":"Kurnool","headquarters":"Kurnool","neighbouringDistricts":["Nandyal","Ananthapuramu","Telangana State (Jogulamba Gadwal)","Karnataka State"],"physiography":["Western Rayalaseema","Deccan Plateau"],"rivers":["Tungabhadra","Handri","Krishna (northern boundary)"],"waterResources":["Sunkesula Barrage (across Tungabhadra)","Kurnool-Cuddapah (KC) Canal","Rajolibanda Diversion Scheme (RDS)"],"terrain":["Plateau","Limestone formations","Black cotton soils"],"disasters":["Severe droughts in western mandals","Urban flash flooding along Handri/Tungabhadra confluence (e.g., 2009 Kurnool floods)"],"crops":["Cotton","Groundnut","Maize","Onion","Setaria (Korra)"],"economy":["Cement manufacturing","Limestone quarrying","Orvakal Solar Power Parks","Commercial agriculture"],"forestsWildlifeEnvironment":["Rollapadu Wildlife Sanctuary (famous for Great Indian Bustard, Lesser Florican, Blackbuck)"],"dynasties":["Badami Chalukyas","Vijayanagara Empire","Nawabs of Kurnool"],"historicalNotes":["Kurnool City served as the Capital of Andhra State from 1953 to 1956."],"temples":[{"name":"Yaganti Uma Maheshwara Swamy Temple","location":"Yaganti (near Banganapalle)","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Uma Maheshwara Swamy","style":"Dravida / Cave Temple","uniqueFacts":["Famous for growing monolithic stone Nandi idol (studied by GSI/ASI), Pushkarini fed by continuous hill spring, and Agastya Cave"],"festivals":["Yaganti Mahashivaratri Brahmotsavams"]},{"name":"Orvakal Rock Garden Temple Caves","location":"Orvakal","administrativeStatus":"State Protected / Tourism","deity":"Natural Rock Formations / Shrines","style":"Erosion Formations","uniqueFacts":["Natural quartz and silica rock formations featuring ancient cave shelters"]}],"festivalsAndCulture":["Yaganti Mahashivaratri Brahmotsavams"],"quickExtras":["Kondareddy Buroju: Historic circular bastion in Kurnool city used as a watchtower and prison during freedom struggle"],"dontConfuse":["Srisailam Temple is in Nandyal District, NOT Kurnool District post-2022 reorganisation."],"sources":[{"title":"Kurnool District Official Portal","url":"https://kurnool.ap.gov.in"},{"title":"AP Endowments \u0026 Forest Dept Rollapadu Records","url":"https://forests.ap.gov.in"}]},{"id":"nandyal","name":"Nandyal","headquarters":"Nandyal","neighbouringDistricts":["Kurnool","YSR Kadapa","Prakasam","Palnadu","Telangana State (Nagarkurnool)"],"physiography":["Nallamala Hill Range","Erramala Valley","Rayalaseema"],"rivers":["Krishna","Bhavanasi","Kunderu"],"waterResources":["Srisailam Dam (Hydroelectric power project on Krishna)","Velugodu Balancing Reservoir","Srisailam Right Bank Canal (SRBC)"],"terrain":["Dense Nallamala forests","Limestone valleys","Mountain passes (Giddalur/Dornala routes)"],"disasters":["Wildlife conflicts","Forest fires during dry summer","Localized flash flooding in Kunderu basin"],"crops":["Paddy","Bengalgram","Sunflower","Sugarcane","Citrus fruits"],"economy":["Limestone \u0026 Marble mining","Cement manufacturing plants","Forest-based tourism"],"forestsWildlifeEnvironment":["Nagarjunasagar Srisailam Tiger Reserve (NSTR - largest Tiger Reserve in India by core area)","Gundla Brahmeswaram Wildlife Sanctuary (GBM)"],"dynasties":["Chalukyas of Badami/Kalyani","Kakatiyas (Prataparudra built outer fortifications)","Vijayanagara Emperors (Harihara I, Krishnadevaraya constructed gopurams and stone pathways)"],"temples":[{"name":"Srisailam Mallikarjuna \u0026 Bhramaramba Temple","location":"Srisailam","administrativeStatus":"Autonomous Devasthanam under AP Endowments","deity":"Mallikarjuna Swamy / Bhramaramba Devi","style":"Synthesis of Chalukya, Kakatiya \u0026 Vijayanagara","uniqueFacts":["One of the 12 Jyotirlingas (Mallikarjuna) and one of the 18 Maha Shakti Peethas (Bhramaramba); situated on Nallamala hills along Krishna river (Patalaganga)"],"festivals":["Srisailam Mahashivaratri Brahmotsavams","Ugadi Festival at Srisailam"]},{"name":"Ahobilam Nava Narasimha Temples","location":"Ahobilam (Nallamala Hills)","administrativeStatus":"Ahobila Mutt / AP Endowments","deity":"9 Forms of Lord Narasimha","style":"Sri Vaishnava Hill Shrines","uniqueFacts":["Major Sri Vaishnava Divya Desam divided into Upper Ahobilam and Lower Ahobilam; features 9 distinct forms of Narasimha spread across hills"],"festivals":["Ahobilam Parveti Utsavam"]},{"name":"Mahanandi Mahanandiswara Swamy Temple","location":"Mahanandi","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Mahanandiswara Swamy","style":"Chalukya / Dravida","uniqueFacts":["Ancient Shaivite temple surrounded by Nallamala hills; famous for crystal-clear pushkarini water originating directly under the main Shiva Lingam"]},{"name":"Navanandi Temples","location":"Around Nandyal","administrativeStatus":"Endowments / Local","deity":"Shiva / Nandi","style":"Traditional Circuit","uniqueFacts":["Historic circuit of 9 Nandi temples surrounding Nandyal town"]}],"festivalsAndCulture":["Srisailam Mahashivaratri Brahmotsavams","Ugadi Festival at Srisailam","Ahobilam Parveti Utsavam"],"quickExtras":["Srisailam Shikhareswaram: Highest peak in the area offering view of the Srisailam temple complex and Krishna river"],"dontConfuse":["Both premier national pilgrimage hubs—Srisailam and Ahobilam—are located in Nandyal District (carved out of Kurnool in 2022)."],"sources":[{"title":"Nandyal District Portal","url":"https://nandyal.ap.gov.in"},{"title":"Srisailam Devasthanam Official Portal","url":"https://srisailamdevasthanam.org"},{"title":"NSTR Project Tiger Records","url":"https://forests.ap.gov.in"}]},{"id":"ntr","name":"NTR","headquarters":"Vijayawada","neighbouringDistricts":["Krishna","Guntur","Eluru","Palnadu","Telangana State (Khammam/Suryapet)"],"physiography":["Krishna River Valley Plain","Kondapalli Hill Range"],"rivers":["Krishna","Munneru","Budameru"],"waterResources":["Prakasam Barrage (Vijayawada)","Pattiseema right canal terminus","Nandikotkur/Nagarjuna Sagar tail pond links"],"terrain":["Alluvial floodplains","Granite hillocks (Indrakeeladri)","Forest hills (Kondapalli)"],"disasters":["High urban flash flood vulnerability (Budameru overflow / Krishna river discharge up to 10+ lakh cusecs)"],"crops":["Paddy","Chilies","Mango","Cotton","Sugarcane"],"economy":["Vijayawada commercial hub","Vijayawada Railway Junction","Kondapalli Industrial Area","Dr. Narla Tata Rao Thermal Power Station (NTTPS)"],"crafts":["Kondapalli Toys (Kondapalli Bommalu - GI Tagged, crafted from Tella Poniki soft wood)"],"forestsWildlifeEnvironment":["Kondapalli Reserve Forest (habitat for rare flora, leopard, wild boar, softwood Tella Poniki trees)"],"dynasties":["Vishnukundins","Eastern Chalukyas","Gajapatis","Reddis","Golconda Nawabs"],"temples":[{"name":"Kanakadurga Temple","location":"Indrakeeladri Hill, Vijayawada","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Kanakadurga (Shakti)","style":"Dravida Hill Temple","uniqueFacts":["Swayambhu deity situated on Indrakeeladri hill on the banks of Krishna River; premier Shakti pilgrimage center in AP"],"festivals":["Dasara Navaratri at Indrakeeladri (Teppotsavam in Krishna river)","Bhavani Deeksha relinquishment"]},{"name":"Mogalarajapuram Cave Temples","location":"Vijayawada","administrativeStatus":"ASI Protected Monument","deity":"Shiva and Durga","style":"Rock-cut Cave Architecture","uniqueFacts":["5th–6th Century CE Vishnukundin-era rock-cut cave temples"]},{"name":"Undavalli Caves","location":"Undavalli (border with Guntur)","administrativeStatus":"ASI Protected Monument","deity":"Anantasayana Vishnu","style":"Rock-cut Monolithic Architecture","uniqueFacts":["4-storey rock-cut cave complex featuring huge monolithic Anantasayana Vishnu sculpture"]},{"name":"Vedadri Narasimha Swamy Temple","location":"Jaggayyapeta","administrativeStatus":"Endowments Department Managed","deity":"Narasimha Swamy","style":"Dravida","uniqueFacts":["Pancha Narasimha Kshetram situated on the Krishna riverbank"]}],"festivalsAndCulture":["Dasara Navaratri at Indrakeeladri","Bhavani Deeksha relinquishment"],"quickExtras":["Kondapalli Fort: 14th-century hill fortress constructed by Prolaya Vema Reddi"],"dontConfuse":["Vijayawada is the HQ of NTR District, while Machilipatnam is the HQ of Krishna District."],"sources":[{"title":"NTR District Official Portal","url":"https://ntr.ap.gov.in"},{"title":"Sri Durga Malleswara Swamy Varla Devasthanam","url":"https://kanakadurgamma.org"},{"title":"ASI Hyderabad Circle","url":"https://asihyderabadcircle.in"}]},{"id":"palnadu","name":"Palnadu","headquarters":"Narasaraopet","neighbouringDistricts":["Guntur","Bapatla","Prakasam","Nandyal","NTR","Telangana State (Nalgonda)"],"physiography":["Palnadu Limestone Plateau","Inland Plain"],"rivers":["Krishna (northern border)","Naguleru","Chandravanka"],"waterResources":["Nagarjuna Sagar Dam (border project on Krishna River - Jawahar Canal irrigates Palnadu)","Buggavagu Reservoir"],"terrain":["Rocky terrain","Limestone hills","Semi-arid plains"],"disasters":["Extreme summer heatwaves (frequently records highest temperatures in AP)","Agricultural drought"],"crops":["Cotton","Chili","Tobacco","Pulses"],"economy":["High-grade Limestone \u0026 Marble mining","Cement Industry Hub (Macherla, Piduguralla - Lime City)"],"forestsWildlifeEnvironment":["Dry deciduous forest patches along Nagarjuna Sagar backwaters and Nallamala fringe"],"dynasties":["Satavahanas \u0026 Ikshvakus (Nagarjunakonda / Vijayapuri capital - 3rd c. CE)","Palnati Nayakururalu \u0026 Heroes (Battle of Karempudi - 12th Century)","Haihayas of Palnadu","Kakatiyas"],"temples":[{"name":"Kotappakonda Trikoteswara Swamy Temple","location":"Kotappakonda (Narasaraopet)","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Trikoteswara Swamy (Shiva)","style":"Hilltop Dravida Temple","uniqueFacts":["Perched on a hill with three prominent peaks representing Brahma, Vishnu, Shiva; famous for massive illuminated Prabhalu"],"festivals":["Kotappakonda Mahashivaratri Jatara"]},{"name":"Nagarjunakonda Archaeological Complex","location":"Nagarjuna Sagar Reservoir","administrativeStatus":"ASI Protected Island Museum","deity":"Buddhist Monastic Ruins / Ikshvaku Relics","style":"Transplanted Ancient Stupas \u0026 Monasteries","uniqueFacts":["World's first island museum created in the middle of Nagarjuna Sagar reservoir containing transplanted Buddhist monuments"]},{"name":"Daida Rama Lingeswara Swamy Temple","location":"Daida","administrativeStatus":"Endowments Department Managed","deity":"Rama Lingeswara Swamy","style":"Regional Shrine","uniqueFacts":["Historic Shaivite shrine along the Krishna river course"]},{"name":"Gutti Konda Bilam","location":"Guttikonda","administrativeStatus":"State Archaeological Site","deity":"Natural Cave Shrine","style":"Cave Complex","uniqueFacts":["Cave complex associated with ancient rishis and spiritual retreats"]}],"festivalsAndCulture":["Kotappakonda Mahashivaratri Jatara (famous for massive illuminated bamboo structures called Prabhalu up to 100 ft tall)"],"quickExtras":["Nagarjunakonda: World's first island museum created to rescue Ikshvaku Buddhist ruins from reservoir submergence"],"dontConfuse":["Kotappakonda Prabhalu are giant illuminated bamboo structures in Palnadu, distinct from Konaseema coconut Prabhas."],"sources":[{"title":"Palnadu District Portal","url":"https://palnadu.ap.gov.in"},{"title":"ASI Hyderabad Circle","url":"https://asihyderabadcircle.in"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"parvathipurammanyam","name":"Parvathipuram Manyam","headquarters":"Parvathipuram","neighbouringDistricts":["Srikakulam","Vizianagaram","Alluri Sitharama Raju","Odisha State (Rayagada/Koraput)"],"physiography":["Eastern Ghats Tribal Agency","Upland Valleys"],"rivers":["Nagavali","Vamsadhara","Suvarnamukhi","Vegavathi"],"waterResources":["Vottigedda Reservoir","Thotapalli Barrage (across Nagavali River)","Janhavati Project"],"terrain":["Dense forest hill ranges","Valleys","Undulating terrain"],"disasters":["Flash floods along Nagavali river","Extreme rainfall runoffs","Hill-slope erosion"],"crops":["Paddy","Cashew","Mango","Millets (Ragi/Sama)","Casuarina","Rubber plantations"],"economy":["Non-Timber Forest Produce (NTFP)","Tamarind \u0026 Hill brooms trade","Horticulture"],"forestsWildlifeEnvironment":["Dense tropical moist deciduous forests","Wild Elephant migration corridor along Odisha border"],"dynasties":["Kalinga Kings","Jeypore Zamindari","Bobbili and Kurupam Samsthanams"],"temples":[{"name":"Sri Venkateswara Swamy Temple","location":"Parvathipuram Town","administrativeStatus":"Endowments Department Managed","deity":"Venkateswara Swamy","style":"Dravida","uniqueFacts":["Principal urban shrine in the district HQ"]},{"name":"Thotapalli Sri Rama Temple","location":"Thotapalli","administrativeStatus":"Endowments Managed","deity":"Sri Rama","style":"Regional Shrine","uniqueFacts":["Situated near the Thotapalli Barrage site"]},{"name":"Paila Vasudeva Swamy Temple","location":"Paila","administrativeStatus":"Endowments Managed","deity":"Vasudeva Swamy","style":"Regional Shrine","uniqueFacts":["Historic Vishnu shrine in the Agency belt"]}],"festivalsAndCulture":["Tribal festivals","Itika Ponduga (Spring hunting/conservation festival)","Sambara Gowri Jatara influence"],"quickExtras":["Thotapalli Barrage: Major irrigation venture named after Sardar Gauthu Latchanna providing water to North Coastal AP"],"dontConfuse":["Bobbili town is in Vizianagaram District, while Parvathipuram is its own separate district HQ."],"sources":[{"title":"Parvathipuram Manyam District Portal","url":"https://parvathipurammanyam.ap.gov.in"},{"title":"AP Water Resources Dept","url":"https://irrigationap.cigg.in"}]},{"id":"prakasam","name":"Prakasam","headquarters":"Ongole","neighbouringDistricts":["Bapatla","Palnadu","Nandyal","YSR Kadapa","Sri Potti Sriramulu Nellore"],"physiography":["South-Central Coastal Plain","Upland Plain"],"rivers":["Gundlakamma","Musi","Paleru","Manneru"],"waterResources":["Gundlakamma Reservoir Project (Kandula Obul Reddy Project)","Cumbum Tank (historic dam built on Gundlakamma River by Princess Varadharajamma of Vijayanagara)"],"terrain":["Coastal plains","Plains transitioning into Veligonda hills"],"disasters":["Cyclones along coast","Drought in interior western mandals (Markapur/Giddalur belt)"],"crops":["Tobacco (FCV - Ongole tobacco auction platform)","Chili","Bengalgram","Cotton"],"livestockMinerals":["Ongole Cattle Breed (*Bos indicus* - world-renowned draft breed)","Black Galaxy Granite (Chimakurthy - export quality)"],"forestsWildlifeEnvironment":["Veligonda Reserve Forest","Fringe zones of NSTR Tiger Reserve"],"dynasties":["Satavahanas","Pallavas","Reddis of Addanki/Kondaveedu","Vijayanagara Empire"],"historicalNotes":["Addanki Inscription of Pandaranga (848 CE): Earliest documented verse (Taruvoja meter) in Telugu literature"],"temples":[{"name":"Singarakonda Prasannanjaneya Swamy Temple","location":"Singarakonda","administrativeStatus":"Endowments Department Managed","deity":"Prasannanjaneya Swamy (Hanuman)","style":"Hilltop Shrine","uniqueFacts":["Famous hill-top Hanuman shrine with Lakshmi Narasimha temple at base; major pilgrimage center"]},{"name":"Tripurantakam Tripurantakeswara Swamy Temple","location":"Tripurantakam","administrativeStatus":"Endowments Department Managed","deity":"Tripurantakeswara Swamy / Tripurasundari Devi","style":"Dravida Hill Shrine","uniqueFacts":["Considered the Eastern Gateway to Srisailam (Purva Dvaram); Shiva temple on hill, Tripurasundari Devi shrine in pond temple below"]},{"name":"Bhairavakona Rock-cut Cave Temples","location":"Ambavaram","administrativeStatus":"State Protected / ASI","deity":"Shiva Lingams","style":"8th-century Monolithic Rock-cut Caves","uniqueFacts":["8th-century monolith rock-cut cave temples showing Pallava influence; waterfall falls on Shiva Lingam"]}],"festivalsAndCulture":["Singarakonda Tirunalla","Tripurantakam Shivaratri"],"quickExtras":["Motupalli Port: Ancient historic port visited by Venetian traveler Marco Polo; site of Motupalli Abhaya Sasanam issued by Kakatiya King Ganapatideva"],"dontConfuse":["Markapuram is currently a revenue division within Prakasam District, NOT a separate official district."],"sources":[{"title":"Prakasam District Portal","url":"https://prakasam.ap.gov.in"},{"title":"Department of Archaeology \u0026 Museums AP","url":"https://aparchaeology.gov.in"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"spsnellore","name":"Sri Potti Sriramulu Nellore (SPS Nellore)","headquarters":"Nellore","neighbouringDistricts":["Prakasam","YSR Kadapa","Tirupati","Bay of Bengal"],"physiography":["South Coastal Plain","Penna Delta"],"rivers":["Penna","Swarnamukhi","Kandaleru","Boggeru"],"waterResources":["Somasila Dam (major reservoir across Penna River)","Penna Barrage (Nellore)","Kandaleru Dam (stores Krishna water via Telugu Ganga Canal)"],"terrain":["Alluvial coastal plain","Coastal sand dunes","Backwaters"],"disasters":["High vulnerability to North-East monsoon cyclones","Coastal depressions","Urban flooding (Penna river overflow)"],"crops":["Paddy (Nellore Sanna / Molagolukulu paddy)","Marine and Brackish Aquaculture (Shrimp Capital of Andhra Pradesh)"],"economy":["Krishnapatnam Deep Water Port","Thermal power plants","Aquaculture exports","Rice milling"],"forestsWildlifeEnvironment":["Nelapattu Bird Sanctuary (major breeding site for Grey Pelican)","Pulicat Lake Sanctuary (northern part in district)"],"dynasties":["Cholas","Pallavas","Telugu Chodas of Nellore (Raja Manumasiddhi - patron of poet Tikkana Somayaji who translated Mahabharatam)"],"temples":[{"name":"Ranganathaswamy Temple (Talpagiri Ranganathar)","location":"Nellore City (Penna Riverbank)","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Talpagiri Ranganatha Swamy (Reclining Vishnu)","style":"Dravida Architecture","uniqueFacts":["Ancient temple on banks of Penna River featuring a huge Rajagopuram and reclining Vishnu on Adisesha; residence of poet Tikkana"]},{"name":"Jonnavada Kamakshi Sametha Mallikarjuna Swamy Temple","location":"Jonnavada","administrativeStatus":"Endowments Department Managed","deity":"Kamakshi Devi / Mallikarjuna Swamy","style":"Dravida","uniqueFacts":["Major regional Shakti and Shaiva pilgrimage shrine on the Penna riverbank"]},{"name":"Penusila Lakshmi Narasimha Swamy Temple","location":"Penchalakona","administrativeStatus":"Endowments Department Managed","deity":"Lakshmi Narasimha Swamy","style":"Hill Forest Shrine","uniqueFacts":["Swayambhu idol nestled in Veligonda hills"]}],"festivalsAndCulture":["Rottela Panduga (Bread Festival) at Bara Shaheed Dargah","Penchalakona Brahmotsavams"],"quickExtras":["Sriharikota (SHAR - ISRO): Satish Dhawan Space Centre located on Sriharikota island (bordering Tirupati/Nellore coastal strip)"],"dontConfuse":["Nelapattu and Sriharikota border zones are divided between SPS Nellore and Tirupati District."],"sources":[{"title":"SPS Nellore District Portal","url":"https://nellore.ap.gov.in"},{"title":"Somasila Irrigation Records","url":"https://irrigationap.cigg.in"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"srisathyasai","name":"Sri Sathya Sai","headquarters":"Puttaparthi","neighbouringDistricts":["Ananthapuramu","YSR Kadapa","Annamayya","Karnataka State (Chikkaballapur/Tumakuru)"],"physiography":["Southern Rayalaseema Upland","Penna-Chitravathi Basin"],"rivers":["Chitravathi","Penna","Maddileru"],"waterResources":["Chitravathi Balancing Reservoir (CBR at Parnapalle)","Upper Pennar Dam"],"terrain":["Undulating plateau","Granite hills","Dry red and black soils"],"disasters":["Severe chronic drought","High temperature extremes"],"crops":["Groundnut","Silk cocoon / Sericulture","Sunflower","Sweet Lime","Maize"],"economy":["Prashanthi Nilayam pilgrimage ecosystem","Super Specialty Healthcare","Sericulture trading"],"forestsWildlifeEnvironment":["Dry deciduous scrub hill forests"],"dynasties":["Vijayanagara Empire (Governors Virupanna and Veeranna)","Penukonda Aravidu Dynasty (Tirumala Deva Raya)"],"historicalNotes":["Penukonda served as secondary capital of Vijayanagara Empire after the fall of Hampi."],"temples":[{"name":"Veerabhadra Swamy Temple","location":"Lepakshi","administrativeStatus":"ASI Protected Monument / Endowments Presence","deity":"Veerabhadra Swamy","style":"Pure Vijayanagara Imperial Style","uniqueFacts":["Premier Vijayanagara architectural masterpiece; features Hanging Pillar (Lamba Stambha), largest monolithic Nandi in India, world's largest monolithic 7-headed Nagalinga, and ceiling fresco paintings"]},{"name":"Penukonda Fort \u0026 Temples","location":"Penukonda","administrativeStatus":"ASI / State Protected","deity":"Lakshmi Narasimha \u0026 Fort Temples","style":"Vijayanagara Fort Architecture","uniqueFacts":["Historical fort with 365 temples and Gagan Mahal palace"]},{"name":"Kadiri Laxmi Narasimha Swamy Temple","location":"Kadiri","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Laxmi Narasimha Swamy (Vasantha Vallabhudu)","style":"Dravida / Vijayanagara","uniqueFacts":["Swayambhu Narasimha shrine where idol depicts emergence from pillar; major Grade-I temple; famous for massive wooden temple car"],"festivals":["Kadiri Rathotsavam"]}],"festivalsAndCulture":["Kadiri Rathotsavam (massive wooden temple car festival)","Lepakshi Utsavams"],"quickExtras":["Puttaparthi: Prashanthi Nilayam - spiritual ashram founded by Sri Sathya Sai Baba"],"dontConfuse":["Lepakshi is located in Sri Sathya Sai District, NOT Ananthapuramu District."],"sources":[{"title":"Sri Sathya Sai District Portal","url":"https://srisathyasai.ap.gov.in"},{"title":"ASI Monograph on Lepakshi","url":"https://asi.nic.in"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"srikakulam","name":"Srikakulam","headquarters":"Srikakulam","neighbouringDistricts":["Vizianagaram","Parvathipuram Manyam","Odisha State (Ganjam/Gajapati)","Bay of Bengal"],"physiography":["North Eastern Coastal Plain"],"rivers":["Vamsadhara","Nagavali","Mahendratanya","Bahuda"],"waterResources":["Vamsadhara Water Resources Complex (Gotta Barrage)","Narayanapuram Anicut (Nagavali)","Offshore Reservoir Hiramandalam"],"terrain":["Coastal plain backed by Eastern Ghats spurs","Long coastline"],"disasters":["Extreme cyclone vulnerability (e.g., Cyclone Phailin, Titli landfall impacts)","River floods along Vamsadhara and Nagavali"],"crops":["Paddy","Coconut","Cashew","Sugarcane","Urad dal"],"economy":["Ponduru Fine Khadi (hand-spun cotton from indigenous hill cotton)","Bhavanapadu Port (under construction)","Marine fishing"],"forestsWildlifeEnvironment":["Telineelapuram Bird Conservation Reserve (nesting site for Spot-billed Pelicans and Painted Storks)","Kalingapatnam beach ecosystems"],"dynasties":["Eastern Gangas of Kalinganagara (Capital at Mukhalingam / Kalingapatnam - 8th–12th Century CE)"],"temples":[{"name":"Suryanarayana Swamy Temple","location":"Arasavalli","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Suryanarayana Swamy (Sun God)","style":"Kalinga / Rekha Deula Style","uniqueFacts":["One of the oldest surviving dedicated Sun Temples in India; constructed by Eastern Ganga King Devendra Varma (7th c. CE); solar alignment allows early sun rays to touch deity's feet on Ratha Saptami"],"festivals":["Ratha Saptami at Arasavalli"]},{"name":"Sri Mukhalingeswara Temple Complex","location":"Mukhalingam (Vamsadhara Riverbank)","administrativeStatus":"ASI Protected Monument / Endowments Managed","deity":"Mukhalingeswara (Shiva)","style":"Early Kalinga Architectural School","uniqueFacts":["Located on Vamsadhara riverbank; ancient capital of Eastern Gangas; trio of temples (Mukhalingeswara, Aniyanka Bheemeshwara, Someshwara) displaying Nagara/Kalinga architectural evolution"]},{"name":"Sri Kurmam Kurmanatha Swamy Temple","location":"Sri Kurmam","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Kurmanatha Swamy (Kurma Avatar)","style":"Kalinga-Dravida Transition","uniqueFacts":["Only prominent active temple in India dedicated to the Kurma (Tortoise) avatar of Lord Vishnu; features two dhwaja stambhams, rear-facing idol, and sanctuary for endangered tortoises"]}],"festivalsAndCulture":["Ratha Saptami at Arasavalli","Shivaratri at Mukhalingam","Dolotsavam at Sri Kurmam"],"quickExtras":["Salihundam: Major Buddhist site on hillock near Vamsadhara river featuring stupas, chaityas, and Viharas with Brahmi inscriptions"],"dontConfuse":["Sri Kurmam is officially verified as the only major functioning temple dedicated to Kurma Avatar in Indian temple literature."],"sources":[{"title":"Srikakulam District Portal","url":"https://srikakulam.ap.gov.in"},{"title":"Arasavalli Devasthanam Portal","url":"https://arasavallisuntemple.org"},{"title":"ASI Hyderabad Circle","url":"https://asihyderabadcircle.in"}]},{"id":"tirupati","name":"Tirupati","headquarters":"Tirupati","neighbouringDistricts":["Chittoor","Annamayya","SPS Nellore","Tamil Nadu State (Tiruvallur)"],"physiography":["Seshachalam Hill Range","Swarnamukhi Basin","Coastal Plain"],"rivers":["Swarnamukhi","Kalangi","Araniyar"],"waterResources":["Kalangi Dam","Araniyar Reservoir","Telugu Ganga Canal link reservoirs (Kailasagiri)"],"terrain":["Seven Hills of Tirumala (Red Hills)","Swarnamukhi river valley","Coastal lagoons in east"],"disasters":["High rainfall / flash flooding along Swarnamukhi basin during North-East monsoon","Cyclonic depressions"],"crops":["Paddy","Groundnut","Sugarcane","Mango"],"economy":["Mega Pilgrimage Tourism (TTD)","Electronics Manufacturing Cluster (EMC Tirupati)","ISRO Spaceport (Sriharikota)"],"forestsWildlifeEnvironment":["Sri Venkateswara National Park","Sri Venkateswara Wildlife Sanctuary","Pulicat Lake Sanctuary (southern portion)","Endemic Red Sanders \u0026 Golden Gecko"],"dynasties":["Pallavas","Cholas (Queen Samavai patronage)","Pandya","Vijayanagara Emperors (Saluva, Tuluva - Krishnadevaraya visited 7 times)","Matli Chiefs"],"temples":[{"name":"Sri Venkateswara Swamy Temple","location":"Tirumala (Venkatadri Hill)","administrativeStatus":"Autonomous TTD under AP Endowments Act 30 of 1987","deity":"Venkateswara Swamy (Srinivasa)","style":"Dravida / Ananda Nilayam Vimana","uniqueFacts":["World's most visited Hindu temple; located on Venkatadri hill; gold-gilded Ananda Nilayam vimana; administered by TTD under statutory Act"]},{"name":"Srikalahasteeswara Temple","location":"Srikalahasti","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Srikalahasteeswara (Vayu Lingam) / Gnanaprasunamba","style":"Dravida / Chola-Vijayanagara Expansion","uniqueFacts":["One of the Pancha Bhoota Stalams representing Vayu (Air); situated on Swarnamukhi riverbank; primary Rahu-Ketu Kshetram; sanctum lamp flame flickers continuously despite no draft"]},{"name":"Padmavathi Ammavari Temple","location":"Tiruchanur","administrativeStatus":"Administered by TTD","deity":"Goddess Padmavathi (Lakshmi)","style":"Dravida Architecture","uniqueFacts":["Primary shrine of Goddess Lakshmi/Padmavathi, consort of Venkateswara"]},{"name":"Govindaraja Swamy Temple","location":"Tirupati City","administrativeStatus":"Administered by TTD","deity":"Govindaraja Swamy (Reclining Vishnu)","style":"Dravida / Tall Rajagopuram","uniqueFacts":["Major Vaishnava temple complex in Tirupati city consecrated by Saint Ramanujacharya"]},{"name":"Kapileswara Swamy Temple","location":"Tirupati City (Kapila Theertham)","administrativeStatus":"Administered by TTD","deity":"Kapileswara Swamy (Shiva)","style":"Dravida Hill Base Shrine","uniqueFacts":["Only Shiva temple in Tirupati city, situated at the foot of Tirumala hills near Kapila Theertham waterfall"]},{"name":"Parasurameswara Temple","location":"Gudimallam","administrativeStatus":"ASI Protected Monument / Endowments","deity":"Parasurameswara (Shiva)","style":"Ancient Indigenous / Dravida","uniqueFacts":["Contains the oldest verified Shiva Lingam in the world (dated 3rd–2nd Century BCE by ASI); Lingam depicts realistic human phallus with hunter figure standing on Yaksha"]}],"festivalsAndCulture":["Tirumala Annual Salakatla and Navaratri Brahmotsavams","Srikalahasti Mahashivaratri Brahmotsavams","Tiruchanur Panchami Theertham"],"quickExtras":["Chandragiri Fort: Historic fort and Raja Mahal palace where Vijayanagara Emperor Sri Ranga Raya III granted land to the British for Fort St. George in 1639"],"dontConfuse":["Gudimallam Lingam is ASI Protected as a 3rd-century BCE relic, distinct from medieval temple architectural styles."],"sources":[{"title":"Tirupati District Portal","url":"https://tirupati.ap.gov.in"},{"title":"TTD Official Portal","url":"https://tirupatibalaji.ap.gov.in"},{"title":"ASI \u0026 AP Endowments Act 1987","url":"https://endowments.ap.gov.in"}]},{"id":"visakhapatnam","name":"Visakhapatnam","headquarters":"Visakhapatnam","neighbouringDistricts":["Anakapalli","Vizianagaram"],"physiography":["North Coastal Plain","Bay of Bengal Coast","Kailasagiri Ridge"],"rivers":["Gosthani","Meghadrigedda"],"waterResources":["Meghadrigedda Reservoir","Mudasarlova Reservoir","Yeleru canal supply line"],"terrain":["Coastal urban hills (Dolphin's Nose, Kailasagiri, Rushikonda)","Natural harbor bay"],"disasters":["High cyclone risk (e.g., Very Severe Cyclonic Storm Hudhud in 2014)","Coastal erosion","Urban industrial hazards"],"crops":["Peri-urban horticulture","Paddy"],"economy":["Visakhapatnam Port Trust (Major Port)","Gangavaram Port","Visakhapatnam Steel Plant (RINL)","Eastern Naval Command (ENC) HQ","Hindustan Shipyard","IT \u0026 Pharma Hub"],"forestsWildlifeEnvironment":["Kambalakonda Wildlife Sanctuary (dry evergreen/deciduous forest sanctuary inside city limits - Indian Leopard, Barking Deer)"],"dynasties":["Eastern Chalukyas","Gajapatis","Vizianagaram Zamindari","British Madras Presidency"],"temples":[{"name":"Varaha Lakshmi Narasimha Swamy Temple","location":"Simhachalam Hill","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Varaha Lakshmi Narasimha Swamy","style":"Kalinga, Chola \u0026 Chalukya Composite Architecture","uniqueFacts":["Perched on Simhachalam hill; deity is continuously covered under a thick coat of Sandalwood paste (Chandanam), revealing actual form (Nija Rupa) only once a year on Chandanotsavam (Akshaya Tritiya)"],"festivals":["Simhachalam Chandanotsavam (Giri Pradakshina - 32 km trek)"]},{"name":"Kanakamahalakshmi Temple","location":"Burujupeta (Visakhapatnam City)","administrativeStatus":"Endowments Department Managed","deity":"Kanakamahalakshmi (Shakti)","style":"Open-air Urban Shrine","uniqueFacts":["Unique open-air shrine without a roof over the presiding deity"]}],"festivalsAndCulture":["Simhachalam Chandanotsavam","Giri Pradakshina","Visakha Utsav"],"quickExtras":["Dolphin's Nose: Prominent rocky promontory 174m high projecting into the sea, protecting natural harbor"],"dontConfuse":["Simhachalam deity is Varaha Narasimha (combination of Boar and Lion avatars), NOT simple Narasimha."],"sources":[{"title":"Visakhapatnam District Portal","url":"https://visakhapatnam.ap.gov.in"},{"title":"Simhachalam Devasthanam Portal","url":"https://simhachalamdevasthanam.org"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"vizianagaram","name":"Vizianagaram","headquarters":"Vizianagaram","neighbouringDistricts":["Visakhapatnam","Anakapalli","Parvathipuram Manyam","Srikakulam"],"physiography":["North Coastal Plain","Eastern Ghats Foothills"],"rivers":["Champavathi","Gosthani","Kandivalasa"],"waterResources":["Tatipudi Reservoir (across Gosthani River - supplies drinking water to Visakhapatnam)","Denkada Anicut"],"terrain":["Undulating plain dotted with isolated granite knolls and hillocks"],"disasters":["Cyclonic rainstorms","Localized flash flooding in river valleys"],"crops":["Sugarcane","Maize","Mesta (Jute alternative)","Paddy","Mango"],"economy":["Ferro-alloy industries","Jute mills","Bobbili Veena handicraft industry"],"crafts":["Bobbili Veena (World-famous string instrument manufactured in Bobbili from single piece Jackwood - GI Tagged)"],"forestsWildlifeEnvironment":["Dry deciduous hill slope forests"],"dynasties":["Pusapati Royal Family (Vizianagaram Samsthanam - Gajapathi Raju rulers)","Bobbili Zamindari"],"historicalNotes":["Battle of Padmanabham (1794): Between Vijayarama Raju and British East India Company. Battle of Bobbili (1757): Historic siege between Bobbili and Vizianagaram aided by French General Bussy."],"temples":[{"name":"Pydithalli Ammavari Temple","location":"Vizianagaram City","administrativeStatus":"Endowments Department Managed","deity":"Pydithalli Ammavaru","style":"Urban Dravida Shrine","uniqueFacts":["Principal patron Goddess of Vizianagaram city; famous for Sirimanotsavam festival"],"festivals":["Sirimanotsavam (Priest perched on tip of 60-ft tall wooden pole - Sirimanu)"]},{"name":"Ramatheertham Sri Rama Temple","location":"Ramatheertham","administrativeStatus":"Endowments Managed / ASI Adjacent","deity":"Sri Rama","style":"Ancient Hill Shrine","uniqueFacts":["Ancient Vaishnava hill shrine located adjacent to 3rd c. BCE Buddhist monastic ruins on Bavikonda/Gurubhaktakonda hillocks"]},{"name":"Bobbili Venugopala Swamy Temple","location":"Bobbili","administrativeStatus":"Endowments Department Managed","deity":"Venugopala Swamy","style":"Royal Fort Shrine","uniqueFacts":["Historic royal shrine of Bobbili fort kings"]},{"name":"Punya Giri Shiva Temple","location":"Near Sothyam","administrativeStatus":"Endowments Managed","deity":"Shiva","style":"Hill Waterfall Shrine","uniqueFacts":["Hilltop waterfall and Shaiva shrine surrounded by natural springs"]}],"festivalsAndCulture":["Sirimanotsavam (Pydithalli Ammavari festival)","Ramatheertham Ratha Saptami"],"quickExtras":["Bobbili Veena: World-famous string instrument crafted from a single piece of Jackwood (GI Tagged)"],"dontConfuse":["Sirimanotsavam is a unique cultural heritage event of Vizianagaram, explicitly recorded under AP Endowments/Cultural records."],"sources":[{"title":"Vizianagaram District Portal","url":"https://vizianagaram.ap.gov.in"},{"title":"AP Endowments Dept \u0026 ASI","url":"https://endowments.ap.gov.in"}]},{"id":"westgodavari","name":"West Godavari","headquarters":"Bhimavaram","neighbouringDistricts":["Eluru","East Godavari","Dr. B.R. Ambedkar Konaseema","Krishna"],"physiography":["Lower Godavari Delta Plain","Coastal Belt"],"rivers":["Vasishta Godavari (eastern boundary)","Yenamadurru drain"],"waterResources":["Godavari Western Delta Canal System (Vijjeswaram lock/headworks)"],"terrain":["Extremely flat deltaic plain","Wetland zones","Sea coast"],"disasters":["High seasonal flooding in delta drains","Cyclonic sea water intrusion","Agricultural waterlogging"],"crops":["Paddy (Rice Bowl district)","Coconut","Sugarcane","Banana"],"economy":["Freshwater Fish Farming (Pangasius/Carp)","Prawn aquaculture hub","Narsapur Lace Industry"],"crafts":["Narsapur Crochet Lace (Hand-made Crochet Lace craft hub - GI Tagged)"],"forestsWildlifeEnvironment":["Kolleru Lake sanctuary (southern fringes)","Coastal mangrove patches along Narsapur coast"],"dynasties":["Eastern Chalukyas","Kakatiyas","Reddis","Dutch East India Company at Narsapur (shipbuilding center)"],"temples":[{"name":"Somarama (Someshwara Swamy Temple)","location":"Gunupudi, Bhimavaram","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Someshwara Swamy (Shiva)","style":"Chalukya-Dravida / Pancharama","uniqueFacts":["One of the 5 Pancharama Kshetrams; Shiva Lingam changes color according to lunar phase (clear white on Full Moon, blackish on Amavasya)"]},{"name":"Ksheerarama (Ksheera Ramalingeswara Swamy Temple)","location":"Palakollu","administrativeStatus":"Endowments Department Managed (Grade-I)","deity":"Ksheera Ramalingeswara Swamy","style":"Chalukya-Dravida / 9-Storey Gopuram","uniqueFacts":["One of the 5 Pancharama Kshetrams; features a 9-storey 120-ft tall Rajagopuram built by Chalukyas and milky white Shiva Lingam"]},{"name":"Mavullamma Temple","location":"Bhimavaram City","administrativeStatus":"Endowments Department Managed","deity":"Mavullamma Ammavaru","style":"Grama Devatha Shrine","uniqueFacts":["Premier Grama Devatha shrine in the delta region; month-long Utsavams in Jan-Feb"]}],"festivalsAndCulture":["Kshiraramam Mahashivaratri Brahmotsavams","Bhimavaram Mavullamma Utsavams"],"quickExtras":["Narsapur Lace Park: Hand-made Crochet Lace craft hub (GI Tagged)"],"dontConfuse":["Two of the 5 Pancharamas—Somarama and Ksheerarama—are located within West Godavari District."],"sources":[{"title":"West Godavari District Portal","url":"https://westgodavari.ap.gov.in"},{"title":"AP Endowments Dept","url":"https://endowments.ap.gov.in"}]},{"id":"ysrkadapa","name":"YSR Kadapa","headquarters":"Kadapa","neighbouringDistricts":["Kurnool","Nandyal","Prakasam","Sri Potti Sriramulu Nellore","Annamayya","Sri Sathya Sai"],"physiography":["Central Rayalaseema Basin","Kunderu Valley"],"rivers":["Penna","Papagni","Chitravathi","Buggavaru"],"waterResources":["Mylavaram Dam (Penna)","Buggavanka Project","Gandikota Reservoir","Lower Sagileru Project"],"terrain":["Surrounded by Palakonda and Nallamala hill arcs","Central red and black soil basin","Gorge canyons"],"disasters":["Seasonal drought in non-irrigated zones","River flooding in Penna basin during cyclonic rain spells"],"crops":["Banana","Turmeric","Papaya","Groundnut","Cotton","Bengalgram","Sunflower"],"minerals":["Barytes (Mangampeta - largest single barytes deposit in the world)","Uranium (Tummalapalle - UCIL mine)","Limestone"],"forestsWildlifeEnvironment":["Sri Lankamalleswara Wildlife Sanctuary (only verified home of the critically endangered endemic bird Jerdon's Courser - Cursorius bitorquatus)"],"dynasties":["Cholas of Renadu (Erickal Mutturaju)","Pemmasani Nayaks","Vijayanagara Emperors","Nawabs of Cuddapah"],"historicalNotes":["Erragudipadu Inscription (575 CE): Issued by Erickal Mutturaju, earliest full stone inscription written in Telugu language."],"temples":[{"name":"Vontimitta Sri Kodandarama Swamy Temple","location":"Vontimitta","administrativeStatus":"Administered by TTD / AP Endowments","deity":"Sri Kodandarama Swamy","style":"Vijayanagara / Dravida Mandapa Style","uniqueFacts":["Massive Vijayanagara temple constructed without Hanuman idol in sanctum (only Rama, Sita, Lakshmana carved on single silt stone); official venue for AP State Government Sri Rama Navami celebrations"],"festivals":["Official AP State Sri Rama Navami Kalyanotsavam"]},{"name":"Devuni Kadapa (Sri Lakshmi Venkateswara Swamy Temple)","location":"Kadapa City","administrativeStatus":"Administered by TTD","deity":"Lakshmi Venkateswara Swamy","style":"Dravida Architecture","uniqueFacts":["Known as the Dehleez (Threshold/Gateway) to Tirumala; traditional pilgrimage custom requires visiting Devuni Kadapa before proceeding to Tirumala"]},{"name":"Gandikota Ranganatha \u0026 Madhavaraya Temples","location":"Gandikota Fort","administrativeStatus":"ASI Protected Monuments","deity":"Ranganatha \u0026 Madhavaraya Swamy","style":"High Vijayanagara Gopuram Style","uniqueFacts":["Historic temples situated inside Gandikota Fort directly above the Penna river gorge"]},{"name":"Pushpagiri Temple Complex","location":"Pushpagiri (Penna Riverbank)","administrativeStatus":"Endowments Department Managed","deity":"Chennakesava \u0026 Vaidyanatha Swamy","style":"Chola / Chalukya / Vijayanagara Complex","uniqueFacts":["Known as the Kashi of the South; situated on banks of Penna River; site of the only Advaita Sankaracharya Matha in Andhra Pradesh"]},{"name":"Soumyanatha Swamy Temple","location":"Nandalur","administrativeStatus":"Endowments Department Managed","deity":"Soumyanatha Swamy","style":"Ancient Chola Architecture","uniqueFacts":["Ancient Chola-era Vishnu shrine featuring detailed stone pillars"]}],"festivalsAndCulture":["Official State Sri Rama Navami Kalyanotsavam at Vontimitta","Pushpagiri Shivaratri"],"quickExtras":["Gandikota Gorge: Known as the Grand Canyon of India, formed by Penna river cutting through Erramala hills"],"dontConfuse":["Official AP Government Sri Rama Navami event takes place at Vontimitta (YSR Kadapa), NOT Bhadrachalam (which is in Telangana)."],"sources":[{"title":"YSR Kadapa District Portal","url":"https://kadapa.ap.gov.in"},{"title":"TTD Vontimitta Admin Records","url":"https://tirupatibalaji.ap.gov.in"},{"title":"ASI \u0026 AP Forest Dept","url":"https://forests.ap.gov.in"}]}]}</script>
+
+  <script>
+    let appData = null;
+    let currentView = 'reading';
+    let currentDistrictIdx = 0;
+    let flashcardsList = [];
+    let currentCardIdx = 0;
+    let knownCards = new Set();
+    let isFlipped = false;
+
+    // Local storage key
+    const STORAGE_KEY = 'appsc_eo_flashcards_progress';
+    const THEME_STORAGE_KEY = 'appsc_eo_appearance_theme';
+    const BW_STORAGE_KEY = 'appsc_eo_appearance_bw';
+    let savedTheme = 'light';
+    let bwEnabled = false;
+
+    function applyAppearance() {
+      document.body.classList.toggle('dark-mode', savedTheme === 'dark' && !bwEnabled);
+      document.body.classList.toggle('bw-mode', bwEnabled);
+
+      const themeToggle = document.getElementById('theme-toggle');
+      const bwToggle = document.getElementById('bw-toggle');
+      const themeState = document.getElementById('theme-state');
+      const bwState = document.getElementById('bw-state');
+      if (themeToggle) {
+        themeToggle.checked = savedTheme === 'dark';
+        themeToggle.disabled = bwEnabled;
+        themeToggle.setAttribute('aria-disabled', String(bwEnabled));
+      }
+      if (bwToggle) bwToggle.checked = bwEnabled;
+      if (themeState) themeState.textContent = savedTheme === 'dark' ? 'Dark' : 'Light';
+      if (bwState) bwState.textContent = bwEnabled ? 'On' : 'Off';
+    }
+
+    function loadAppearance() {
+      try {
+        const theme = localStorage.getItem(THEME_STORAGE_KEY);
+        savedTheme = theme === 'dark' ? 'dark' : 'light';
+        bwEnabled = localStorage.getItem(BW_STORAGE_KEY) === 'true';
+      } catch (e) {
+        savedTheme = 'light';
+        bwEnabled = false;
+      }
+      applyAppearance();
+
+      document.getElementById('theme-toggle').addEventListener('change', (event) => {
+        if (bwEnabled) {
+          event.target.checked = savedTheme === 'dark';
+          return;
+        }
+        savedTheme = event.target.checked ? 'dark' : 'light';
+        try { localStorage.setItem(THEME_STORAGE_KEY, savedTheme); } catch (e) {}
+        applyAppearance();
+      });
+
+      document.getElementById('bw-toggle').addEventListener('change', (event) => {
+        bwEnabled = event.target.checked;
+        try { localStorage.setItem(BW_STORAGE_KEY, String(bwEnabled)); } catch (e) {}
+        // Keep savedTheme untouched: disabling B&W restores the prior light/dark choice.
+        applyAppearance();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAppearance();
+      loadProgress();
+      fetchData();
+    });
+
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            knownCards = new Set(parsed);
+          }
+        }
+      } catch (e) {
+        console.warn('Could not load progress from localStorage:', e);
+      }
+    }
+
+    function saveProgress() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...knownCards]));
+      } catch (e) {
+        console.warn('Could not save progress to localStorage:', e);
+      }
+    }
+
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset your flashcard learning progress?')) {
+        knownCards.clear();
+        saveProgress();
+        if (currentView === 'flashcards') {
+          renderFlashcardsView();
+        }
+      }
+    }
+
+    // The dataset is embedded in this HTML, so no external fetch or file picker is needed.
+    function fetchData() {
+      try {
+        const datasetElement = document.getElementById('embedded-district-dataset');
+        if (!datasetElement) {
+          throw new Error('The embedded district dataset is missing from this HTML file.');
+        }
+        const data = JSON.parse(datasetElement.textContent);
+        validateData(data);
+        appData = data;
+        initApp();
+      } catch (err) {
+        showError(err.message || 'The embedded district dataset could not be loaded.');
+      }
+    }
+
+    function validateData(data) {
+      if (!data || !Array.isArray(data.districts) || data.districts.length === 0) {
+        throw new Error('Malformed dataset: Expected a non-empty "districts" array.');
+      }
+    }
+
+    function showError(msg) {
+      const container = document.getElementById('app-container');
+      container.innerHTML = `
+        <div class="error-box">
+          <h3>Could not load the district dataset</h3>
+          <p>${escapeHtml(msg)}</p>
+          <p style="margin-top:0.75rem;">This standalone HTML is expected to contain its own dataset. If this message persists, download the HTML file again and open that copy.</p>
+        </div>
+      `;
+    }
+
+    function initApp() {
+      document.getElementById('district-count-badge').textContent = `${appData.districts.length} Districts Verified (${appData.metadata.workingDistrictCount} Working Count)`;
+      generateAllFlashcards();
+      renderCurrentView();
+    }
+
+    function switchView(view) {
+      currentView = view;
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', 
+          (view === 'reading' && idx === 0) || 
+          (view === 'flashcards' && idx === 1) || 
+          (view === 'compact' && idx === 2)
+        );
+      });
+      renderCurrentView();
+    }
+
+    function renderCurrentView() {
+      const container = document.getElementById('app-container');
+      container.innerHTML = '';
+
+      if (currentView === 'reading') {
+        renderReadingView(container);
+      } else if (currentView === 'flashcards') {
+        renderFlashcardsView(container);
+      } else if (currentView === 'compact') {
+        renderCompactView(container);
+      }
+    }
+
+    // READING VIEW
+    function renderReadingView(container) {
+      const d = appData.districts[currentDistrictIdx];
+
+      let navHtml = `
+        <div class="controls-bar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search temple, river, dynasty, crop, or district..." oninput="handleSearch(this.value)">
+          </div>
+          <div class="filter-group">
+            <label for="district-select"><strong>Jump to District:</strong></label>
+            <select id="district-select" onchange="selectDistrict(this.value)">
+              <option value="all">-- All Districts Grid --</option>
+              ${appData.districts.map((dist, idx) => `<option value="${idx}" ${idx === currentDistrictIdx ? 'selected' : ''}>${idx + 1}. ${escapeHtml(dist.name)}</option>`).join('')}
+            </select>
+            <button class="btn" onclick="window.print()">🖨️ Print View</button>
+          </div>
+        </div>
+
+        <div class="district-nav">
+          <button class="btn" onclick="prevDistrict()" ${currentDistrictIdx === 0 ? 'disabled' : ''}>← Previous</button>
+          <div class="district-title-display">${currentDistrictIdx + 1} of ${appData.districts.length}: ${escapeHtml(d.name)}</div>
+          <button class="btn" onclick="nextDistrict()" ${currentDistrictIdx === appData.districts.length - 1 ? 'disabled' : ''}>Next →</button>
+        </div>
+
+        <div id="district-content-area">
+          ${renderDistrictCard(d)}
+        </div>
+      `;
+
+      container.innerHTML = navHtml;
+    }
+
+    function selectDistrict(val) {
+      if (val === 'all') {
+        renderAllDistrictsGrid();
+      } else {
+        currentDistrictIdx = parseInt(val, 10);
+        renderCurrentView();
+      }
+    }
+
+    function prevDistrict() {
+      if (currentDistrictIdx > 0) {
+        currentDistrictIdx--;
+        renderCurrentView();
+      }
+    }
+
+    function nextDistrict() {
+      if (currentDistrictIdx < appData.districts.length - 1) {
+        currentDistrictIdx++;
+        renderCurrentView();
+      }
+    }
+
+    function renderDistrictCard(d, query = '') {
+      return `
+        <div class="card">
+          <div class="card-title">
+            <span>${highlightText(escapeHtml(d.name), query)}</span>
+            <span class="tag">HQ: ${highlightText(escapeHtml(d.headquarters || 'N/A'), query)}</span>
+          </div>
+
+          ${renderSection('Identity & Location', [
+            d.headquarters ? `<strong>Headquarters:</strong> ${escapeHtml(d.headquarters)}` : null,
+            d.neighbouringDistricts && d.neighbouringDistricts.length ? `<strong>Neighbouring:</strong> ${escapeHtml(d.neighbouringDistricts.join(', '))}` : null,
+            d.physiography && d.physiography.length ? `<strong>Physiography:</strong> ${escapeHtml(d.physiography.join('; '))}` : null
+          ], query)}
+
+          ${renderSection('Rivers & Water Resources', [
+            d.rivers && d.rivers.length ? `<strong>Rivers:</strong> ${escapeHtml(d.rivers.join(', '))}` : null,
+            d.waterResources && d.waterResources.length ? `<strong>Projects/Lakes:</strong> ${escapeHtml(d.waterResources.join('; '))}` : null
+          ], query)}
+
+          ${renderSection('Terrain & Natural Disasters', [
+            d.terrain && d.terrain.length ? `<strong>Terrain:</strong> ${escapeHtml(d.terrain.join('; '))}` : null,
+            d.disasters && d.disasters.length ? `<strong>Hazards:</strong> ${escapeHtml(d.disasters.join('; '))}` : null
+          ], query)}
+
+          ${renderSection('Crops & Economy', [
+            d.crops && d.crops.length ? `<strong>Crops:</strong> ${escapeHtml(d.crops.join(', '))}` : null,
+            d.economy && d.economy.length ? `<strong>Economy/Industry:</strong> ${escapeHtml(d.economy.join('; '))}` : null,
+            d.minerals && d.minerals.length ? `<strong>Minerals:</strong> ${escapeHtml(d.minerals.join('; '))}` : null,
+            d.livestockMinerals && d.livestockMinerals.length ? `<strong>Livestock/Minerals:</strong> ${escapeHtml(d.livestockMinerals.join('; '))}` : null,
+            d.crafts && d.crafts.length ? `<strong>Crafts:</strong> ${escapeHtml(d.crafts.join('; '))}` : null
+          ], query)}
+
+          ${renderSection('Forests, Wildlife & Environment', [
+            d.forestsWildlifeEnvironment && d.forestsWildlifeEnvironment.length ? escapeHtml(d.forestsWildlifeEnvironment.join('; ')) : null
+          ], query)}
+
+          ${renderSection('Kings & Dynasties', [
+            d.dynasties && d.dynasties.length ? `<strong>Dynasties:</strong> ${escapeHtml(d.dynasties.join(', '))}` : null,
+            d.historicalNotes && d.historicalNotes.length ? escapeHtml(d.historicalNotes.join('; ')) : null
+          ], query)}
+
+          ${d.temples && d.temples.length ? `
+            <div class="section-header">Important Temples (Paper-II Focus)</div>
+            ${d.temples.map(t => renderTempleBlock(t, query)).join('')}
+          ` : ''}
+
+          ${renderSection('Festivals & Culture', d.festivalsAndCulture, query)}
+          ${renderSection('Quick Extras', d.quickExtras, query)}
+          ${renderSection("Don't Confuse", d.dontConfuse, query)}
+
+          ${d.sources && d.sources.length ? `
+            <div class="section-header">Official Primary Sources</div>
+            <div class="sources-list">
+              ${d.sources.map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.title)}</a>`).join(' | ')}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderSection(title, items, query = '') {
+      if (!items) return '';
+      const validItems = items.filter(i => i !== null && i !== undefined && i !== '');
+      if (validItems.length === 0) return '';
+
+      return `
+        <div class="section-header">${title}</div>
+        <ul class="fact-list">
+          ${validItems.map(item => `<li>${highlightText(item, query)}</li>`).join('')}
+        </ul>
+      `;
+    }
+
+    function renderTempleBlock(t, query = '') {
+      const isEndowments = t.administrativeStatus && t.administrativeStatus.toLowerCase().includes('endowments');
+      const isASI = t.administrativeStatus && t.administrativeStatus.toLowerCase().includes('asi');
+
+      return `
+        <div class="temple-block">
+          <div class="temple-name">
+            ${highlightText(escapeHtml(t.name), query)}
+            ${isEndowments ? '<span class="tag tag-endowments">Endowments</span>' : ''}
+            ${isASI ? '<span class="tag tag-asi">ASI Protected</span>' : ''}
+          </div>
+          <div class="temple-meta">
+            ${t.location ? `Location: ${escapeHtml(t.location)} | ` : ''}
+            ${t.deity ? `Deity: ${escapeHtml(t.deity)} | ` : ''}
+            ${t.style ? `Style: ${escapeHtml(t.style)}` : ''}
+          </div>
+          ${t.uniqueFacts && t.uniqueFacts.length ? `
+            <ul class="fact-list" style="margin-top:0.3rem;">
+              ${t.uniqueFacts.map(uf => `<li>${highlightText(escapeHtml(uf), query)}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${t.festivals && t.festivals.length ? `
+            <div style="font-size:0.8rem; color: var(--text-muted); margin-top:0.2rem;">
+              <strong>Festivals:</strong> ${escapeHtml(t.festivals.join(', '))}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderAllDistrictsGrid() {
+      const area = document.getElementById('district-content-area');
+      area.className = 'district-grid';
+      area.innerHTML = appData.districts.map(d => renderDistrictCard(d)).join('');
+    }
+
+    function handleSearch(query) {
+      query = query.trim().toLowerCase();
+      const area = document.getElementById('district-content-area');
+
+      if (!query) {
+        area.className = '';
+        area.innerHTML = renderDistrictCard(appData.districts[currentDistrictIdx]);
+        return;
+      }
+
+      const matchingDistricts = appData.districts.filter(d => {
+        const str = JSON.stringify(d).toLowerCase();
+        return str.includes(query);
+      });
+
+      if (matchingDistricts.length === 0) {
+        area.className = '';
+        area.innerHTML = `<div class="error-box" style="background:#fff; border-color:#cbd5e1; color:#475569;">No districts or facts matched your search query "${escapeHtml(query)}".</div>`;
+        return;
+      }
+
+      area.className = 'district-grid';
+      area.innerHTML = matchingDistricts.map(d => renderDistrictCard(d, query)).join('');
+    }
+
+    function highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+      return text.replace(regex, '<mark class="highlight">$1</mark>');
+    }
+
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // FLASHCARD GENERATOR LOGIC
+    function generateAllFlashcards() {
+      flashcardsList = [];
+
+      appData.districts.forEach(d => {
+        // Rivers & Water
+        if (d.rivers && d.rivers.length) {
+          flashcardsList.push({
+            id: `river_${d.id}`,
+            district: d.name,
+            paper: 'Paper-I',
+            topic: 'Rivers & Geography',
+            question: `Which important rivers and water bodies flow through or border ${d.name} District?`,
+            answer: `Rivers: ${d.rivers.join(', ')}.\nProjects: ${(d.waterResources || []).join('; ')}.`
+          });
+        }
+
+        // Dynasties
+        if (d.dynasties && d.dynasties.length) {
+          flashcardsList.push({
+            id: `dynasty_${d.id}`,
+            district: d.name,
+            paper: 'Paper-I & II',
+            topic: 'Dynasties & History',
+            question: `Which historic dynasties and rulers are associated with ${d.name} District?`,
+            answer: `Dynasties: ${d.dynasties.join(', ')}.\nHistorical Highlights: ${(d.historicalNotes || []).join('; ')}.`
+          });
+        }
+
+        // Hazards
+        if (d.disasters && d.disasters.length) {
+          flashcardsList.push({
+            id: `disaster_${d.id}`,
+            district: d.name,
+            paper: 'Paper-I',
+            topic: 'Disasters & Hazards',
+            question: `What are the primary natural hazard vulnerabilities for ${d.name} District?`,
+            answer: d.disasters.join('; ')
+          });
+        }
+
+        // Temples
+        if (d.temples && d.temples.length) {
+          d.temples.forEach((t, tIdx) => {
+            flashcardsList.push({
+              id: `temple_${d.id}_${tIdx}`,
+              district: d.name,
+              paper: 'Paper-II',
+              topic: 'Temples & Endowments',
+              question: `What are the key features, deity, and administrative status of ${t.name} in ${d.name} District?`,
+              answer: `Location: ${t.location || d.name}\nDeity: ${t.deity || 'N/A'}\nStatus: ${t.administrativeStatus || 'N/A'}\nStyle: ${t.style || 'N/A'}\nDistinctive Facts: ${(t.uniqueFacts || []).join('; ')}`
+            });
+          });
+        }
+
+        // Crops & Economy
+        if (d.crops && d.crops.length) {
+          flashcardsList.push({
+            id: `crop_${d.id}`,
+            district: d.name,
+            paper: 'Paper-I',
+            topic: 'Crops & Economy',
+            question: `What are the major agricultural crops and economic drivers of ${d.name} District?`,
+            answer: `Crops: ${d.crops.join(', ')}.\nEconomy: ${(d.economy || []).join('; ')}.`
+          });
+        }
+
+        // Don't Confuse
+        if (d.dontConfuse && d.dontConfuse.length) {
+          flashcardsList.push({
+            id: `trap_${d.id}`,
+            district: d.name,
+            paper: 'Both',
+            topic: "Don't Confuse / MCQ Traps",
+            question: `MCQ Trap Alert: What commonly confused fact should you remember regarding ${d.name} District?`,
+            answer: d.dontConfuse.join(' ')
+          });
+        }
+      });
+    }
+
+    // FLASHCARDS VIEW RENDER
+    function renderFlashcardsView(container = document.getElementById('app-container')) {
+      if (flashcardsList.length === 0) generateAllFlashcards();
+
+      const filteredCards = getFilteredCards();
+      
+      let html = `
+        <div class="controls-bar">
+          <div class="filter-group">
+            <label><strong>Filter Topic:</strong></label>
+            <select id="fc-topic-filter" onchange="renderFlashcardsView()">
+              <option value="all">All Topics</option>
+              <option value="Temples & Endowments">Temples & Endowments (Paper-II)</option>
+              <option value="Rivers & Geography">Rivers & Geography</option>
+              <option value="Dynasties & History">Dynasties & History</option>
+              <option value="Disasters & Hazards">Disasters & Hazards</option>
+              <option value="Crops & Economy">Crops & Economy</option>
+              <option value="Don't Confuse / MCQ Traps">MCQ Traps</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><strong>District:</strong></label>
+            <select id="fc-district-filter" onchange="renderFlashcardsView()">
+              <option value="all">All 28 Districts</option>
+              ${appData.districts.map(d => `<option value="${escapeHtml(d.name)}">${escapeHtml(d.name)}</option>`).join('')}
+            </select>
+          </div>
+
+          <div class="stats-bar">
+            <span>Known: <strong style="color:var(--success);">${knownCards.size}</strong></span>
+            <span>Total Deck: <strong>${flashcardsList.length}</strong></span>
+            <button class="source-toggle-btn" onclick="resetProgress()">Reset Progress</button>
+          </div>
+        </div>
+
+        ${filteredCards.length === 0 ? `
+          <div class="error-box" style="background:#fff; border-color:#cbd5e1; color:#475569;">No flashcards found matching the selected filters.</div>
+        ` : `
+          <div class="flashcard-wrapper">
+            <div class="flashcard-header">
+              <span><strong>${escapeHtml(filteredCards[currentCardIdx % filteredCards.length].district)}</strong> | ${escapeHtml(filteredCards[currentCardIdx % filteredCards.length].topic)}</span>
+              <span>Card ${(currentCardIdx % filteredCards.length) + 1} of ${filteredCards.length}</span>
+            </div>
+
+            <div class="flashcard-container" onclick="flipCard()">
+              <div class="flashcard ${isFlipped ? 'flipped' : ''}" id="active-flashcard">
+                <span class="card-label">${isFlipped ? 'Answer' : 'Question (Click to reveal)'}</span>
+                <div class="card-question">${escapeHtml(filteredCards[currentCardIdx % filteredCards.length].question)}</div>
+                <div class="card-answer">${escapeHtml(filteredCards[currentCardIdx % filteredCards.length].answer).replace(/\n/g, '<br>')}</div>
+                <div class="click-hint">${isFlipped ? 'Click again to return to question' : 'Click card or press Spacebar to flip'}</div>
+              </div>
+            </div>
+
+            <div class="flashcard-controls">
+              <button class="btn" onclick="prevCard()">← Prev</button>
+              <button class="btn btn-accent" onclick="knowCard('${filteredCards[currentCardIdx % filteredCards.length].id}')">
+                ${knownCards.has(filteredCards[currentCardIdx % filteredCards.length].id) ? '✓ Marked Known' : 'Mark as Known'}
+              </button>
+              <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
+              <button class="btn btn-primary" onclick="nextCard()">Next →</button>
+            </div>
+          </div>
+        `}
+      `;
+
+      container.innerHTML = html;
+    }
+
+    function getFilteredCards() {
+      const topic = document.getElementById('fc-topic-filter') ? document.getElementById('fc-topic-filter').value : 'all';
+      const district = document.getElementById('fc-district-filter') ? document.getElementById('fc-district-filter').value : 'all';
+
+      return flashcardsList.filter(c => {
+        const matchTopic = (topic === 'all' || c.topic === topic);
+        const matchDistrict = (district === 'all' || c.district === district);
+        return matchTopic && matchDistrict;
+      });
+    }
+
+    function flipCard() {
+      isFlipped = !isFlipped;
+      const cardEl = document.getElementById('active-flashcard');
+      if (cardEl) cardEl.classList.toggle('flipped', isFlipped);
+    }
+
+    function nextCard() {
+      isFlipped = false;
+      const cards = getFilteredCards();
+      if (cards.length > 0) {
+        currentCardIdx = (currentCardIdx + 1) % cards.length;
+        renderFlashcardsView();
+      }
+    }
+
+    function prevCard() {
+      isFlipped = false;
+      const cards = getFilteredCards();
+      if (cards.length > 0) {
+        currentCardIdx = (currentCardIdx - 1 + cards.length) % cards.length;
+        renderFlashcardsView();
+      }
+    }
+
+    function shuffleCards() {
+      isFlipped = false;
+      for (let i = flashcardsList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [flashcardsList[i], flashcardsList[j]] = [flashcardsList[j], flashcardsList[i]];
+      }
+      currentCardIdx = 0;
+      renderFlashcardsView();
+    }
+
+    function knowCard(id) {
+      if (knownCards.has(id)) {
+        knownCards.delete(id);
+      } else {
+        knownCards.add(id);
+      }
+      saveProgress();
+      renderFlashcardsView();
+    }
+
+    // COMPACT REVISION VIEW
+    function renderCompactView(container) {
+      let html = `
+        <div class="controls-bar">
+          <h2>Compact Rapid Revision Table</h2>
+          <button class="btn btn-primary" onclick="window.print()">🖨️ Print Summary</button>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; background:#fff; font-size:0.88rem; border:1px solid var(--border);">
+            <thead>
+              <tr style="background:var(--primary-dark); color:#fff; text-align:left;">
+                <th style="padding:0.75rem; border:1px solid var(--border);">#</th>
+                <th style="padding:0.75rem; border:1px solid var(--border);">District & HQ</th>
+                <th style="padding:0.75rem; border:1px solid var(--border);">Key Rivers</th>
+                <th style="padding:0.75rem; border:1px solid var(--border);">Major Temples (Paper-II)</th>
+                <th style="padding:0.75rem; border:1px solid var(--border);">Key MCQ Distinction</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${appData.districts.map((d, idx) => `
+                <tr style="border-bottom:1px solid var(--border); background:${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+                  <td style="padding:0.6rem; border:1px solid var(--border); font-weight:bold;">${idx + 1}</td>
+                  <td style="padding:0.6rem; border:1px solid var(--border);">
+                    <strong>${escapeHtml(d.name)}</strong><br>
+                    <small style="color:var(--text-muted);">HQ: ${escapeHtml(d.headquarters)}</small>
+                  </td>
+                  <td style="padding:0.6rem; border:1px solid var(--border);">${escapeHtml((d.rivers || []).join(', '))}</td>
+                  <td style="padding:0.6rem; border:1px solid var(--border);">
+                    ${(d.temples || []).map(t => `• <strong>${escapeHtml(t.name)}</strong> (${escapeHtml(t.deity || '')})`).join('<br>')}
+                  </td>
+                  <td style="padding:0.6rem; border:1px solid var(--border); color:#92400e;">
+                    ${escapeHtml((d.dontConfuse || []).join(' '))}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+      container.innerHTML = html;
+    }
+
+    // Keyboard Navigation for Flashcards
+    document.addEventListener('keydown', (e) => {
+      if (currentView === 'flashcards') {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          flipCard();
+        } else if (e.code === 'ArrowRight') {
+          nextCard();
+        } else if (e.code === 'ArrowLeft') {
+          prevCard();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
