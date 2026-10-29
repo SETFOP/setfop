@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f5f7">
+<title>APPSC EO Grade III — Study Hub</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f5f5f7;
+    --surface: rgba(255,255,255,.82);
+    --surface-solid: #fff;
+    --text: #202124;
+    --muted: #6b7280;
+    --line: rgba(30, 41, 59, .12);
+    --accent: #315c9b;
+    --accent-soft: #e9eff9;
+    --shadow: 0 18px 50px rgba(25, 35, 55, .07);
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #151619;
+    --surface: rgba(34,36,40,.9);
+    --surface-solid: #222428;
+    --text: #f2f2f3;
+    --muted: #a6a8ae;
+    --line: rgba(255,255,255,.11);
+    --accent: #a8c5f4;
+    --accent-soft: #2c3544;
+    --shadow: 0 18px 50px rgba(0,0,0,.22);
+  }
+  [data-theme="bw"] {
+    color-scheme: light;
+    --bg: #fff;
+    --surface: #fff;
+    --surface-solid: #fff;
+    --text: #000;
+    --muted: #444;
+    --line: #777;
+    --accent: #000;
+    --accent-soft: #eee;
+    --shadow: none;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    transition: background .2s ease, color .2s ease;
+  }
+  .wrap { width: min(1080px, calc(100% - 32px)); margin: 0 auto; }
+  header { padding: 34px 0 24px; }
+  .topline { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .eyebrow { color:var(--muted); text-transform:uppercase; letter-spacing:.14em; font-size:.76rem; font-weight:700; }
+  h1 { margin: 8px 0 6px; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height:1.12; letter-spacing:-.045em; }
+  .intro { margin:0; color:var(--muted); max-width:660px; }
+  .theme-tools { display:flex; gap:6px; padding:5px; border:1px solid var(--line); border-radius:999px; background:var(--surface); }
+  .theme-tools button { border:0; border-radius:999px; padding:8px 11px; background:transparent; color:var(--text); cursor:pointer; font-size:.82rem; }
+  .theme-tools button[aria-pressed="true"] { background:var(--accent-soft); font-weight:700; }
+  main { padding: 12px 0 56px; }
+  .section-heading { display:flex; justify-content:space-between; align-items:end; gap:12px; margin: 10px 0 18px; }
+  .section-heading h2 { margin:0; font-size:1.1rem; letter-spacing:-.02em; }
+  .section-heading p { margin:0; color:var(--muted); font-size:.88rem; }
+  .papers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; align-items:start; }
+  .paper { background:var(--surface); border:1px solid var(--line); border-radius:22px; box-shadow:var(--shadow); overflow:hidden; backdrop-filter:blur(16px); }
+  .paper-toggle { display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%; padding:22px; border:0; background:transparent; color:inherit; text-align:left; cursor:pointer; }
+  .paper-toggle:hover { background:var(--accent-soft); }
+  .paper-label { display:flex; align-items:center; gap:14px; }
+  .paper-number { display:grid; place-items:center; width:48px; height:48px; border-radius:15px; background:var(--accent-soft); color:var(--accent); font-weight:800; flex-shrink:0; }
+  .paper-title { display:block; font-size:1.18rem; font-weight:750; letter-spacing:-.025em; }
+  .paper-subtitle { display:block; margin-top:3px; color:var(--muted); font-size:.88rem; }
+  .arrow { font-size:1.25rem; color:var(--muted); transition:transform .2s ease; }
+  .paper-toggle[aria-expanded="true"] .arrow { transform:rotate(180deg); }
+  .paper-meta { display:flex; gap:8px; padding:0 22px 18px; flex-wrap:wrap; }
+  .pill { border:1px solid var(--line); border-radius:999px; padding:5px 10px; font-size:.77rem; color:var(--muted); }
+  .syllabus { border-top:1px solid var(--line); padding:10px 18px 18px; }
+  .syllabus[hidden] { display:none; }
+  .topic { display:grid; grid-template-columns:30px minmax(0,1fr); gap:10px; padding:13px 4px; border-bottom:1px solid var(--line); }
+  .topic:last-child { border-bottom:0; }
+  .topic-num { display:grid; place-items:center; width:28px; height:28px; border-radius:9px; background:var(--accent-soft); color:var(--accent); font-size:.78rem; font-weight:800; }
+  .topic h3 { margin:1px 0 5px; font-size:.94rem; line-height:1.35; }
+  .topic p { margin:0; color:var(--muted); font-size:.85rem; }
+  .topic-actions { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .small-btn { display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:9px; padding:6px 10px; color:var(--text); text-decoration:none; font-size:.78rem; background:var(--surface-solid); }
+  .small-btn:hover { border-color:var(--accent); background:var(--accent-soft); }
+  .note { margin-top:18px; padding:15px 17px; border:1px dashed var(--line); border-radius:14px; color:var(--muted); font-size:.86rem; }
+  footer { padding:0 0 28px; color:var(--muted); font-size:.8rem; text-align:center; }
+  @media (max-width:700px) {
+    .topline { align-items:flex-start; flex-direction:column; }
+    .theme-tools { align-self:flex-start; }
+    .papers { grid-template-columns:1fr; }
+    header { padding-top:25px; }
+    .paper-toggle { padding:18px; }
+    .paper-meta { padding-left:18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; }
+  }
+</style>
+</head>
+<body data-theme="light">
+<header class="wrap">
+  <div class="topline">
+    <div>
+      <div class="eyebrow">Study workspace · Andhra Pradesh</div>
+      <h1>APPSC Endowment Officer</h1>
+      <p class="intro">Grade III syllabus hub — choose a paper to expand its subjects and jump into your study material.</p>
+    </div>
+    <div class="theme-tools" aria-label="Appearance">
+      <button type="button" data-set-theme="light" aria-pressed="true">Light</button>
+      <button type="button" data-set-theme="dark" aria-pressed="false">Dark</button>
+      <button type="button" data-set-theme="bw" aria-pressed="false">B&amp;W</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="section-heading">
+    <h2>Your syllabus</h2>
+    <p>Tap a paper to open or close its topics</p>
+  </div>
+
+  <div class="papers">
+    <section class="paper" aria-labelledby="paper1-title">
+      <button class="paper-toggle" id="paper1-toggle" type="button" aria-expanded="false" aria-controls="paper1-syllabus">
+        <span class="paper-label">
+          <span class="paper-number">01</span>
+          <span>
+            <span class="paper-title" id="paper1-title">Paper I</span>
+            <span class="paper-subtitle">General Studies &amp; Mental Ability</span>
+          </span>
+        </span>
+        <span class="arrow" aria-hidden="true">⌄</span>
+      </button>
+      <div class="paper-meta"><span class="pill">10 subjects</span><span class="pill">General Studies</span></div>
+      <div class="syllabus" id="paper1-syllabus" hidden>
+        <article class="topic"><span class="topic-num">01</span><div><h3>Current Events &amp; Issues</h3><p>International, national and Andhra Pradesh state events and issues.</p><div class="topic-actions"><a class="small-btn" href="paper1/current-affairs.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">02</span><div><h3>General Science &amp; Technology</h3><p>Science in everyday life, contemporary developments in science and technology, and Information Technology.</p><div class="topic-actions"><a class="small-btn" href="paper1/general-science.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">03</span><div><h3>History of India</h3><p>Social, economic, cultural and political aspects, with emphasis on Andhra Pradesh and the Indian National Movement.</p><div class="topic-actions"><a class="small-btn" href="paper1/history.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">04</span><div><h3>Geography of India</h3><p>Geography of India with a focus on Andhra Pradesh.</p><div class="topic-actions"><a class="small-btn" href="paper1/geography.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">05</span><div><h3>Indian Polity &amp; Governance</h3><p>Constitutional issues, public policy, reforms and e-Governance initiatives.</p><div class="topic-actions"><a class="small-btn" href="paper1/polity-governance.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">06</span><div><h3>Indian Economy &amp; Planning</h3><p>Indian economy and planning.</p><div class="topic-actions"><a class="small-btn" href="paper1/economy.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">07</span><div><h3>Sustainable Development &amp; Environment</h3><p>Sustainable development and environmental protection.</p><div class="topic-actions"><a class="small-btn" href="paper1/environment.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">08</span><div><h3>Disaster Management</h3><p>Vulnerability profile, prevention and mitigation strategies, and remote sensing and GIS in disaster assessment.</p><div class="topic-actions"><a class="small-btn" href="paper1/disaster-management.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">09</span><div><h3>Logical Reasoning &amp; Analytical Ability</h3><p>Logical reasoning, analytical ability and logical interpretation.</p><div class="topic-actions"><a class="small-btn" href="paper1/reasoning.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">10</span><div><h3>Data Analysis</h3><p>Tabulation, visual representation, summary statistics (mean, median, mode and variance), and interpretation.</p><div class="topic-actions"><a class="small-btn" href="paper1/data-analysis.html">Open notes ↗</a></div></div></article>
+      </div>
+    </section>
+
+    <section class="paper" aria-labelledby="paper2-title">
+      <button class="paper-toggle" id="paper2-toggle" type="button" aria-expanded="false" aria-controls="paper2-syllabus">
+        <span class="paper-label">
+          <span class="paper-number">02</span>
+          <span>
+            <span class="paper-title" id="paper2-title">Paper II</span>
+            <span class="paper-subtitle">Hindu Philosophy &amp; Temple System</span>
+          </span>
+        </span>
+        <span class="arrow" aria-hidden="true">⌄</span>
+      </button>
+      <div class="paper-meta"><span class="pill">12 subjects</span><span class="pill">Hindu Philosophy</span></div>
+      <div class="syllabus" id="paper2-syllabus" hidden>
+        <article class="topic"><span class="topic-num">01</span><div><h3>Ramayanam</h3><p>Characters, Kandas, dynasties and places mentioned in the Ramayana.</p><div class="topic-actions"><a class="small-btn" href="paper2/ramayanam.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">02</span><div><h3>Mahabharatham</h3><p>Characters, Parvas, dynasties and places mentioned in the Mahabharata.</p><div class="topic-actions"><a class="small-btn" href="paper2/mahabharatham.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">03</span><div><h3>Bhagavatham</h3><p>Characters, Skandams and places mentioned in the Bhagavatham.</p><div class="topic-actions"><a class="small-btn" href="paper2/bhagavatham.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">04</span><div><h3>Hindu Puranams</h3><p>Basic knowledge of the Hindu Puranas and places mentioned in them.</p><div class="topic-actions"><a class="small-btn" href="paper2/puranams.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">05</span><div><h3>Temple Agamas</h3><p>Vaishnava Agamas: Vaikhanasam, Pancharathram and Chattada Srivaishnavam; Saiva Agamas: Smardham, Adi Saiva, Veera Saiva and Jangama; Kapalika; and Saktheyam for Mother Goddesses.</p><div class="topic-actions"><a class="small-btn" href="paper2/agamas.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">06</span><div><h3>Hindu Festivals &amp; Classical Fine Arts</h3><p>Festivals celebrated in different parts of India and classical fine arts of Indian origin.</p><div class="topic-actions"><a class="small-btn" href="paper2/festivals-fine-arts.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">07</span><div><h3>Vedic Culture</h3><p>Yagnas and Yagams, Vedas, Upavedas, Upanishads and Dharmas in different stages of life.</p><div class="topic-actions"><a class="small-btn" href="paper2/vedic-culture.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">08</span><div><h3>Philosophies, Cults &amp; Gurus</h3><p>Alwars, Nayanars, Sankaracharya (Advaita), Ramanujacharya (Visishtadvaita), Madhwacharya (Dwaithadvatham) and Basava (Veera Saiva).</p><div class="topic-actions"><a class="small-btn" href="paper2/philosophies-gurus.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">09</span><div><h3>Family Structure, Adoption &amp; Succession</h3><p>Family structure in Hindu society, adoption and succession.</p><div class="topic-actions"><a class="small-btn" href="paper2/family-adoption-succession.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">10</span><div><h3>Temple Income &amp; Allocation of Funds</h3><p>Sources of income for temples and charitable institutions; allocation of endowment funds for different purposes (Sections 57 of the Endowments Act, 30/87).</p><div class="topic-actions"><a class="small-btn" href="paper2/temple-income-funds.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">11</span><div><h3>Duties of Executive Officers</h3><p>Duties of Executive Officers of Endowment Institutions (Section 29 of the Endowments Act, 30/87).</p><div class="topic-actions"><a class="small-btn" href="paper2/executive-officer-duties.html">Open notes ↗</a></div></div></article>
+        <article class="topic"><span class="topic-num">12</span><div><h3>Land Records &amp; Endowment Lands</h3><p>Land records, law relating to endowment lands, ROR Act, Record of Rights in Land and Pattadar Pass Book Act, and Sections 75–86 of the Endowments Act 30/87.</p><div class="topic-actions"><a class="small-btn" href="paper2/land-records.html">Open notes ↗</a></div></div></article>
+      </div>
+    </section>
+  </div>
+
+  <div class="note"><strong>Setup note:</strong> The “Open notes” links are starter paths. Create the matching files/folders under <code>EO/</code>, or edit each link’s <code>href</code> to point to pages you already have. This page works as a standalone HTML file and does not require a framework.</div>
+</main>
+<footer class="wrap">APPSC Endowment Officer Grade III · Personal study hub</footer>
+<script>
+  document.querySelectorAll('.paper-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = document.getElementById(button.getAttribute('aria-controls'));
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!isOpen));
+      panel.hidden = isOpen;
+    });
+  });
+
+  document.querySelectorAll('[data-set-theme]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const theme = button.dataset.setTheme;
+      document.body.dataset.theme = theme;
+      document.querySelectorAll('[data-set-theme]').forEach((item) => {
+        item.setAttribute('aria-pressed', String(item === button));
+      });
+      document.querySelector('meta[name="theme-color"]').content =
+        theme === 'dark' ? '#151619' : theme === 'bw' ? '#ffffff' : '#f5f5f7';
+    });
+  });
+</script>
+</body>
+</html>
