@@ -921,4 +921,68 @@ function toggleMenu() {
 }
 
 function openSearch() {
-    document.getElementById('searchOverlay'
+    document.getElementById('searchOverlay').classList.add('open');
+    document.getElementById('searchInput').focus();
+}
+
+function closeSearch() {
+    document.getElementById('searchOverlay').classList.remove('open');
+}
+
+function filterStories(category, button) {
+    document.querySelectorAll('.category').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    button.classList.add('active');
+
+    let visible = 0;
+
+    document.querySelectorAll('#comicShelf .comic-card').forEach(card => {
+        const match = category === 'all' ||
+            card.dataset.category === category;
+
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+    });
+
+    document.getElementById('noResults').style.display =
+        visible ? 'none' : 'block';
+}
+
+function searchStories() {
+    const query = document.getElementById('searchInput')
+        .value.toLowerCase().trim();
+
+    let visible = 0;
+
+    document.querySelectorAll('#comicShelf .comic-card').forEach(card => {
+        const match = card.innerText.toLowerCase().includes(query);
+
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+    });
+
+    document.getElementById('noResults').style.display =
+        visible ? 'none' : 'block';
+}
+
+function showStory(title) {
+    alert(
+        title +
+        '\n\nThe reading experience will be connected here.'
+    );
+}
+
+function readStory(title) {
+    showStory(title);
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') closeSearch();
+});
+
+</script>
+
+</body>
+</html>
