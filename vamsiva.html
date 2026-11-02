@@ -1,216 +1,924 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShivaKeshava Comics | Sanatana Dharma for Kids</title>
-    <style>
-        /* Modern Dark Theme OTT Palette */
-        body {
-            background-color: #0d0f12; 
-            color: #ffffff;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090a0e">
 
-        /* Top OTT Navigation Bar */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-            position: absolute;
-            width: 90%;
-            z-index: 10;
-        }
+<title>VAMSIVA — Stories Beyond Time</title>
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff9933, #00d2ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        nav a {
-            color: #ccc;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
+<style>
+:root {
+    --bg: #090a0e;
+    --surface: #11131a;
+    --surface-2: #191b23;
+    --gold: #c9a66b;
+    --gold-light: #e4c894;
+    --text: #f4f1eb;
+    --muted: #92939d;
+    --border: rgba(255,255,255,.09);
+    --nav-height: 76px;
+}
 
-        nav a:hover { color: #fff; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        /* Massive Hero Banner (Netflix Style Slider) */
-        .hero-banner {
-            position: relative;
-            height: 75vh;
-            background: linear-gradient(rgba(13, 15, 18, 0.1), #0d0f12), 
-                        url('https://placeholder.com') no-gradient center/cover;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 5% 50px 5%;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
 
-        .hero-tag {
-            background-color: #ff9933;
-            color: black;
-            padding: 4px 8px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
+button, input {
+    font: inherit;
+}
 
-        .hero-title {
-            font-size: 48px;
-            margin: 15px 0 10px 0;
-            font-weight: 800;
-        }
+button {
+    cursor: pointer;
+}
 
-        .hero-desc {
-            font-size: 16px;
-            color: #b3b3b3;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
+/* NAVIGATION */
 
-        .btn-read {
-            background-color: #ffffff;
-            color: #0d0f12;
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+header {
+    height: var(--nav-height);
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    background: rgba(9,10,14,.86);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,.045);
+}
 
-        .btn-read:hover { background-color: #e6e6e6; }
+.brand {
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--gold-light);
+    text-decoration: none;
+}
 
-        /* Horizontal Comic Shelf (OTT Row) */
-        .comic-row {
-            padding: 30px 5%;
-        }
+.brand span {
+    color: white;
+}
 
-        .row-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #e5e5e5;
-        }
+.nav-links {
+    display: flex;
+    gap: 34px;
+    align-items: center;
+}
 
-        .comic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
+.nav-links a {
+    color: #b5b5bc;
+    text-decoration: none;
+    font-size: 13px;
+    transition: .25s;
+}
 
-        /* Interactive Comic Card */
-        .comic-card {
-            background-color: #1a1e24;
-            border-radius: 6px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+}
 
-        .comic-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(0,210,255,0.2);
-        }
+.nav-right {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+}
 
-        .comic-thumb {
-            width: 100%;
-            height: 280px;
-            background-color: #252b35;
-            object-fit: cover;
-        }
+.search-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 19px;
+}
 
-        .comic-info {
-            padding: 12px;
-        }
+.profile {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--gold-light);
+    font-size: 12px;
+}
 
-        .comic-name {
-            font-size: 14px;
-            font-weight: bold;
-            margin: 0 0 5px 0;
-        }
+.mobile-menu {
+    display: none;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 23px;
+}
 
-        .comic-meta {
-            font-size: 11px;
-            color: #808080;
-        }
-    </style>
+/* HERO */
+
+.hero {
+    min-height: 680px;
+    height: 91vh;
+    max-height: 850px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 8% 105px;
+    overflow: hidden;
+
+    background:
+      linear-gradient(90deg,
+        rgba(9,10,14,.98) 0%,
+        rgba(9,10,14,.84) 36%,
+        rgba(9,10,14,.15) 100%),
+      linear-gradient(0deg,
+        #090a0e 0%,
+        transparent 45%),
+      url('assets/samudra-manthan-hero.jpg')
+      center 35% / cover no-repeat,
+      radial-gradient(ellipse at 75% 30%, #55402d, #131622 55%, #090a0e);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 78% 30%,
+        rgba(201,166,107,.12), transparent 35%);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 620px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.eyebrow::before {
+    content: "";
+    height: 1px;
+    width: 32px;
+    background: var(--gold);
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(38px, 5.4vw, 70px);
+    line-height: 1.15;
+    font-weight: 600;
+    margin: 23px 0 16px;
+    letter-spacing: -1px;
+}
+
+.hero-description {
+    color: #c0c0c5;
+    line-height: 1.8;
+    font-size: 14px;
+    max-width: 480px;
+    margin-bottom: 22px;
+}
+
+.hero-meta {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    color: #a9a9b0;
+    font-size: 11px;
+    margin-bottom: 28px;
+}
+
+.meta-highlight {
+    color: var(--gold-light);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 14px 25px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    border: 1px solid transparent;
+    transition: .25s;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: #111;
+}
+
+.btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,.08);
+    color: white;
+    border-color: rgba(255,255,255,.18);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,.16);
+}
+
+/* MAIN CONTENT */
+
+main {
+    padding: 0 6%;
+}
+
+.section {
+    margin: 0 0 60px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 23px;
+}
+
+.section-heading h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -.4px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.view-all {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
+/* COMIC SHELF */
+
+.comic-shelf {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 23px;
+}
+
+.comic-card {
+    min-width: 0;
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.comic-card:hover {
+    transform: translateY(-7px);
+}
+
+.cover {
+    position: relative;
+    aspect-ratio: 2 / 2.85;
+    overflow: hidden;
+    background: var(--surface-2);
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(0,0,0,.76),
+        transparent 48%
+    );
+}
+
+.cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s;
+}
+
+.comic-card:hover .cover img {
+    transform: scale(1.07);
+}
+
+.cover-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.5;
+    letter-spacing: 2px;
+    color: #e8cf9e;
+    background:
+      radial-gradient(ellipse at 50% 35%, #705333, transparent 55%),
+      linear-gradient(145deg, #28202b, #0c1019);
+}
+
+.cover-art small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.cover-art.blue {
+    background:
+      radial-gradient(ellipse at 50% 35%, #325c80, transparent 60%),
+      linear-gradient(145deg, #152e46, #090c17);
+}
+
+.cover-art.red {
+    background:
+      radial-gradient(ellipse at 50% 35%, #783c30, transparent 60%),
+      linear-gradient(145deg, #361c23, #100d15);
+}
+
+.cover-art.purple {
+    background:
+      radial-gradient(ellipse at 50% 35%, #65507f, transparent 60%),
+      linear-gradient(145deg, #28203c, #0e1019);
+}
+
+.cover-art.green {
+    background:
+      radial-gradient(ellipse at 50% 35%, #466a50, transparent 60%),
+      linear-gradient(145deg, #1c302b, #0c1114);
+}
+
+.cover-number {
+    position: absolute;
+    z-index: 2;
+    top: 13px;
+    left: 13px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0,0,0,.55);
+    padding: 6px 9px;
+}
+
+.cover-label {
+    position: absolute;
+    z-index: 2;
+    bottom: 13px;
+    left: 13px;
+    font-size: 9px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.comic-info {
+    padding-top: 13px;
+}
+
+.comic-info h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.comic-info p {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.comic-card:hover .comic-info h3 {
+    color: var(--gold-light);
+}
+
+/* CATEGORY STRIP */
+
+.categories {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin: 20px 0 26px;
+}
+
+.category {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: #aaaab2;
+    padding: 10px 18px;
+    font-size: 11px;
+    transition: .25s;
+}
+
+.category:hover,
+.category.active {
+    color: #111;
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+/* EDITORIAL FEATURE */
+
+.editorial {
+    min-height: 245px;
+    padding: 45px;
+    margin-bottom: 65px;
+    background:
+      linear-gradient(90deg,
+        rgba(12,14,21,.97),
+        rgba(12,14,21,.77)),
+      url('assets/epic-illustration.jpg') center / cover,
+      #191c28;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+}
+
+.editorial-content {
+    max-width: 550px;
+}
+
+.editorial h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 29px;
+    font-weight: 600;
+    margin: 13px 0;
+}
+
+.editorial p {
+    color: #aaaab2;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+/* SEARCH */
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.96);
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 130px 20px;
+}
+
+.search-overlay.open {
+    display: flex;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 700px;
+}
+
+.search-box input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold);
+    color: white;
+    padding: 20px 0;
+    font-size: 25px;
+    outline: none;
+}
+
+.close-search {
+    float: right;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 28px;
+    margin-top: -45px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer .brand {
+    font-size: 18px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+    header {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        padding: 25px;
+        background: #11131a;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 23px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .hero {
+        min-height: 620px;
+        height: 85vh;
+        padding: 0 6% 75px;
+        background-position: 60% center;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    main {
+        padding: 0 5%;
+    }
+
+    .comic-shelf {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 25px 14px;
+    }
+
+    .editorial {
+        padding: 30px 22px;
+    }
+}
+
+@media (max-width: 420px) {
+    .brand {
+        font-size: 21px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 13px 16px;
+        font-size: 11px;
+    }
+
+    .section-heading h2 {
+        font-size: 16px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">SHIVA KESHAVA</div>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Comics</a>
-            <a href="#">Avatars</a>
-            <a href="#">Categories</a>
-        </nav>
-    </header>
+<header>
+    <a href="#" class="brand">VAM<span>SIVA</span></a>
 
-    <!-- Main Spotlight Feature -->
-    <section class="hero-banner">
-        <div class="hero-content">
-            <span class="hero-tag">Trending Now</span>
-            <div class="hero-title">The Churning of the Ocean</div>
-            <div class="hero-desc">When gods and demons came together to uncover the ultimate secrets hidden deep within the cosmic sea. An epic tale of team-work, poison, and nectar!</div>
-            <button class="btn-read">➔ Start Reading</button>
+    <nav class="nav-links" id="navigation">
+        <a href="#" class="active">Home</a>
+        <a href="#comics">Explore</a>
+        <a href="#collections">Collections</a>
+        <a href="#epics">The Epics</a>
+    </nav>
+
+    <div class="nav-right">
+        <button class="search-button" onclick="openSearch()" aria-label="Search">⌕</button>
+        <div class="profile">VS</div>
+        <button class="mobile-menu" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    </div>
+</header>
+
+<!-- FEATURED STORY -->
+
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="eyebrow">The VAMSIVA Collection</div>
+
+        <h1>The Churning<br>of the Ocean</h1>
+
+        <div class="hero-meta">
+            <span class="meta-highlight">FEATURED STORY</span>
+            <span>•</span>
+            <span>10 MIN READ</span>
+            <span>•</span>
+            <span>MYTHOLOGY</span>
         </div>
-    </section>
 
-    <!-- Content Carousels / Lists -->
-    <section class="comic-row">
-        <div class="row-title">Popular Tales of Shiva & Vishnu</div>
-        <div class="comic-grid">
-            <div class="comic-card">
-                <div class="comic-thumb" style="display:flex; align-items:center; justify-content:center; color:#555;">[Comic Image]</div>
-                <div class="comic-info">
-                    <p class="comic-name">The Advent of Ganesha</p>
-                    <span class="comic-meta">5 Mins Read • Action</span>
-                </div>
-            </div>
-            <div class="comic-card">
-                <div class="comic-thumb" style="display:flex; align-items:center; justify-content:center; color:#555;">[Comic Image]</div>
-                <div class="comic-info">
-                    <p class="comic-name">Little Krishna & Kaliya</p>
-                    <span class="comic-meta">7 Mins Read • Adventure</span>
-                </div>
-            </div>
-            <div class="comic-card">
-                <div class="comic-thumb" style="display:flex; align-items:center; justify-content:center; color:#555;">[Comic Image]</div>
-                <div class="comic-info">
-                    <p class="comic-name">The Mighty Mahadev</p>
-                    <span class="comic-meta">4 Mins Read • Mythic</span>
-                </div>
-            </div>
-            <div class="comic-card">
-                <div class="comic-thumb" style="display:flex; align-items:center; justify-content:center; color:#555;">[Comic Image]</div>
-                <div class="comic-info">
-                    <p class="comic-name">Samudra Manthan</p>
-                    <span class="comic-meta">10 Mins Read • Epic</span>
-                </div>
-            </div>
+        <p class="hero-description">
+            Devas and Asuras unite in an extraordinary quest
+            for Amrita. An epic of ambition, sacrifice, cosmic
+            balance and the emergence of immortality.
+        </p>
+
+        <div class="hero-actions">
+            <button class="btn-primary"
+                onclick="readStory('The Churning of the Ocean')">
+                ▶ &nbsp; READ STORY
+            </button>
+
+            <button class="btn-secondary"
+                onclick="showStory('The Churning of the Ocean')">
+                + &nbsp; EXPLORE
+            </button>
         </div>
-    </section>
 
-</body>
-</html>
+    </div>
+</section>
+
+<main>
+
+<!-- CATEGORIES -->
+
+<section class="section" id="comics">
+
+    <div class="section-heading">
+        <div>
+            <h2>Explore the Universe</h2>
+            <p>Discover stories across the Sanatana tradition.</p>
+        </div>
+    </div>
+
+    <div class="categories">
+        <button class="category active" onclick="filterStories('all',this)">All Stories</button>
+        <button class="category" onclick="filterStories('shiva',this)">Shiva</button>
+        <button class="category" onclick="filterStories('vishnu',this)">Vishnu</button>
+        <button class="category" onclick="filterStories('epics',this)">Itihasa</button>
+        <button class="category" onclick="filterStories('purana',this)">Puranas</button>
+    </div>
+
+    <div class="comic-shelf" id="comicShelf">
+
+        <article class="comic-card" data-category="shiva"
+            onclick="showStory('The Advent of Ganesha')">
+            <div class="cover">
+                <div class="cover-art">
+                    <small>THE DIVINE ORIGINS</small>
+                    GANESHA
+                </div>
+                <span class="cover-number">01</span>
+                <span class="cover-label">ORIGINS</span>
+            </div>
+            <div class="comic-info">
+                <h3>The Advent of Ganesha</h3>
+                <p>5 MIN READ &nbsp; • &nbsp; SHIVA</p>
+            </div>
+        </article>
+
+        <article class="comic-card" data-category="vishnu"
+            onclick="showStory('Krishna and Kaliya')">
+            <div class="cover">
+                <div class="cover-art blue">
+                    <small>THE DIVINE CHILD</small>
+                    KRISHNA
+                </div>
+                <span class="cover-number">02</span>
+                <span class="cover-label">ADVENTURE</span>
+            </div>
+            <div class="comic-info">
+                <h3>Krishna and Kaliya</h3>
+                <p>7 MIN READ &nbsp; • &nbsp; VISHNU</p>
+            </div>
+        </article>
+
+        <article class="comic-card" data-category="shiva"
+            onclick="showStory('The Legend of Mahadev')">
+            <div class="cover">
+                <div class="cover-art purple">
+                    <small>THE ETERNAL YOGI</small>
+                    MAHADEV
+                </div>
+                <span class="cover-number">03</span>
+                <span class="cover-label">DIVINITY</span>
+            </div>
+            <div class="comic-info">
+                <h3>The Legend of Mahadev</h3>
+                <p>4 MIN READ &nbsp; • &nbsp; SHIVA</p>
+            </div>
+        </article>
+
+        <article class="comic-card" data-category="purana"
+            onclick="showStory('Samudra Manthan')">
+            <div class="cover">
+                <div class="cover-art green">
+                    <small>THE COSMIC QUEST</small>
+                    SAMUDRA<br>MANTHAN
+                </div>
+                <span class="cover-number">04</span>
+                <span class="cover-label">COSMIC EPIC</span>
+            </div>
+            <div class="comic-info">
+                <h3>Samudra Manthan</h3>
+                <p>10 MIN READ &nbsp; • &nbsp; PURANA</p>
+            </div>
+        </article>
+
+    </div>
+
+    <p id="noResults" style="display:none;color:#92939d;font-size:13px;margin-top:20px;">
+        No stories found in this collection.
+    </p>
+
+</section>
+
+<!-- EDITORIAL COLLECTION -->
+
+<section class="editorial" id="epics">
+    <div class="editorial-content">
+
+        <div class="eyebrow">Beyond ordinary storytelling</div>
+
+        <h2>Legends that shaped civilizations.</h2>
+
+        <p>
+            From the timeless wisdom of the Mahabharata
+            to the extraordinary journey of the Ramayana.
+            Enter the world of Itihasa through beautifully
+            illustrated storytelling.
+        </p>
+
+        <button class="btn-primary"
+            onclick="document.getElementById('collections').scrollIntoView({behavior:'smooth'})">
+            EXPLORE THE EPICS
+        </button>
+
+    </div>
+</section>
+
+<!-- COLLECTIONS -->
+
+<section class="section" id="collections">
+
+    <div class="section-heading">
+        <div>
+            <h2>The Great Itihasas</h2>
+            <p>Stories that transcend generations.</p>
+        </div>
+        <a href="#collections" class="view-all">EXPLORE ALL →</a>
+    </div>
+
+    <div class="comic-shelf">
+
+        <article class="comic-card"
+            onclick="showStory('The Ramayana')">
+            <div class="cover">
+                <div class="cover-art red">
+                    <small>THE ETERNAL EPIC</small>
+                    RAMAYANA
+                </div>
+                <span class="cover-label">ITIHASA</span>
+            </div>
+            <div class="comic-info">
+                <h3>The Ramayana</h3>
+                <p>THE JOURNEY OF DHARMA</p>
+            </div>
+        </article>
+
+        <article class="comic-card"
+            onclick="showStory('The Mahabharata')">
+            <div class="cover">
+                <div class="cover-art blue">
+                    <small>THE GREAT BHARATA</small>
+                    MAHABHARATA
+                </div>
+                <span class="cover-label">ITIHASA</span>
+            </div>
+            <div class="comic-info">
+                <h3>The Mahabharata</h3>
+                <p>THE EPIC OF DHARMA</p>
+            </div>
+        </article>
+
+        <article class="comic-card"
+            onclick="showStory('The Bhagavad Gita')">
+            <div class="cover">
+                <div class="cover-art">
+                    <small>DIVINE KNOWLEDGE</small>
+                    BHAGAVAD<br>GITA
+                </div>
+                <span class="cover-label">PHILOSOPHY</span>
+            </div>
+            <div class="comic-info">
+                <h3>The Bhagavad Gita</h3>
+                <p>THE SONG OF THE DIVINE</p>
+            </div>
+        </article>
+
+        <article class="comic-card"
+            onclick="showStory('The Puranas')">
+            <div class="cover">
+                <div class="cover-art purple">
+                    <small>ANCIENT WISDOM</small>
+                    PURANAS
+                </div>
+                <span class="cover-label">KNOWLEDGE</span>
+            </div>
+            <div class="comic-info">
+                <h3>The Puranas</h3>
+                <p>MYTHS, COSMOLOGY & LEGENDS</p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <a href="#" class="brand">VAMSIVA</a>
+    <span>Stories Beyond Time.</span>
+    <span>© 2026 VAMSIVA. All rights reserved.</span>
+</footer>
+
+<!-- SEARCH OVERLAY -->
+
+<div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+        <button class="close-search" onclick="closeSearch()">×</button>
+        <input type="search" id="searchInput"
+            placeholder="Search stories, characters, epics..."
+            oninput="searchStories()">
+        <p style="color:#92939d;font-size:12px;margin-top:20px;">
+            DISCOVER YOUR NEXT STORY
+        </p>
+    </div>
+</div>
+
+<script>
+
+function toggleMenu() {
+    document.getElementById('navigation').classList.toggle('open');
+}
+
+function openSearch() {
+    document.getElementById('searchOverlay'
